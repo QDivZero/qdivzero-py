@@ -40,8 +40,9 @@ for m in getattr(response.parsed, "memberships", None) or []:
 
 ## Authentication
 
-Tokens come first; the client falls back to API-key, then access-token, then
-refresh-token credentials in that order:
+Tokens come first: an API key, access token, and refresh token can each be
+supplied, and a configured access token takes precedence over the API key when
+sending the `Authorization: Bearer <token>` header.
 
 - `QDivZero(api_key="...")` sends the API key as `Authorization: Bearer <key>`.
 - `QDivZero(access_token="...")` / `QDivZero(refresh_token="...")` pre-configure
