@@ -29,9 +29,10 @@ class QDivZero:
     ) -> None:
         file = load_credentials() if load_credentials_file else dict(EMPTY_CREDENTIALS)
         self._base_url = base_url
+        file_api_key = file["api_key"] if file else ""
         self._auth = QDivZeroAuth(
             base_url,
-            api_key=api_key,
+            api_key=api_key or file_api_key,
             access_token=access_token or file["access_token"],
             refresh_token=refresh_token or file["refresh_token"],
             email=email or file["email"],

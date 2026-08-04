@@ -10,7 +10,7 @@ def test_loads_tokens_from_file(tmp_path: Path) -> None:
     creds_dir.mkdir()
     (creds_dir / "credentials").write_text('{"access_token": "t1", "refresh_token": "r1"}')
     creds = load_credentials(home=tmp_path)
-    assert creds == {"email": "", "password": "", "access_token": "t1", "refresh_token": "r1"}
+    assert creds == {"email": "", "password": "", "access_token": "t1", "refresh_token": "r1", "api_key": ""}
 
 
 def test_missing_file_is_empty(tmp_path: Path) -> None:
@@ -19,6 +19,7 @@ def test_missing_file_is_empty(tmp_path: Path) -> None:
         "password": "",
         "access_token": "",
         "refresh_token": "",
+        "api_key": "",
     }
 
 

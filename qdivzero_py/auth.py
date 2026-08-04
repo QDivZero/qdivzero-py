@@ -17,6 +17,7 @@ EMPTY_CREDENTIALS: dict[str, str] = {
     "password": "",
     "access_token": "",
     "refresh_token": "",
+    "api_key": "",
 }
 
 
@@ -41,6 +42,7 @@ def load_credentials(home: str | None = None) -> dict[str, str]:
         "password": str(parsed.get("password", "")),
         "access_token": str(parsed.get("access_token", "")),
         "refresh_token": str(parsed.get("refresh_token", "")),
+        "api_key": str(parsed.get("api_key", "")),
     }
 
 
