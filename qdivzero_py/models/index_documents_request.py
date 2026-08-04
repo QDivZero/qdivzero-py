@@ -1,0 +1,96 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+  from ..models.index_document_request import IndexDocumentRequest
+
+
+
+
+
+T = TypeVar("T", bound="IndexDocumentsRequest")
+
+
+
+@_attrs_define
+class IndexDocumentsRequest:
+    """ 
+        Attributes:
+            documents (list[IndexDocumentRequest] | Unset):
+     """
+
+    documents: list[IndexDocumentRequest] | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        documents: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.documents, Unset):
+            documents = []
+            for documents_item_data in self.documents:
+                documents_item = documents_item_data.to_dict()
+                documents.append(documents_item)
+
+
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+        })
+        if documents is not UNSET:
+            field_dict["documents"] = documents
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.index_document_request import IndexDocumentRequest
+        d = dict(src_dict)
+        _documents = d.pop("documents", UNSET)
+        documents: list[IndexDocumentRequest] | Unset = UNSET
+        if _documents is not UNSET:
+            documents = []
+            for documents_item_data in _documents:
+                documents_item = IndexDocumentRequest.from_dict(documents_item_data)
+
+
+
+                documents.append(documents_item)
+
+
+        index_documents_request = cls(
+            documents=documents,
+        )
+
+
+        index_documents_request.additional_properties = d
+        return index_documents_request
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

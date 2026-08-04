@@ -1,0 +1,4 @@
+project_name_override: "qdivzero-py"
+package_name_override: "qdivzero_py"
+package_version_override: "1.0.0"
+post_hooks: [ruff]
