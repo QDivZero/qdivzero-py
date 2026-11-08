@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ServingTargetRequest")
 
 
-
 @_attrs_define
 class ServingTargetRequest:
-    """ 
-        Attributes:
-            instance_id (str | Unset):
-            target_ref_id (str | Unset):
-            type_ (str | Unset):
-     """
+    """
+    Attributes:
+        instance_id (str | Unset):
+        target_ref_id (str | Unset):
+        type_ (str | Unset):
+    """
 
     instance_id: str | Unset = UNSET
     target_ref_id: str | Unset = UNSET
     type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         instance_id = self.instance_id
@@ -37,11 +32,9 @@ class ServingTargetRequest:
 
         type_ = self.type_
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if instance_id is not UNSET:
             field_dict["instance_id"] = instance_id
         if target_ref_id is not UNSET:
@@ -50,8 +43,6 @@ class ServingTargetRequest:
             field_dict["type"] = type_
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class ServingTargetRequest:
             target_ref_id=target_ref_id,
             type_=type_,
         )
-
 
         serving_target_request.additional_properties = d
         return serving_target_request

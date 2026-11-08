@@ -9,30 +9,26 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.smart_balancer_route_destination_response import SmartBalancerRouteDestinationResponse
-
-
-
+    from ..models.smart_balancer_route_destination_response import SmartBalancerRouteDestinationResponse
 
 
 T = TypeVar("T", bound="SmartBalancerRouteResponse")
 
 
-
 @_attrs_define
 class SmartBalancerRouteResponse:
-    """ 
-        Attributes:
-            created_at (str | Unset):
-            destination (SmartBalancerRouteDestinationResponse | Unset):
-            enabled (bool | Unset):
-            id (str | Unset):
-            intent (str | Unset):
-            is_default (bool | Unset):
-            name (str | Unset):
-            priority (int | Unset):
-            updated_at (str | Unset):
-     """
+    """
+    Attributes:
+        created_at (str | Unset):
+        destination (SmartBalancerRouteDestinationResponse | Unset):
+        enabled (bool | Unset):
+        id (str | Unset):
+        intent (str | Unset):
+        is_default (bool | Unset):
+        name (str | Unset):
+        priority (int | Unset):
+        updated_at (str | Unset):
+    """
 
     created_at: str | Unset = UNSET
     destination: SmartBalancerRouteDestinationResponse | Unset = UNSET
@@ -44,10 +40,6 @@ class SmartBalancerRouteResponse:
     priority: int | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         created_at = self.created_at
@@ -70,11 +62,9 @@ class SmartBalancerRouteResponse:
 
         updated_at = self.updated_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if destination is not UNSET:
@@ -96,23 +86,19 @@ class SmartBalancerRouteResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.smart_balancer_route_destination_response import SmartBalancerRouteDestinationResponse
+
         d = dict(src_dict)
         created_at = d.pop("created_at", UNSET)
 
         _destination = d.pop("destination", UNSET)
         destination: SmartBalancerRouteDestinationResponse | Unset
-        if isinstance(_destination,  Unset):
+        if isinstance(_destination, Unset):
             destination = UNSET
         else:
             destination = SmartBalancerRouteDestinationResponse.from_dict(_destination)
-
-
-
 
         enabled = d.pop("enabled", UNSET)
 
@@ -139,7 +125,6 @@ class SmartBalancerRouteResponse:
             priority=priority,
             updated_at=updated_at,
         )
-
 
         smart_balancer_route_response.additional_properties = d
         return smart_balancer_route_response

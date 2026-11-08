@@ -15,50 +15,40 @@ def _get_kwargs(
     id: str,
     *,
     locale: str | Unset = UNSET,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
     params["locale"] = locale
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/v1/templates/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/v1/templates/{id}".format(
+            id=quote(str(id), safe=""),
+        ),
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | GetUserVariantResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | GetUserVariantResponse | None:
     if response.status_code == 200:
         response_200 = GetUserVariantResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 503:
         response_503 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_503
 
@@ -68,7 +58,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | GetUserVariantResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | GetUserVariantResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -82,9 +74,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     locale: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | GetUserVariantResponse]:
-    """ Get a template variant
+    """Get a template variant
 
      Returns a single template variant by ID for the authenticated user.
 
@@ -98,13 +89,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | GetUserVariantResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         id=id,
-locale=locale,
-
+        locale=locale,
     )
 
     response = client.get_httpx_client().request(
@@ -113,14 +102,14 @@ locale=locale,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     id: str,
     *,
     client: AuthenticatedClient,
     locale: str | Unset = UNSET,
-
 ) -> ErrorResponse | GetUserVariantResponse | None:
-    """ Get a template variant
+    """Get a template variant
 
      Returns a single template variant by ID for the authenticated user.
 
@@ -134,24 +123,22 @@ def sync(
 
     Returns:
         ErrorResponse | GetUserVariantResponse
-     """
-
+    """
 
     return sync_detailed(
         id=id,
-client=client,
-locale=locale,
-
+        client=client,
+        locale=locale,
     ).parsed
+
 
 async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
     locale: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | GetUserVariantResponse]:
-    """ Get a template variant
+    """Get a template variant
 
      Returns a single template variant by ID for the authenticated user.
 
@@ -165,29 +152,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | GetUserVariantResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         id=id,
-locale=locale,
-
+        locale=locale,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
     locale: str | Unset = UNSET,
-
 ) -> ErrorResponse | GetUserVariantResponse | None:
-    """ Get a template variant
+    """Get a template variant
 
      Returns a single template variant by ID for the authenticated user.
 
@@ -201,12 +184,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | GetUserVariantResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        id=id,
-client=client,
-locale=locale,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            id=id,
+            client=client,
+            locale=locale,
+        )
+    ).parsed

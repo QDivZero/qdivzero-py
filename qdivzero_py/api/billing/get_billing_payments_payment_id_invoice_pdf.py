@@ -12,29 +12,21 @@ from ...types import Response
 
 def _get_kwargs(
     payment_id: str,
-
 ) -> dict[str, Any]:
-    
-
-    
-
-    
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/billing/payments/{payment_id}/invoice.pdf".format(payment_id=quote(str(payment_id), safe=""),),
+        "url": "/v1/billing/payments/{payment_id}/invoice.pdf".format(
+            payment_id=quote(str(payment_id), safe=""),
+        ),
     }
 
-
     return _kwargs
-
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | str | None:
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -45,14 +37,10 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -75,9 +63,8 @@ def sync_detailed(
     payment_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | str]:
-    """ Download a payment invoice PDF
+    """Download a payment invoice PDF
 
      Returns the invoice PDF for a given payment of the active account context.
 
@@ -90,12 +77,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         payment_id=payment_id,
-
     )
 
     response = client.get_httpx_client().request(
@@ -104,13 +89,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     payment_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | str | None:
-    """ Download a payment invoice PDF
+    """Download a payment invoice PDF
 
      Returns the invoice PDF for a given payment of the active account context.
 
@@ -123,22 +108,20 @@ def sync(
 
     Returns:
         ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         payment_id=payment_id,
-client=client,
-
+        client=client,
     ).parsed
+
 
 async def asyncio_detailed(
     payment_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | str]:
-    """ Download a payment invoice PDF
+    """Download a payment invoice PDF
 
      Returns the invoice PDF for a given payment of the active account context.
 
@@ -151,27 +134,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         payment_id=payment_id,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     payment_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | str | None:
-    """ Download a payment invoice PDF
+    """Download a payment invoice PDF
 
      Returns the invoice PDF for a given payment of the active account context.
 
@@ -184,11 +163,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        payment_id=payment_id,
-client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            payment_id=payment_id,
+            client=client,
+        )
+    ).parsed

@@ -16,18 +16,14 @@ def _get_kwargs(
     user_id: str,
     *,
     body: UpdateAccountMemberRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/accounts/current/members/{user_id}".format(user_id=quote(str(user_id), safe=""),),
+        "url": "/v1/accounts/current/members/{user_id}".format(
+            user_id=quote(str(user_id), safe=""),
+        ),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -38,19 +34,16 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> AccountMemberResponse | ErrorResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> AccountMemberResponse | ErrorResponse | str | None:
     if response.status_code == 200:
         response_200 = AccountMemberResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -61,28 +54,20 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 403:
         response_403 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_404
 
     if response.status_code == 412:
         response_412 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_412
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -92,7 +77,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[AccountMemberResponse | ErrorResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[AccountMemberResponse | ErrorResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -106,9 +93,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateAccountMemberRequest,
-
 ) -> Response[AccountMemberResponse | ErrorResponse | str]:
-    """ Update a selected account member role
+    """Update a selected account member role
 
      Updates the role of an existing user within the active account context.
 
@@ -122,13 +108,11 @@ def sync_detailed(
 
     Returns:
         Response[AccountMemberResponse | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         user_id=user_id,
-body=body,
-
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -137,14 +121,14 @@ body=body,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     user_id: str,
     *,
     client: AuthenticatedClient,
     body: UpdateAccountMemberRequest,
-
 ) -> AccountMemberResponse | ErrorResponse | str | None:
-    """ Update a selected account member role
+    """Update a selected account member role
 
      Updates the role of an existing user within the active account context.
 
@@ -158,24 +142,22 @@ def sync(
 
     Returns:
         AccountMemberResponse | ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         user_id=user_id,
-client=client,
-body=body,
-
+        client=client,
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     user_id: str,
     *,
     client: AuthenticatedClient,
     body: UpdateAccountMemberRequest,
-
 ) -> Response[AccountMemberResponse | ErrorResponse | str]:
-    """ Update a selected account member role
+    """Update a selected account member role
 
      Updates the role of an existing user within the active account context.
 
@@ -189,29 +171,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[AccountMemberResponse | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         user_id=user_id,
-body=body,
-
+        body=body,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     user_id: str,
     *,
     client: AuthenticatedClient,
     body: UpdateAccountMemberRequest,
-
 ) -> AccountMemberResponse | ErrorResponse | str | None:
-    """ Update a selected account member role
+    """Update a selected account member role
 
      Updates the role of an existing user within the active account context.
 
@@ -225,12 +203,12 @@ async def asyncio(
 
     Returns:
         AccountMemberResponse | ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        user_id=user_id,
-client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            user_id=user_id,
+            client=client,
+            body=body,
+        )
+    ).parsed

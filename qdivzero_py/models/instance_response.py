@@ -9,59 +9,63 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.gpu_preference_response import GpuPreferenceResponse
-
-
-
+    from ..models.gpu_preference_response import GpuPreferenceResponse
+    from ..models.startup_progress import StartupProgress
 
 
 T = TypeVar("T", bound="InstanceResponse")
 
 
-
 @_attrs_define
 class InstanceResponse:
-    """ 
-        Attributes:
-            account_id (str | Unset):
-            capacity_tier (str | Unset):
-            created_at (str | Unset):
-            description (str | Unset):
-            estimated_required_vram_gb (float | Unset):
-            failure_reason (str | Unset):
-            gpu_count (int | Unset):
-            gpu_preferences (list[GpuPreferenceResponse] | Unset):
-            huggingface_repo_id (str | Unset):
-            id (str | Unset):
-            idle_timeout_seconds (int | Unset):
-            last_request_at (str | Unset):
-            name (str | Unset):
-            public_gpu_id (str | Unset):
-            public_price_per_hour_eur (float | Unset):
-            replica_set_id (str | Unset):
-            runtime_config_snapshot (str | Unset):
-            runtime_preset (str | Unset):
-            scheduling_mode (str | Unset):
-            serverless_enabled (bool | Unset):
-            serving_name (str | Unset):
-            smart_allow_community (bool | Unset):
-            smart_allow_spot (bool | Unset):
-            smart_max_price_per_hour_eur (float | Unset):
-            smart_min_gpu_class (str | Unset):
-            smart_min_total_tflops (float | Unset):
-            smart_provider_filter_mode (str | Unset):
-            smart_provider_preference (str | Unset):
-            smart_region (str | Unset):
-            smart_regions (list[str] | Unset):
-            smart_selection_label (str | Unset):
-            started_at (str | Unset):
-            state (str | Unset):
-            stopped_at (str | Unset):
-            workload_kind (str | Unset):
-     """
+    """
+    Attributes:
+        account_id (str | Unset):
+        capacity_tier (str | Unset):
+        cost_optimization_enabled (bool | Unset):
+        cost_optimization_min_savings_percent (float | Unset):
+        created_at (str | Unset):
+        description (str | Unset):
+        estimated_required_vram_gb (float | Unset):
+        failure_reason (str | Unset):
+        gpu_count (int | Unset):
+        gpu_preferences (list[GpuPreferenceResponse] | Unset):
+        huggingface_repo_id (str | Unset):
+        id (str | Unset):
+        idle_timeout_seconds (int | Unset):
+        last_request_at (str | Unset):
+        name (str | Unset):
+        public_gpu_id (str | Unset):
+        public_price_per_hour_eur (float | Unset):
+        replica_set_id (str | Unset):
+        runtime_config_snapshot (str | Unset):
+        runtime_preset (str | Unset):
+        scheduling_mode (str | Unset):
+        serverless_enabled (bool | Unset):
+        serving_name (str | Unset):
+        smart_allow_community (bool | Unset):
+        smart_allow_spot (bool | Unset):
+        smart_max_price_per_hour_eur (float | Unset):
+        smart_min_gpu_class (str | Unset):
+        smart_min_total_tflops (float | Unset):
+        smart_provider_filter_mode (str | Unset):
+        smart_provider_preference (str | Unset):
+        smart_region (str | Unset):
+        smart_regions (list[str] | Unset):
+        smart_selection_label (str | Unset):
+        started_at (str | Unset):
+        startup_progress (StartupProgress | Unset):
+        state (str | Unset):
+        stopped_at (str | Unset):
+        storage_price_per_hour_eur (float | Unset):
+        supported_protocols (list[str] | Unset):
+        workload_kind (str | Unset):
+    """
 
     account_id: str | Unset = UNSET
     capacity_tier: str | Unset = UNSET
+    cost_optimization_enabled: bool | Unset = UNSET
+    cost_optimization_min_savings_percent: float | Unset = UNSET
     created_at: str | Unset = UNSET
     description: str | Unset = UNSET
     estimated_required_vram_gb: float | Unset = UNSET
@@ -92,19 +96,22 @@ class InstanceResponse:
     smart_regions: list[str] | Unset = UNSET
     smart_selection_label: str | Unset = UNSET
     started_at: str | Unset = UNSET
+    startup_progress: StartupProgress | Unset = UNSET
     state: str | Unset = UNSET
     stopped_at: str | Unset = UNSET
+    storage_price_per_hour_eur: float | Unset = UNSET
+    supported_protocols: list[str] | Unset = UNSET
     workload_kind: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account_id = self.account_id
 
         capacity_tier = self.capacity_tier
+
+        cost_optimization_enabled = self.cost_optimization_enabled
+
+        cost_optimization_min_savings_percent = self.cost_optimization_min_savings_percent
 
         created_at = self.created_at
 
@@ -122,8 +129,6 @@ class InstanceResponse:
             for gpu_preferences_item_data in self.gpu_preferences:
                 gpu_preferences_item = gpu_preferences_item_data.to_dict()
                 gpu_preferences.append(gpu_preferences_item)
-
-
 
         huggingface_repo_id = self.huggingface_repo_id
 
@@ -171,27 +176,37 @@ class InstanceResponse:
         if not isinstance(self.smart_regions, Unset):
             smart_regions = self.smart_regions
 
-
-
         smart_selection_label = self.smart_selection_label
 
         started_at = self.started_at
+
+        startup_progress: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.startup_progress, Unset):
+            startup_progress = self.startup_progress.to_dict()
 
         state = self.state
 
         stopped_at = self.stopped_at
 
-        workload_kind = self.workload_kind
+        storage_price_per_hour_eur = self.storage_price_per_hour_eur
 
+        supported_protocols: list[str] | Unset = UNSET
+        if not isinstance(self.supported_protocols, Unset):
+            supported_protocols = self.supported_protocols
+
+        workload_kind = self.workload_kind
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account_id is not UNSET:
             field_dict["account_id"] = account_id
         if capacity_tier is not UNSET:
             field_dict["capacity_tier"] = capacity_tier
+        if cost_optimization_enabled is not UNSET:
+            field_dict["cost_optimization_enabled"] = cost_optimization_enabled
+        if cost_optimization_min_savings_percent is not UNSET:
+            field_dict["cost_optimization_min_savings_percent"] = cost_optimization_min_savings_percent
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if description is not UNSET:
@@ -252,24 +267,34 @@ class InstanceResponse:
             field_dict["smart_selection_label"] = smart_selection_label
         if started_at is not UNSET:
             field_dict["started_at"] = started_at
+        if startup_progress is not UNSET:
+            field_dict["startup_progress"] = startup_progress
         if state is not UNSET:
             field_dict["state"] = state
         if stopped_at is not UNSET:
             field_dict["stopped_at"] = stopped_at
+        if storage_price_per_hour_eur is not UNSET:
+            field_dict["storage_price_per_hour_eur"] = storage_price_per_hour_eur
+        if supported_protocols is not UNSET:
+            field_dict["supported_protocols"] = supported_protocols
         if workload_kind is not UNSET:
             field_dict["workload_kind"] = workload_kind
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.gpu_preference_response import GpuPreferenceResponse
+        from ..models.startup_progress import StartupProgress
+
         d = dict(src_dict)
         account_id = d.pop("account_id", UNSET)
 
         capacity_tier = d.pop("capacity_tier", UNSET)
+
+        cost_optimization_enabled = d.pop("cost_optimization_enabled", UNSET)
+
+        cost_optimization_min_savings_percent = d.pop("cost_optimization_min_savings_percent", UNSET)
 
         created_at = d.pop("created_at", UNSET)
 
@@ -288,10 +313,7 @@ class InstanceResponse:
             for gpu_preferences_item_data in _gpu_preferences:
                 gpu_preferences_item = GpuPreferenceResponse.from_dict(gpu_preferences_item_data)
 
-
-
                 gpu_preferences.append(gpu_preferences_item)
-
 
         huggingface_repo_id = d.pop("huggingface_repo_id", UNSET)
 
@@ -337,20 +359,32 @@ class InstanceResponse:
 
         smart_regions = cast(list[str], d.pop("smart_regions", UNSET))
 
-
         smart_selection_label = d.pop("smart_selection_label", UNSET)
 
         started_at = d.pop("started_at", UNSET)
 
+        _startup_progress = d.pop("startup_progress", UNSET)
+        startup_progress: StartupProgress | Unset
+        if isinstance(_startup_progress, Unset):
+            startup_progress = UNSET
+        else:
+            startup_progress = StartupProgress.from_dict(_startup_progress)
+
         state = d.pop("state", UNSET)
 
         stopped_at = d.pop("stopped_at", UNSET)
+
+        storage_price_per_hour_eur = d.pop("storage_price_per_hour_eur", UNSET)
+
+        supported_protocols = cast(list[str], d.pop("supported_protocols", UNSET))
 
         workload_kind = d.pop("workload_kind", UNSET)
 
         instance_response = cls(
             account_id=account_id,
             capacity_tier=capacity_tier,
+            cost_optimization_enabled=cost_optimization_enabled,
+            cost_optimization_min_savings_percent=cost_optimization_min_savings_percent,
             created_at=created_at,
             description=description,
             estimated_required_vram_gb=estimated_required_vram_gb,
@@ -381,11 +415,13 @@ class InstanceResponse:
             smart_regions=smart_regions,
             smart_selection_label=smart_selection_label,
             started_at=started_at,
+            startup_progress=startup_progress,
             state=state,
             stopped_at=stopped_at,
+            storage_price_per_hour_eur=storage_price_per_hour_eur,
+            supported_protocols=supported_protocols,
             workload_kind=workload_kind,
         )
-
 
         instance_response.additional_properties = d
         return instance_response

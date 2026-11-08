@@ -11,26 +11,21 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="RuntimeConfigRequestStorageMountsItem")
 
 
-
 @_attrs_define
 class RuntimeConfigRequestStorageMountsItem:
-    """ 
-        Attributes:
-            mount_path (str | Unset):
-            set_hf_home (bool | Unset):
-            subpath (str | Unset):
-            volume_id (str | Unset):
-     """
+    """
+    Attributes:
+        mount_path (str | Unset):
+        set_hf_home (bool | Unset):
+        subpath (str | Unset):
+        volume_id (str | Unset):
+    """
 
     mount_path: str | Unset = UNSET
     set_hf_home: bool | Unset = UNSET
     subpath: str | Unset = UNSET
     volume_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         mount_path = self.mount_path
@@ -41,11 +36,9 @@ class RuntimeConfigRequestStorageMountsItem:
 
         volume_id = self.volume_id
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if mount_path is not UNSET:
             field_dict["mount_path"] = mount_path
         if set_hf_home is not UNSET:
@@ -56,8 +49,6 @@ class RuntimeConfigRequestStorageMountsItem:
             field_dict["volume_id"] = volume_id
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,7 +67,6 @@ class RuntimeConfigRequestStorageMountsItem:
             subpath=subpath,
             volume_id=volume_id,
         )
-
 
         runtime_config_request_storage_mounts_item.additional_properties = d
         return runtime_config_request_storage_mounts_item

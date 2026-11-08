@@ -9,39 +9,33 @@ from attrs import field as _attrs_field
 T = TypeVar("T", bound="ConfirmTotpEnrollmentRequest")
 
 
-
 @_attrs_define
 class ConfirmTotpEnrollmentRequest:
-    """ 
-        Attributes:
-            code (str):
-            secret (str):
-     """
+    """
+    Attributes:
+        code (str):
+        secret (str):
+    """
 
     code: str
     secret: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         code = self.code
 
         secret = self.secret
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "code": code,
-            "secret": secret,
-        })
+        field_dict.update(
+            {
+                "code": code,
+                "secret": secret,
+            }
+        )
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -54,7 +48,6 @@ class ConfirmTotpEnrollmentRequest:
             code=code,
             secret=secret,
         )
-
 
         confirm_totp_enrollment_request.additional_properties = d
         return confirm_totp_enrollment_request

@@ -13,18 +13,12 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: ChangePasswordRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/auth/password",
+        "url": "/v1/auth/password",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -35,7 +29,6 @@ def _get_kwargs(
     return _kwargs
 
 
-
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | str | None:
     if response.status_code == 204:
         response_204 = cast(str, response.json())
@@ -44,28 +37,20 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_401
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -88,9 +73,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: ChangePasswordRequest,
-
 ) -> Response[ErrorResponse | str]:
-    """ Change the current user's password
+    """Change the current user's password
 
      Requires the authenticated user to provide the current password and a new password.
 
@@ -103,12 +87,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
     response = client.get_httpx_client().request(
@@ -117,13 +99,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     body: ChangePasswordRequest,
-
 ) -> ErrorResponse | str | None:
-    """ Change the current user's password
+    """Change the current user's password
 
      Requires the authenticated user to provide the current password and a new password.
 
@@ -136,22 +118,20 @@ def sync(
 
     Returns:
         ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: ChangePasswordRequest,
-
 ) -> Response[ErrorResponse | str]:
-    """ Change the current user's password
+    """Change the current user's password
 
      Requires the authenticated user to provide the current password and a new password.
 
@@ -164,27 +144,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     body: ChangePasswordRequest,
-
 ) -> ErrorResponse | str | None:
-    """ Change the current user's password
+    """Change the current user's password
 
      Requires the authenticated user to provide the current password and a new password.
 
@@ -197,11 +173,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+        )
+    ).parsed

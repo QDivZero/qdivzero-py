@@ -9,33 +9,23 @@ from attrs import field as _attrs_field
 T = TypeVar("T", bound="PostVectorDatabaseViewElementResponse200")
 
 
-
 @_attrs_define
 class PostVectorDatabaseViewElementResponse200:
-    """ 
-     """
+    """ """
 
     additional_properties: dict[str, str] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        post_vector_database_view_element_response_200 = cls(
-        )
-
+        post_vector_database_view_element_response_200 = cls()
 
         post_vector_database_view_element_response_200.additional_properties = d
         return post_vector_database_view_element_response_200

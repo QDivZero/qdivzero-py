@@ -9,29 +9,21 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.account_membership_response import AccountMembershipResponse
-
-
-
+    from ..models.account_membership_response import AccountMembershipResponse
 
 
 T = TypeVar("T", bound="AccountListResponse")
 
 
-
 @_attrs_define
 class AccountListResponse:
-    """ 
-        Attributes:
-            memberships (list[AccountMembershipResponse] | Unset):
-     """
+    """
+    Attributes:
+        memberships (list[AccountMembershipResponse] | Unset):
+    """
 
     memberships: list[AccountMembershipResponse] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         memberships: list[dict[str, Any]] | Unset = UNSET
@@ -41,23 +33,18 @@ class AccountListResponse:
                 memberships_item = memberships_item_data.to_dict()
                 memberships.append(memberships_item)
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if memberships is not UNSET:
             field_dict["memberships"] = memberships
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.account_membership_response import AccountMembershipResponse
+
         d = dict(src_dict)
         _memberships = d.pop("memberships", UNSET)
         memberships: list[AccountMembershipResponse] | Unset = UNSET
@@ -66,15 +53,11 @@ class AccountListResponse:
             for memberships_item_data in _memberships:
                 memberships_item = AccountMembershipResponse.from_dict(memberships_item_data)
 
-
-
                 memberships.append(memberships_item)
-
 
         account_list_response = cls(
             memberships=memberships,
         )
-
 
         account_list_response.additional_properties = d
         return account_list_response

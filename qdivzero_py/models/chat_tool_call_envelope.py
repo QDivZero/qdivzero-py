@@ -9,35 +9,27 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.chat_tool_call_function_envelope import ChatToolCallFunctionEnvelope
-
-
-
+    from ..models.chat_tool_call_function_envelope import ChatToolCallFunctionEnvelope
 
 
 T = TypeVar("T", bound="ChatToolCallEnvelope")
 
 
-
 @_attrs_define
 class ChatToolCallEnvelope:
-    """ 
-        Attributes:
-            function (ChatToolCallFunctionEnvelope | Unset):
-            id (str | Unset):
-            index (int | Unset):
-            type_ (str | Unset):
-     """
+    """
+    Attributes:
+        function (ChatToolCallFunctionEnvelope | Unset):
+        id (str | Unset):
+        index (int | Unset):
+        type_ (str | Unset):
+    """
 
     function: ChatToolCallFunctionEnvelope | Unset = UNSET
     id: str | Unset = UNSET
     index: int | Unset = UNSET
     type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         function: dict[str, Any] | Unset = UNSET
@@ -50,11 +42,9 @@ class ChatToolCallEnvelope:
 
         type_ = self.type_
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if function is not UNSET:
             field_dict["function"] = function
         if id is not UNSET:
@@ -66,21 +56,17 @@ class ChatToolCallEnvelope:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.chat_tool_call_function_envelope import ChatToolCallFunctionEnvelope
+
         d = dict(src_dict)
         _function = d.pop("function", UNSET)
         function: ChatToolCallFunctionEnvelope | Unset
-        if isinstance(_function,  Unset):
+        if isinstance(_function, Unset):
             function = UNSET
         else:
             function = ChatToolCallFunctionEnvelope.from_dict(_function)
-
-
-
 
         id = d.pop("id", UNSET)
 
@@ -94,7 +80,6 @@ class ChatToolCallEnvelope:
             index=index,
             type_=type_,
         )
-
 
         chat_tool_call_envelope.additional_properties = d
         return chat_tool_call_envelope

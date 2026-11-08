@@ -9,31 +9,23 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.listed_document_response import ListedDocumentResponse
-
-
-
+    from ..models.listed_document_response import ListedDocumentResponse
 
 
 T = TypeVar("T", bound="ListDocumentsResponse")
 
 
-
 @_attrs_define
 class ListDocumentsResponse:
-    """ 
-        Attributes:
-            documents (list[ListedDocumentResponse] | Unset):
-            next_cursor (str | Unset):
-     """
+    """
+    Attributes:
+        documents (list[ListedDocumentResponse] | Unset):
+        next_cursor (str | Unset):
+    """
 
     documents: list[ListedDocumentResponse] | Unset = UNSET
     next_cursor: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         documents: list[dict[str, Any]] | Unset = UNSET
@@ -43,15 +35,11 @@ class ListDocumentsResponse:
                 documents_item = documents_item_data.to_dict()
                 documents.append(documents_item)
 
-
-
         next_cursor = self.next_cursor
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if documents is not UNSET:
             field_dict["documents"] = documents
         if next_cursor is not UNSET:
@@ -59,11 +47,10 @@ class ListDocumentsResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.listed_document_response import ListedDocumentResponse
+
         d = dict(src_dict)
         _documents = d.pop("documents", UNSET)
         documents: list[ListedDocumentResponse] | Unset = UNSET
@@ -72,10 +59,7 @@ class ListDocumentsResponse:
             for documents_item_data in _documents:
                 documents_item = ListedDocumentResponse.from_dict(documents_item_data)
 
-
-
                 documents.append(documents_item)
-
 
         next_cursor = d.pop("next_cursor", UNSET)
 
@@ -83,7 +67,6 @@ class ListDocumentsResponse:
             documents=documents,
             next_cursor=next_cursor,
         )
-
 
         list_documents_response.additional_properties = d
         return list_documents_response

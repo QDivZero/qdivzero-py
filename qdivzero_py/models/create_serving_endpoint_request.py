@@ -9,35 +9,27 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.serving_target_request import ServingTargetRequest
-
-
-
+    from ..models.serving_target_request import ServingTargetRequest
 
 
 T = TypeVar("T", bound="CreateServingEndpointRequest")
 
 
-
 @_attrs_define
 class CreateServingEndpointRequest:
-    """ 
-        Attributes:
-            display_name (str | Unset):
-            name (str | Unset):
-            target (ServingTargetRequest | Unset):
-            workload_kind (str | Unset):
-     """
+    """
+    Attributes:
+        display_name (str | Unset):
+        name (str | Unset):
+        target (ServingTargetRequest | Unset):
+        workload_kind (str | Unset):
+    """
 
     display_name: str | Unset = UNSET
     name: str | Unset = UNSET
     target: ServingTargetRequest | Unset = UNSET
     workload_kind: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         display_name = self.display_name
@@ -50,11 +42,9 @@ class CreateServingEndpointRequest:
 
         workload_kind = self.workload_kind
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if display_name is not UNSET:
             field_dict["display_name"] = display_name
         if name is not UNSET:
@@ -66,11 +56,10 @@ class CreateServingEndpointRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.serving_target_request import ServingTargetRequest
+
         d = dict(src_dict)
         display_name = d.pop("display_name", UNSET)
 
@@ -78,13 +67,10 @@ class CreateServingEndpointRequest:
 
         _target = d.pop("target", UNSET)
         target: ServingTargetRequest | Unset
-        if isinstance(_target,  Unset):
+        if isinstance(_target, Unset):
             target = UNSET
         else:
             target = ServingTargetRequest.from_dict(_target)
-
-
-
 
         workload_kind = d.pop("workload_kind", UNSET)
 
@@ -94,7 +80,6 @@ class CreateServingEndpointRequest:
             target=target,
             workload_kind=workload_kind,
         )
-
 
         create_serving_endpoint_request.additional_properties = d
         return create_serving_endpoint_request

@@ -11,26 +11,21 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="TargetGroupMemberRequest")
 
 
-
 @_attrs_define
 class TargetGroupMemberRequest:
-    """ 
-        Attributes:
-            enabled (bool | Unset):
-            instance_id (str | Unset):
-            priority (int | Unset):
-            weight (int | Unset):
-     """
+    """
+    Attributes:
+        enabled (bool | Unset):
+        instance_id (str | Unset):
+        priority (int | Unset):
+        weight (int | Unset):
+    """
 
     enabled: bool | Unset = UNSET
     instance_id: str | Unset = UNSET
     priority: int | Unset = UNSET
     weight: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         enabled = self.enabled
@@ -41,11 +36,9 @@ class TargetGroupMemberRequest:
 
         weight = self.weight
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if enabled is not UNSET:
             field_dict["enabled"] = enabled
         if instance_id is not UNSET:
@@ -56,8 +49,6 @@ class TargetGroupMemberRequest:
             field_dict["weight"] = weight
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,7 +67,6 @@ class TargetGroupMemberRequest:
             priority=priority,
             weight=weight,
         )
-
 
         target_group_member_request.additional_properties = d
         return target_group_member_request

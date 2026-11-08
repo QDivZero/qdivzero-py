@@ -11,21 +11,20 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="IndexJobResponse")
 
 
-
 @_attrs_define
 class IndexJobResponse:
-    """ 
-        Attributes:
-            account_id (str | Unset):
-            completed_at (str | Unset):
-            created_at (str | Unset):
-            database_id (str | Unset):
-            error_message (str | Unset):
-            id (str | Unset):
-            kind (str | Unset):
-            status (str | Unset):
-            updated_at (str | Unset):
-     """
+    """
+    Attributes:
+        account_id (str | Unset):
+        completed_at (str | Unset):
+        created_at (str | Unset):
+        database_id (str | Unset):
+        error_message (str | Unset):
+        id (str | Unset):
+        kind (str | Unset):
+        status (str | Unset):
+        updated_at (str | Unset):
+    """
 
     account_id: str | Unset = UNSET
     completed_at: str | Unset = UNSET
@@ -37,10 +36,6 @@ class IndexJobResponse:
     status: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account_id = self.account_id
@@ -61,11 +56,9 @@ class IndexJobResponse:
 
         updated_at = self.updated_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account_id is not UNSET:
             field_dict["account_id"] = account_id
         if completed_at is not UNSET:
@@ -86,8 +79,6 @@ class IndexJobResponse:
             field_dict["updated_at"] = updated_at
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -121,7 +112,6 @@ class IndexJobResponse:
             status=status,
             updated_at=updated_at,
         )
-
 
         index_job_response.additional_properties = d
         return index_job_response

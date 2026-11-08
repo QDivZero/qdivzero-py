@@ -9,37 +9,33 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.timestamp import Timestamp
-  from ..models.translation import Translation
-
-
-
+    from ..models.timestamp import Timestamp
+    from ..models.translation import Translation
 
 
 T = TypeVar("T", bound="Template")
 
 
-
 @_attrs_define
 class Template:
-    """ 
-        Attributes:
-            category (str | Unset):
-            created_at (Timestamp | Unset):
-            created_by (str | Unset):
-            health_checked_at (Timestamp | Unset):
-            health_error (str | Unset):
-            health_status (str | Unset):
-            id (str | Unset):
-            is_active (bool | Unset):
-            is_featured (bool | Unset):
-            ordering (int | Unset):
-            slug (str | Unset):
-            tags (list[str] | Unset):
-            translations (list[Translation] | Unset):
-            updated_at (Timestamp | Unset):
-            updated_by (str | Unset):
-     """
+    """
+    Attributes:
+        category (str | Unset):
+        created_at (Timestamp | Unset):
+        created_by (str | Unset):
+        health_checked_at (Timestamp | Unset):
+        health_error (str | Unset):
+        health_status (str | Unset):
+        id (str | Unset):
+        is_active (bool | Unset):
+        is_featured (bool | Unset):
+        ordering (int | Unset):
+        slug (str | Unset):
+        tags (list[str] | Unset):
+        translations (list[Translation] | Unset):
+        updated_at (Timestamp | Unset):
+        updated_by (str | Unset):
+    """
 
     category: str | Unset = UNSET
     created_at: Timestamp | Unset = UNSET
@@ -57,10 +53,6 @@ class Template:
     updated_at: Timestamp | Unset = UNSET
     updated_by: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         category = self.category
@@ -93,8 +85,6 @@ class Template:
         if not isinstance(self.tags, Unset):
             tags = self.tags
 
-
-
         translations: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.translations, Unset):
             translations = []
@@ -102,19 +92,15 @@ class Template:
                 translations_item = translations_item_data.to_dict()
                 translations.append(translations_item)
 
-
-
         updated_at: dict[str, Any] | Unset = UNSET
         if not isinstance(self.updated_at, Unset):
             updated_at = self.updated_at.to_dict()
 
         updated_by = self.updated_by
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if category is not UNSET:
             field_dict["category"] = category
         if created_at is not UNSET:
@@ -148,36 +134,29 @@ class Template:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.timestamp import Timestamp
         from ..models.translation import Translation
+
         d = dict(src_dict)
         category = d.pop("category", UNSET)
 
         _created_at = d.pop("created_at", UNSET)
         created_at: Timestamp | Unset
-        if isinstance(_created_at,  Unset):
+        if isinstance(_created_at, Unset):
             created_at = UNSET
         else:
             created_at = Timestamp.from_dict(_created_at)
-
-
-
 
         created_by = d.pop("created_by", UNSET)
 
         _health_checked_at = d.pop("health_checked_at", UNSET)
         health_checked_at: Timestamp | Unset
-        if isinstance(_health_checked_at,  Unset):
+        if isinstance(_health_checked_at, Unset):
             health_checked_at = UNSET
         else:
             health_checked_at = Timestamp.from_dict(_health_checked_at)
-
-
-
 
         health_error = d.pop("health_error", UNSET)
 
@@ -195,7 +174,6 @@ class Template:
 
         tags = cast(list[str], d.pop("tags", UNSET))
 
-
         _translations = d.pop("translations", UNSET)
         translations: list[Translation] | Unset = UNSET
         if _translations is not UNSET:
@@ -203,20 +181,14 @@ class Template:
             for translations_item_data in _translations:
                 translations_item = Translation.from_dict(translations_item_data)
 
-
-
                 translations.append(translations_item)
-
 
         _updated_at = d.pop("updated_at", UNSET)
         updated_at: Timestamp | Unset
-        if isinstance(_updated_at,  Unset):
+        if isinstance(_updated_at, Unset):
             updated_at = UNSET
         else:
             updated_at = Timestamp.from_dict(_updated_at)
-
-
-
 
         updated_by = d.pop("updated_by", UNSET)
 
@@ -237,7 +209,6 @@ class Template:
             updated_at=updated_at,
             updated_by=updated_by,
         )
-
 
         template.additional_properties = d
         return template

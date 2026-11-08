@@ -11,26 +11,21 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="CreateVectorDatabaseRequest")
 
 
-
 @_attrs_define
 class CreateVectorDatabaseRequest:
-    """ 
-        Attributes:
-            description (str | Unset):
-            embedding_serving_name (str | Unset):
-            name (str | Unset):
-            slug (str | Unset):
-     """
+    """
+    Attributes:
+        description (str | Unset):
+        embedding_serving_name (str | Unset):
+        name (str | Unset):
+        slug (str | Unset):
+    """
 
     description: str | Unset = UNSET
     embedding_serving_name: str | Unset = UNSET
     name: str | Unset = UNSET
     slug: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         description = self.description
@@ -41,11 +36,9 @@ class CreateVectorDatabaseRequest:
 
         slug = self.slug
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if description is not UNSET:
             field_dict["description"] = description
         if embedding_serving_name is not UNSET:
@@ -56,8 +49,6 @@ class CreateVectorDatabaseRequest:
             field_dict["slug"] = slug
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,7 +67,6 @@ class CreateVectorDatabaseRequest:
             name=name,
             slug=slug,
         )
-
 
         create_vector_database_request.additional_properties = d
         return create_vector_database_request

@@ -11,37 +11,38 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ReplicaSetResponse")
 
 
-
 @_attrs_define
 class ReplicaSetResponse:
-    """ 
-        Attributes:
-            account_id (str | Unset):
-            created_at (str | Unset):
-            desired_replicas (int | Unset):
-            gguf_model_path (str | Unset):
-            id (str | Unset):
-            min_replicas (int | Unset):
-            model_ref (str | Unset):
-            name (str | Unset):
-            scheduling_mode (str | Unset):
-            serving_endpoint_id (str | Unset):
-            serving_name (str | Unset):
-            smart_allow_community (bool | Unset):
-            smart_allow_spot (bool | Unset):
-            smart_max_price_per_hour_usd (float | Unset):
-            smart_min_gpu_class (str | Unset):
-            smart_min_total_tflops (float | Unset):
-            smart_provider_filter_mode (str | Unset):
-            smart_provider_preference (str | Unset):
-            smart_region (str | Unset):
-            smart_regions (list[str] | Unset):
-            smart_selection_label (str | Unset):
-            status (str | Unset):
-            target_group_id (str | Unset):
-            updated_at (str | Unset):
-            workload_kind (str | Unset):
-     """
+    """
+    Attributes:
+        account_id (str | Unset):
+        created_at (str | Unset):
+        desired_replicas (int | Unset):
+        gguf_model_path (str | Unset):
+        id (str | Unset):
+        min_replicas (int | Unset):
+        model_ref (str | Unset):
+        name (str | Unset):
+        runtime_config_snapshot (str | Unset):
+        scheduling_mode (str | Unset):
+        serving_endpoint_id (str | Unset):
+        serving_name (str | Unset):
+        smart_allow_community (bool | Unset):
+        smart_allow_spot (bool | Unset):
+        smart_max_price_per_hour_usd (float | Unset):
+        smart_min_gpu_class (str | Unset):
+        smart_min_total_tflops (float | Unset):
+        smart_provider_filter_mode (str | Unset):
+        smart_provider_preference (str | Unset):
+        smart_region (str | Unset):
+        smart_regions (list[str] | Unset):
+        smart_selection_label (str | Unset):
+        status (str | Unset):
+        supported_protocols (list[str] | Unset):
+        target_group_id (str | Unset):
+        updated_at (str | Unset):
+        workload_kind (str | Unset):
+    """
 
     account_id: str | Unset = UNSET
     created_at: str | Unset = UNSET
@@ -51,6 +52,7 @@ class ReplicaSetResponse:
     min_replicas: int | Unset = UNSET
     model_ref: str | Unset = UNSET
     name: str | Unset = UNSET
+    runtime_config_snapshot: str | Unset = UNSET
     scheduling_mode: str | Unset = UNSET
     serving_endpoint_id: str | Unset = UNSET
     serving_name: str | Unset = UNSET
@@ -65,14 +67,11 @@ class ReplicaSetResponse:
     smart_regions: list[str] | Unset = UNSET
     smart_selection_label: str | Unset = UNSET
     status: str | Unset = UNSET
+    supported_protocols: list[str] | Unset = UNSET
     target_group_id: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     workload_kind: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account_id = self.account_id
@@ -90,6 +89,8 @@ class ReplicaSetResponse:
         model_ref = self.model_ref
 
         name = self.name
+
+        runtime_config_snapshot = self.runtime_config_snapshot
 
         scheduling_mode = self.scheduling_mode
 
@@ -117,11 +118,13 @@ class ReplicaSetResponse:
         if not isinstance(self.smart_regions, Unset):
             smart_regions = self.smart_regions
 
-
-
         smart_selection_label = self.smart_selection_label
 
         status = self.status
+
+        supported_protocols: list[str] | Unset = UNSET
+        if not isinstance(self.supported_protocols, Unset):
+            supported_protocols = self.supported_protocols
 
         target_group_id = self.target_group_id
 
@@ -129,11 +132,9 @@ class ReplicaSetResponse:
 
         workload_kind = self.workload_kind
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account_id is not UNSET:
             field_dict["account_id"] = account_id
         if created_at is not UNSET:
@@ -150,6 +151,8 @@ class ReplicaSetResponse:
             field_dict["model_ref"] = model_ref
         if name is not UNSET:
             field_dict["name"] = name
+        if runtime_config_snapshot is not UNSET:
+            field_dict["runtime_config_snapshot"] = runtime_config_snapshot
         if scheduling_mode is not UNSET:
             field_dict["scheduling_mode"] = scheduling_mode
         if serving_endpoint_id is not UNSET:
@@ -178,6 +181,8 @@ class ReplicaSetResponse:
             field_dict["smart_selection_label"] = smart_selection_label
         if status is not UNSET:
             field_dict["status"] = status
+        if supported_protocols is not UNSET:
+            field_dict["supported_protocols"] = supported_protocols
         if target_group_id is not UNSET:
             field_dict["target_group_id"] = target_group_id
         if updated_at is not UNSET:
@@ -186,8 +191,6 @@ class ReplicaSetResponse:
             field_dict["workload_kind"] = workload_kind
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -207,6 +210,8 @@ class ReplicaSetResponse:
         model_ref = d.pop("model_ref", UNSET)
 
         name = d.pop("name", UNSET)
+
+        runtime_config_snapshot = d.pop("runtime_config_snapshot", UNSET)
 
         scheduling_mode = d.pop("scheduling_mode", UNSET)
 
@@ -232,10 +237,11 @@ class ReplicaSetResponse:
 
         smart_regions = cast(list[str], d.pop("smart_regions", UNSET))
 
-
         smart_selection_label = d.pop("smart_selection_label", UNSET)
 
         status = d.pop("status", UNSET)
+
+        supported_protocols = cast(list[str], d.pop("supported_protocols", UNSET))
 
         target_group_id = d.pop("target_group_id", UNSET)
 
@@ -252,6 +258,7 @@ class ReplicaSetResponse:
             min_replicas=min_replicas,
             model_ref=model_ref,
             name=name,
+            runtime_config_snapshot=runtime_config_snapshot,
             scheduling_mode=scheduling_mode,
             serving_endpoint_id=serving_endpoint_id,
             serving_name=serving_name,
@@ -266,11 +273,11 @@ class ReplicaSetResponse:
             smart_regions=smart_regions,
             smart_selection_label=smart_selection_label,
             status=status,
+            supported_protocols=supported_protocols,
             target_group_id=target_group_id,
             updated_at=updated_at,
             workload_kind=workload_kind,
         )
-
 
         replica_set_response.additional_properties = d
         return replica_set_response

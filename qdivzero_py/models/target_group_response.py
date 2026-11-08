@@ -9,31 +9,27 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.target_group_member_response import TargetGroupMemberResponse
-
-
-
+    from ..models.target_group_member_response import TargetGroupMemberResponse
 
 
 T = TypeVar("T", bound="TargetGroupResponse")
 
 
-
 @_attrs_define
 class TargetGroupResponse:
-    """ 
-        Attributes:
-            created_at (str | Unset):
-            description (str | Unset):
-            display_name (str | Unset):
-            enabled (bool | Unset):
-            id (str | Unset):
-            members (list[TargetGroupMemberResponse] | Unset):
-            name (str | Unset):
-            selection_policy (str | Unset):
-            updated_at (str | Unset):
-            workload_kind (str | Unset):
-     """
+    """
+    Attributes:
+        created_at (str | Unset):
+        description (str | Unset):
+        display_name (str | Unset):
+        enabled (bool | Unset):
+        id (str | Unset):
+        members (list[TargetGroupMemberResponse] | Unset):
+        name (str | Unset):
+        selection_policy (str | Unset):
+        updated_at (str | Unset):
+        workload_kind (str | Unset):
+    """
 
     created_at: str | Unset = UNSET
     description: str | Unset = UNSET
@@ -46,10 +42,6 @@ class TargetGroupResponse:
     updated_at: str | Unset = UNSET
     workload_kind: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         created_at = self.created_at
@@ -69,8 +61,6 @@ class TargetGroupResponse:
                 members_item = members_item_data.to_dict()
                 members.append(members_item)
 
-
-
         name = self.name
 
         selection_policy = self.selection_policy
@@ -79,11 +69,9 @@ class TargetGroupResponse:
 
         workload_kind = self.workload_kind
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if description is not UNSET:
@@ -107,11 +95,10 @@ class TargetGroupResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.target_group_member_response import TargetGroupMemberResponse
+
         d = dict(src_dict)
         created_at = d.pop("created_at", UNSET)
 
@@ -130,10 +117,7 @@ class TargetGroupResponse:
             for members_item_data in _members:
                 members_item = TargetGroupMemberResponse.from_dict(members_item_data)
 
-
-
                 members.append(members_item)
-
 
         name = d.pop("name", UNSET)
 
@@ -155,7 +139,6 @@ class TargetGroupResponse:
             updated_at=updated_at,
             workload_kind=workload_kind,
         )
-
 
         target_group_response.additional_properties = d
         return target_group_response

@@ -9,33 +9,23 @@ from attrs import field as _attrs_field
 T = TypeVar("T", bound="DeleteFirewallResponse200")
 
 
-
 @_attrs_define
 class DeleteFirewallResponse200:
-    """ 
-     """
+    """ """
 
     additional_properties: dict[str, bool] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        delete_firewall_response_200 = cls(
-        )
-
+        delete_firewall_response_200 = cls()
 
         delete_firewall_response_200.additional_properties = d
         return delete_firewall_response_200

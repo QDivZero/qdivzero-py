@@ -13,57 +13,43 @@ from ...types import Response
 
 def _get_kwargs(
     database_id: str,
-
 ) -> dict[str, Any]:
-    
-
-    
-
-    
 
     _kwargs: dict[str, Any] = {
         "method": "delete",
-        "url": "/flexible-vector-databases/{database_id}".format(database_id=quote(str(database_id), safe=""),),
+        "url": "/v1/flexible-vector-databases/{database_id}".format(
+            database_id=quote(str(database_id), safe=""),
+        ),
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> DeleteVectorDatabaseResponse200 | ErrorResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> DeleteVectorDatabaseResponse200 | ErrorResponse | None:
     if response.status_code == 200:
         response_200 = DeleteVectorDatabaseResponse200.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_401
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -73,7 +59,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[DeleteVectorDatabaseResponse200 | ErrorResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[DeleteVectorDatabaseResponse200 | ErrorResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -86,9 +74,8 @@ def sync_detailed(
     database_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[DeleteVectorDatabaseResponse200 | ErrorResponse]:
-    """ Delete a vector database
+    """Delete a vector database
 
      Removes a vector database owned by the authenticated account.
 
@@ -101,12 +88,10 @@ def sync_detailed(
 
     Returns:
         Response[DeleteVectorDatabaseResponse200 | ErrorResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-
     )
 
     response = client.get_httpx_client().request(
@@ -115,13 +100,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     database_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> DeleteVectorDatabaseResponse200 | ErrorResponse | None:
-    """ Delete a vector database
+    """Delete a vector database
 
      Removes a vector database owned by the authenticated account.
 
@@ -134,22 +119,20 @@ def sync(
 
     Returns:
         DeleteVectorDatabaseResponse200 | ErrorResponse
-     """
-
+    """
 
     return sync_detailed(
         database_id=database_id,
-client=client,
-
+        client=client,
     ).parsed
+
 
 async def asyncio_detailed(
     database_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[DeleteVectorDatabaseResponse200 | ErrorResponse]:
-    """ Delete a vector database
+    """Delete a vector database
 
      Removes a vector database owned by the authenticated account.
 
@@ -162,27 +145,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[DeleteVectorDatabaseResponse200 | ErrorResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     database_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> DeleteVectorDatabaseResponse200 | ErrorResponse | None:
-    """ Delete a vector database
+    """Delete a vector database
 
      Removes a vector database owned by the authenticated account.
 
@@ -195,11 +174,11 @@ async def asyncio(
 
     Returns:
         DeleteVectorDatabaseResponse200 | ErrorResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        database_id=database_id,
-client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            database_id=database_id,
+            client=client,
+        )
+    ).parsed

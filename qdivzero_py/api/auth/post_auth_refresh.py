@@ -6,63 +6,40 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.error_response import ErrorResponse
-from ...models.refresh_request import RefreshRequest
 from ...models.refresh_response import RefreshResponse
 from ...types import Response
 
 
-def _get_kwargs(
-    *,
-    body: RefreshRequest,
-
-) -> dict[str, Any]:
-    headers: dict[str, Any] = {}
-
-
-    
-
-    
+def _get_kwargs() -> dict[str, Any]:
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/auth/refresh",
+        "url": "/v1/auth/refresh",
     }
 
-    _kwargs["json"] = body.to_dict()
-
-    headers["Content-Type"] = "application/json"
-
-    _kwargs["headers"] = headers
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | RefreshResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | RefreshResponse | None:
     if response.status_code == 200:
         response_200 = RefreshResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -72,7 +49,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | RefreshResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | RefreshResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,15 +63,12 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
-    body: RefreshRequest,
-
 ) -> Response[ErrorResponse | RefreshResponse]:
-    """ Refresh an access token
+    """Refresh the browser session
 
-     Exchanges a refresh token for a new access token.
-
-    Args:
-        body (RefreshRequest):
+     Consumes the HTTP-only qdiv0_refresh cookie and, on success, resets the qdiv0_access and
+    qdiv0_refresh browser-session cookies. The endpoint has no JSON request body and the JSON response
+    contains no access or refresh token values.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -100,13 +76,9 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | RefreshResponse]
-     """
+    """
 
-
-    kwargs = _get_kwargs(
-        body=body,
-
-    )
+    kwargs = _get_kwargs()
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -114,18 +86,16 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient | Client,
-    body: RefreshRequest,
-
 ) -> ErrorResponse | RefreshResponse | None:
-    """ Refresh an access token
+    """Refresh the browser session
 
-     Exchanges a refresh token for a new access token.
-
-    Args:
-        body (RefreshRequest):
+     Consumes the HTTP-only qdiv0_refresh cookie and, on success, resets the qdiv0_access and
+    qdiv0_refresh browser-session cookies. The endpoint has no JSON request body and the JSON response
+    contains no access or refresh token values.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -133,27 +103,22 @@ def sync(
 
     Returns:
         ErrorResponse | RefreshResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
-    body: RefreshRequest,
-
 ) -> Response[ErrorResponse | RefreshResponse]:
-    """ Refresh an access token
+    """Refresh the browser session
 
-     Exchanges a refresh token for a new access token.
-
-    Args:
-        body (RefreshRequest):
+     Consumes the HTTP-only qdiv0_refresh cookie and, on success, resets the qdiv0_access and
+    qdiv0_refresh browser-session cookies. The endpoint has no JSON request body and the JSON response
+    contains no access or refresh token values.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -161,32 +126,24 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | RefreshResponse]
-     """
+    """
 
+    kwargs = _get_kwargs()
 
-    kwargs = _get_kwargs(
-        body=body,
-
-    )
-
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
-    body: RefreshRequest,
-
 ) -> ErrorResponse | RefreshResponse | None:
-    """ Refresh an access token
+    """Refresh the browser session
 
-     Exchanges a refresh token for a new access token.
-
-    Args:
-        body (RefreshRequest):
+     Consumes the HTTP-only qdiv0_refresh cookie and, on success, resets the qdiv0_access and
+    qdiv0_refresh browser-session cookies. The endpoint has no JSON request body and the JSON response
+    contains no access or refresh token values.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -194,11 +151,10 @@ async def asyncio(
 
     Returns:
         ErrorResponse | RefreshResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+        )
+    ).parsed

@@ -11,21 +11,20 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="RuntimeMemoryEstimateResponse")
 
 
-
 @_attrs_define
 class RuntimeMemoryEstimateResponse:
-    """ 
-        Attributes:
-            active_parameter_count (int | Unset):
-            download_size_bytes (int | Unset):
-            gpu_memory_utilization (float | Unset):
-            kv_cache_vram_gb (float | Unset):
-            model_vram_gb (float | Unset):
-            parameter_count (int | Unset):
-            per_gpu_required_vram_gb (float | Unset):
-            required_vram_gb (float | Unset):
-            tensor_parallel_size (int | Unset):
-     """
+    """
+    Attributes:
+        active_parameter_count (int | Unset):
+        download_size_bytes (int | Unset):
+        gpu_memory_utilization (float | Unset):
+        kv_cache_vram_gb (float | Unset):
+        model_vram_gb (float | Unset):
+        parameter_count (int | Unset):
+        per_gpu_required_vram_gb (float | Unset):
+        required_vram_gb (float | Unset):
+        tensor_parallel_size (int | Unset):
+    """
 
     active_parameter_count: int | Unset = UNSET
     download_size_bytes: int | Unset = UNSET
@@ -37,10 +36,6 @@ class RuntimeMemoryEstimateResponse:
     required_vram_gb: float | Unset = UNSET
     tensor_parallel_size: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         active_parameter_count = self.active_parameter_count
@@ -61,11 +56,9 @@ class RuntimeMemoryEstimateResponse:
 
         tensor_parallel_size = self.tensor_parallel_size
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if active_parameter_count is not UNSET:
             field_dict["active_parameter_count"] = active_parameter_count
         if download_size_bytes is not UNSET:
@@ -86,8 +79,6 @@ class RuntimeMemoryEstimateResponse:
             field_dict["tensor_parallel_size"] = tensor_parallel_size
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -121,7 +112,6 @@ class RuntimeMemoryEstimateResponse:
             required_vram_gb=required_vram_gb,
             tensor_parallel_size=tensor_parallel_size,
         )
-
 
         runtime_memory_estimate_response.additional_properties = d
         return runtime_memory_estimate_response

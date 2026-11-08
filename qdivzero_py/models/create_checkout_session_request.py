@@ -11,17 +11,16 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="CreateCheckoutSessionRequest")
 
 
-
 @_attrs_define
 class CreateCheckoutSessionRequest:
-    """ 
-        Attributes:
-            amount_cents (float | Unset):
-            cancel_url (str | Unset):
-            currency (str | Unset):
-            discount_code (str | Unset):
-            success_url (str | Unset):
-     """
+    """
+    Attributes:
+        amount_cents (float | Unset):
+        cancel_url (str | Unset):
+        currency (str | Unset):
+        discount_code (str | Unset):
+        success_url (str | Unset):
+    """
 
     amount_cents: float | Unset = UNSET
     cancel_url: str | Unset = UNSET
@@ -29,10 +28,6 @@ class CreateCheckoutSessionRequest:
     discount_code: str | Unset = UNSET
     success_url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         amount_cents = self.amount_cents
@@ -45,11 +40,9 @@ class CreateCheckoutSessionRequest:
 
         success_url = self.success_url
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if amount_cents is not UNSET:
             field_dict["amount_cents"] = amount_cents
         if cancel_url is not UNSET:
@@ -62,8 +55,6 @@ class CreateCheckoutSessionRequest:
             field_dict["success_url"] = success_url
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -85,7 +76,6 @@ class CreateCheckoutSessionRequest:
             discount_code=discount_code,
             success_url=success_url,
         )
-
 
         create_checkout_session_request.additional_properties = d
         return create_checkout_session_request

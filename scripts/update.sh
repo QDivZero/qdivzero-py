@@ -8,7 +8,23 @@ SPEC_URL="${SPEC_URL:-https://api.qdiv0.com/openapi}"
 OPC_VERSION="${OPC_VERSION:-0.29.0}"
 
 RAW="$(mktemp)"
-trap 'rm -f "$RAW"' EXIT
+CLEAN="$(mktemp)"
+PRESERVED="$(mktemp -d)"
+PRESERVED_READY=0
+restore_handwritten() {
+  if [ "$PRESERVED_READY" = 1 ]; then
+    cp "$PRESERVED/__init__.py" qdivzero_py/__init__.py
+    cp "$PRESERVED/auth.py" qdivzero_py/auth.py
+    cp "$PRESERVED/README.md" README.md
+    cp "$PRESERVED/.gitignore" .gitignore
+  fi
+}
+cleanup() {
+  restore_handwritten
+  rm -f "$RAW" "$CLEAN"
+  rm -rf "$PRESERVED"
+}
+trap cleanup EXIT
 
 echo "==> fetching spec: $SPEC_URL"
 curl -fsSL "$SPEC_URL" -o "$RAW"
@@ -38,6 +54,11 @@ else
 fi
 
 echo "==> regenerating client for $NEXT"
+cp qdivzero_py/__init__.py "$PRESERVED/__init__.py"
+cp qdivzero_py/auth.py "$PRESERVED/auth.py"
+cp README.md "$PRESERVED/README.md"
+cp .gitignore "$PRESERVED/.gitignore"
+PRESERVED_READY=1
 python3 - "${NEXT#v}" <<'EOF'
 import sys
 path = "api/opc-config.yaml"
@@ -52,19 +73,22 @@ for line in content.splitlines():
 with open(path, "w") as f:
     f.write("\n".join(lines) + "\n")
 EOF
-openapi-python-client generate --path "$RAW" --config api/opc-config.yaml --meta uv --output-path . --overwrite
+python3 scripts/preprocess.py "$RAW" "$CLEAN"
+openapi-python-client generate --path "$CLEAN" --config api/opc-config.yaml --meta uv --output-path . --overwrite
+python3 scripts/fix_generated.py qdivzero_py
 
 echo "==> restoring hand-written files"
-cp scripts/wrapper/__init__.py qdivzero_py/__init__.py
-cp scripts/wrapper/auth.py qdivzero_py/auth.py
-git checkout -- README.md .gitignore
+restore_handwritten
 
 python3 - <<'EOF'
 path = "pyproject.toml"
 content = open(path).read()
+if '"anyio' not in content:
+    content = content.replace('dependencies = [\n', 'dependencies = [\n    "anyio>=4.0",\n', 1)
 if "[dependency-groups]" not in content:
-    with open(path, "a") as f:
-        f.write("\n[dependency-groups]\ndev = [\n    \"pytest>=9.1.1\",\n]\n")
+    content += "\n[dependency-groups]\ndev = [\n    \"pytest>=9.1.1\",\n]\n"
+with open(path, "w") as f:
+    f.write(content)
 EOF
 
 echo "==> verifying"

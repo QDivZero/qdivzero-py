@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="IndexDocumentSourceRequest")
 
 
-
 @_attrs_define
 class IndexDocumentSourceRequest:
-    """ 
-        Attributes:
-            image_url (str | Unset):
-            text (str | Unset):
-     """
+    """
+    Attributes:
+        image_url (str | Unset):
+        text (str | Unset):
+    """
 
     image_url: str | Unset = UNSET
     text: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         image_url = self.image_url
 
         text = self.text
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if image_url is not UNSET:
             field_dict["image_url"] = image_url
         if text is not UNSET:
             field_dict["text"] = text
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class IndexDocumentSourceRequest:
             image_url=image_url,
             text=text,
         )
-
 
         index_document_source_request.additional_properties = d
         return index_document_source_request

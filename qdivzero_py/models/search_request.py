@@ -9,35 +9,27 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.search_recommend_request import SearchRecommendRequest
-
-
-
+    from ..models.search_recommend_request import SearchRecommendRequest
 
 
 T = TypeVar("T", bound="SearchRequest")
 
 
-
 @_attrs_define
 class SearchRequest:
-    """ 
-        Attributes:
-            image_url (str | Unset):
-            query (str | Unset):
-            recommend (SearchRecommendRequest | Unset):
-            top_k (int | Unset):
-     """
+    """
+    Attributes:
+        image_url (str | Unset):
+        query (str | Unset):
+        recommend (SearchRecommendRequest | Unset):
+        top_k (int | Unset):
+    """
 
     image_url: str | Unset = UNSET
     query: str | Unset = UNSET
     recommend: SearchRecommendRequest | Unset = UNSET
     top_k: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         image_url = self.image_url
@@ -50,11 +42,9 @@ class SearchRequest:
 
         top_k = self.top_k
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if image_url is not UNSET:
             field_dict["image_url"] = image_url
         if query is not UNSET:
@@ -66,11 +56,10 @@ class SearchRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.search_recommend_request import SearchRecommendRequest
+
         d = dict(src_dict)
         image_url = d.pop("image_url", UNSET)
 
@@ -78,13 +67,10 @@ class SearchRequest:
 
         _recommend = d.pop("recommend", UNSET)
         recommend: SearchRecommendRequest | Unset
-        if isinstance(_recommend,  Unset):
+        if isinstance(_recommend, Unset):
             recommend = UNSET
         else:
             recommend = SearchRecommendRequest.from_dict(_recommend)
-
-
-
 
         top_k = d.pop("top_k", UNSET)
 
@@ -94,7 +80,6 @@ class SearchRequest:
             recommend=recommend,
             top_k=top_k,
         )
-
 
         search_request.additional_properties = d
         return search_request

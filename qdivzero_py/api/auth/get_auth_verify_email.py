@@ -13,64 +13,48 @@ from ...types import UNSET, Response
 def _get_kwargs(
     *,
     token: str,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
     params["token"] = token
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/auth/verify-email",
+        "url": "/v1/auth/verify-email",
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | VerifyEmailResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | VerifyEmailResponse | None:
     if response.status_code == 200:
         response_200 = VerifyEmailResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 403:
         response_403 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_403
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -80,7 +64,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | VerifyEmailResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | VerifyEmailResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,9 +79,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     token: str,
-
 ) -> Response[ErrorResponse | VerifyEmailResponse]:
-    """ Verify an email activation link
+    """Verify an email activation link
 
      Consumes the activation token and returns a session.
 
@@ -108,12 +93,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | VerifyEmailResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         token=token,
-
     )
 
     response = client.get_httpx_client().request(
@@ -122,13 +105,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient | Client,
     token: str,
-
 ) -> ErrorResponse | VerifyEmailResponse | None:
-    """ Verify an email activation link
+    """Verify an email activation link
 
      Consumes the activation token and returns a session.
 
@@ -141,22 +124,20 @@ def sync(
 
     Returns:
         ErrorResponse | VerifyEmailResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-token=token,
-
+        token=token,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     token: str,
-
 ) -> Response[ErrorResponse | VerifyEmailResponse]:
-    """ Verify an email activation link
+    """Verify an email activation link
 
      Consumes the activation token and returns a session.
 
@@ -169,27 +150,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | VerifyEmailResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         token=token,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     token: str,
-
 ) -> ErrorResponse | VerifyEmailResponse | None:
-    """ Verify an email activation link
+    """Verify an email activation link
 
      Consumes the activation token and returns a session.
 
@@ -202,11 +179,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | VerifyEmailResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-token=token,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            token=token,
+        )
+    ).parsed

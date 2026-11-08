@@ -13,186 +13,146 @@ from ..types import UNSET, File, FileTypes, Unset
 T = TypeVar("T", bound="PostV1ImageEditsBody")
 
 
-
 @_attrs_define
 class PostV1ImageEditsBody:
-    """ 
-        Attributes:
-            model (str):
-            prompt (str):
-            image (File):
-            mask (File | Unset):
-            size (str | Unset):
-            num_inference_steps (int | Unset):
-            guidance_scale (float | Unset):
-            seed (int | Unset):
-            strength (float | Unset):
-     """
+    """
+    Attributes:
+        image (File): Source image file
+        model (str): Model ID
+        prompt (str): Edit prompt
+        guidance_scale (float | Unset): Guidance scale (0-20)
+        mask (File | Unset): Mask image file
+        num_inference_steps (int | Unset): Inference steps (1-200)
+        seed (int | Unset): Random seed
+        size (str | Unset): Output size (WIDTHxHEIGHT)
+        strength (float | Unset): Denoising strength (0-1, lower preserves original)
+    """
 
+    image: File
     model: str
     prompt: str
-    image: File
-    mask: File | Unset = UNSET
-    size: str | Unset = UNSET
-    num_inference_steps: int | Unset = UNSET
     guidance_scale: float | Unset = UNSET
+    mask: File | Unset = UNSET
+    num_inference_steps: int | Unset = UNSET
     seed: int | Unset = UNSET
+    size: str | Unset = UNSET
     strength: float | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
+        image = self.image.to_tuple()
+
         model = self.model
 
         prompt = self.prompt
 
-        image = self.image.to_tuple()
-
+        guidance_scale = self.guidance_scale
 
         mask: FileTypes | Unset = UNSET
         if not isinstance(self.mask, Unset):
             mask = self.mask.to_tuple()
 
-
-        size = self.size
-
         num_inference_steps = self.num_inference_steps
-
-        guidance_scale = self.guidance_scale
 
         seed = self.seed
 
-        strength = self.strength
+        size = self.size
 
+        strength = self.strength
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "model": model,
-            "prompt": prompt,
-            "image": image,
-        })
-        if mask is not UNSET:
-            field_dict["mask"] = mask
-        if size is not UNSET:
-            field_dict["size"] = size
-        if num_inference_steps is not UNSET:
-            field_dict["num_inference_steps"] = num_inference_steps
+        field_dict.update(
+            {
+                "image": image,
+                "model": model,
+                "prompt": prompt,
+            }
+        )
         if guidance_scale is not UNSET:
             field_dict["guidance_scale"] = guidance_scale
+        if mask is not UNSET:
+            field_dict["mask"] = mask
+        if num_inference_steps is not UNSET:
+            field_dict["num_inference_steps"] = num_inference_steps
         if seed is not UNSET:
             field_dict["seed"] = seed
+        if size is not UNSET:
+            field_dict["size"] = size
         if strength is not UNSET:
             field_dict["strength"] = strength
 
         return field_dict
 
-
     def to_multipart(self) -> types.RequestFiles:
         files: types.RequestFiles = []
 
-        files.append(("model", (None, str(self.model).encode(), "text/plain")))
-
-
-
-        files.append(("prompt", (None, str(self.prompt).encode(), "text/plain")))
-
-
-
         files.append(("image", self.image.to_tuple()))
 
+        files.append(("model", (None, str(self.model).encode(), "text/plain")))
 
-
-        if not isinstance(self.mask, Unset):
-            files.append(("mask", self.mask.to_tuple()))
-
-
-
-        if not isinstance(self.size, Unset):
-            files.append(("size", (None, str(self.size).encode(), "text/plain")))
-
-
-
-        if not isinstance(self.num_inference_steps, Unset):
-            files.append(("num_inference_steps", (None, str(self.num_inference_steps).encode(), "text/plain")))
-
-
+        files.append(("prompt", (None, str(self.prompt).encode(), "text/plain")))
 
         if not isinstance(self.guidance_scale, Unset):
             files.append(("guidance_scale", (None, str(self.guidance_scale).encode(), "text/plain")))
 
+        if not isinstance(self.mask, Unset):
+            files.append(("mask", self.mask.to_tuple()))
 
+        if not isinstance(self.num_inference_steps, Unset):
+            files.append(("num_inference_steps", (None, str(self.num_inference_steps).encode(), "text/plain")))
 
         if not isinstance(self.seed, Unset):
             files.append(("seed", (None, str(self.seed).encode(), "text/plain")))
 
-
+        if not isinstance(self.size, Unset):
+            files.append(("size", (None, str(self.size).encode(), "text/plain")))
 
         if not isinstance(self.strength, Unset):
             files.append(("strength", (None, str(self.strength).encode(), "text/plain")))
 
-
-
-
         for prop_name, prop in self.additional_properties.items():
             files.append((prop_name, (None, str(prop).encode(), "text/plain")))
 
-
-
         return files
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+        image = File(payload=BytesIO(d.pop("image")))
+
         model = d.pop("model")
 
         prompt = d.pop("prompt")
 
-        image = File(
-             payload = BytesIO(d.pop("image"))
-        )
-
-
-
+        guidance_scale = d.pop("guidance_scale", UNSET)
 
         _mask = d.pop("mask", UNSET)
         mask: File | Unset
-        if isinstance(_mask,  Unset):
+        if isinstance(_mask, Unset):
             mask = UNSET
         else:
-            mask = File(
-             payload = BytesIO(_mask)
-        )
-
-
-
-
-        size = d.pop("size", UNSET)
+            mask = File(payload=BytesIO(_mask))
 
         num_inference_steps = d.pop("num_inference_steps", UNSET)
 
-        guidance_scale = d.pop("guidance_scale", UNSET)
-
         seed = d.pop("seed", UNSET)
+
+        size = d.pop("size", UNSET)
 
         strength = d.pop("strength", UNSET)
 
         post_v1_image_edits_body = cls(
+            image=image,
             model=model,
             prompt=prompt,
-            image=image,
-            mask=mask,
-            size=size,
-            num_inference_steps=num_inference_steps,
             guidance_scale=guidance_scale,
+            mask=mask,
+            num_inference_steps=num_inference_steps,
             seed=seed,
+            size=size,
             strength=strength,
         )
-
 
         post_v1_image_edits_body.additional_properties = d
         return post_v1_image_edits_body

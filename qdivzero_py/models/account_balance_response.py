@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="AccountBalanceResponse")
 
 
-
 @_attrs_define
 class AccountBalanceResponse:
-    """ 
-        Attributes:
-            account_id (str | Unset):
-            balance (float | Unset):
-     """
+    """
+    Attributes:
+        account_id (str | Unset):
+        balance (float | Unset):
+    """
 
     account_id: str | Unset = UNSET
     balance: float | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account_id = self.account_id
 
         balance = self.balance
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account_id is not UNSET:
             field_dict["account_id"] = account_id
         if balance is not UNSET:
             field_dict["balance"] = balance
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class AccountBalanceResponse:
             account_id=account_id,
             balance=balance,
         )
-
 
         account_balance_response.additional_properties = d
         return account_balance_response

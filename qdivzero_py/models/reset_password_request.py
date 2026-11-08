@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ResetPasswordRequest")
 
 
-
 @_attrs_define
 class ResetPasswordRequest:
-    """ 
-        Attributes:
-            new_password (str):
-            token (str):
-            cf_turnstile_response (str | Unset):
-     """
+    """
+    Attributes:
+        new_password (str):
+        token (str):
+        cf_turnstile_response (str | Unset):
+    """
 
     new_password: str
     token: str
     cf_turnstile_response: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         new_password = self.new_password
@@ -37,19 +32,18 @@ class ResetPasswordRequest:
 
         cf_turnstile_response = self.cf_turnstile_response
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "new_password": new_password,
-            "token": token,
-        })
+        field_dict.update(
+            {
+                "new_password": new_password,
+                "token": token,
+            }
+        )
         if cf_turnstile_response is not UNSET:
             field_dict["cf_turnstile_response"] = cf_turnstile_response
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -65,7 +59,6 @@ class ResetPasswordRequest:
             token=token,
             cf_turnstile_response=cf_turnstile_response,
         )
-
 
         reset_password_request.additional_properties = d
         return reset_password_request

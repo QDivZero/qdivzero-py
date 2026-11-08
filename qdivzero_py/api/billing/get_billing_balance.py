@@ -10,30 +10,21 @@ from ...models.error_response import ErrorResponse
 from ...types import Response
 
 
-def _get_kwargs(
-    
-) -> dict[str, Any]:
-    
-
-    
-
-    
+def _get_kwargs() -> dict[str, Any]:
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/billing/balance",
+        "url": "/v1/billing/balance",
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> AccountBalanceResponse | ErrorResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> AccountBalanceResponse | ErrorResponse | str | None:
     if response.status_code == 200:
         response_200 = AccountBalanceResponse.from_dict(response.json())
-
-
 
         return response_200
 
@@ -44,8 +35,6 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_500
 
     if client.raise_on_unexpected_status:
@@ -54,7 +43,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[AccountBalanceResponse | ErrorResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[AccountBalanceResponse | ErrorResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -66,9 +57,8 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[AccountBalanceResponse | ErrorResponse | str]:
-    """ Get the current account balance
+    """Get the current account balance
 
      Returns the billing balance of the authenticated account.
 
@@ -78,12 +68,9 @@ def sync_detailed(
 
     Returns:
         Response[AccountBalanceResponse | ErrorResponse | str]
-     """
+    """
 
-
-    kwargs = _get_kwargs(
-        
-    )
+    kwargs = _get_kwargs()
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -91,12 +78,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
-
 ) -> AccountBalanceResponse | ErrorResponse | str | None:
-    """ Get the current account balance
+    """Get the current account balance
 
      Returns the billing balance of the authenticated account.
 
@@ -106,20 +93,18 @@ def sync(
 
     Returns:
         AccountBalanceResponse | ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[AccountBalanceResponse | ErrorResponse | str]:
-    """ Get the current account balance
+    """Get the current account balance
 
      Returns the billing balance of the authenticated account.
 
@@ -129,25 +114,20 @@ async def asyncio_detailed(
 
     Returns:
         Response[AccountBalanceResponse | ErrorResponse | str]
-     """
+    """
 
+    kwargs = _get_kwargs()
 
-    kwargs = _get_kwargs(
-        
-    )
-
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
-
 ) -> AccountBalanceResponse | ErrorResponse | str | None:
-    """ Get the current account balance
+    """Get the current account balance
 
      Returns the billing balance of the authenticated account.
 
@@ -157,10 +137,10 @@ async def asyncio(
 
     Returns:
         AccountBalanceResponse | ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+        )
+    ).parsed

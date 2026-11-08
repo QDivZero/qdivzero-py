@@ -11,47 +11,38 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="Timestamp")
 
 
-
 @_attrs_define
 class Timestamp:
-    """ 
-        Attributes:
-            nanos (int | Unset): Non-negative fractions of a second at nanosecond resolution. This field is
-                the nanosecond portion of the duration, not an alternative to seconds.
-                Negative second values with fractions must still have non-negative nanos
-                values that count forward in time. Must be between 0 and 999,999,999
-                inclusive.
-            seconds (int | Unset): Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must
-                be between -315576000000 and 315576000000 inclusive (which corresponds to
-                0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).
-     """
+    """
+    Attributes:
+        nanos (int | Unset): Non-negative fractions of a second at nanosecond resolution. This field is
+            the nanosecond portion of the duration, not an alternative to seconds.
+            Negative second values with fractions must still have non-negative nanos
+            values that count forward in time. Must be between 0 and 999,999,999
+            inclusive.
+        seconds (int | Unset): Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must
+            be between -62135596800 and 253402300799 inclusive (which corresponds to
+            0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).
+    """
 
     nanos: int | Unset = UNSET
     seconds: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         nanos = self.nanos
 
         seconds = self.seconds
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if nanos is not UNSET:
             field_dict["nanos"] = nanos
         if seconds is not UNSET:
             field_dict["seconds"] = seconds
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -64,7 +55,6 @@ class Timestamp:
             nanos=nanos,
             seconds=seconds,
         )
-
 
         timestamp.additional_properties = d
         return timestamp

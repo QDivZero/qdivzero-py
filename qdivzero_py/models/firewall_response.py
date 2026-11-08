@@ -11,20 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="FirewallResponse")
 
 
-
 @_attrs_define
 class FirewallResponse:
-    """ 
-        Attributes:
-            created_at (str | Unset):
-            description (str | Unset):
-            evaluator_serving_name (str | Unset):
-            mode (str | Unset):
-            name (str | Unset):
-            rule_slugs (list[str] | Unset):
-            slug (str | Unset):
-            updated_at (str | Unset):
-     """
+    """
+    Attributes:
+        created_at (str | Unset):
+        description (str | Unset):
+        evaluator_serving_name (str | Unset):
+        mode (str | Unset):
+        name (str | Unset):
+        rule_slugs (list[str] | Unset):
+        slug (str | Unset):
+        updated_at (str | Unset):
+    """
 
     created_at: str | Unset = UNSET
     description: str | Unset = UNSET
@@ -35,10 +34,6 @@ class FirewallResponse:
     slug: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         created_at = self.created_at
@@ -55,17 +50,13 @@ class FirewallResponse:
         if not isinstance(self.rule_slugs, Unset):
             rule_slugs = self.rule_slugs
 
-
-
         slug = self.slug
 
         updated_at = self.updated_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if description is not UNSET:
@@ -85,8 +76,6 @@ class FirewallResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -102,7 +91,6 @@ class FirewallResponse:
 
         rule_slugs = cast(list[str], d.pop("rule_slugs", UNSET))
 
-
         slug = d.pop("slug", UNSET)
 
         updated_at = d.pop("updated_at", UNSET)
@@ -117,7 +105,6 @@ class FirewallResponse:
             slug=slug,
             updated_at=updated_at,
         )
-
 
         firewall_response.additional_properties = d
         return firewall_response

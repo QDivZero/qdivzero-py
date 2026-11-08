@@ -9,35 +9,27 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.resource_metric_snapshot import ResourceMetricSnapshot
-
-
-
+    from ..models.resource_metric_snapshot import ResourceMetricSnapshot
 
 
 T = TypeVar("T", bound="ResourceMetricsResponse")
 
 
-
 @_attrs_define
 class ResourceMetricsResponse:
-    """ 
-        Attributes:
-            latest (ResourceMetricSnapshot | Unset):
-            retention_seconds (int | Unset):
-            sample_interval_seconds (int | Unset):
-            series (list[ResourceMetricSnapshot] | Unset):
-     """
+    """
+    Attributes:
+        latest (ResourceMetricSnapshot | Unset):
+        retention_seconds (int | Unset):
+        sample_interval_seconds (int | Unset):
+        series (list[ResourceMetricSnapshot] | Unset):
+    """
 
     latest: ResourceMetricSnapshot | Unset = UNSET
     retention_seconds: int | Unset = UNSET
     sample_interval_seconds: int | Unset = UNSET
     series: list[ResourceMetricSnapshot] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         latest: dict[str, Any] | Unset = UNSET
@@ -55,13 +47,9 @@ class ResourceMetricsResponse:
                 series_item = series_item_data.to_dict()
                 series.append(series_item)
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if latest is not UNSET:
             field_dict["latest"] = latest
         if retention_seconds is not UNSET:
@@ -73,21 +61,17 @@ class ResourceMetricsResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.resource_metric_snapshot import ResourceMetricSnapshot
+
         d = dict(src_dict)
         _latest = d.pop("latest", UNSET)
         latest: ResourceMetricSnapshot | Unset
-        if isinstance(_latest,  Unset):
+        if isinstance(_latest, Unset):
             latest = UNSET
         else:
             latest = ResourceMetricSnapshot.from_dict(_latest)
-
-
-
 
         retention_seconds = d.pop("retention_seconds", UNSET)
 
@@ -100,10 +84,7 @@ class ResourceMetricsResponse:
             for series_item_data in _series:
                 series_item = ResourceMetricSnapshot.from_dict(series_item_data)
 
-
-
                 series.append(series_item)
-
 
         resource_metrics_response = cls(
             latest=latest,
@@ -111,7 +92,6 @@ class ResourceMetricsResponse:
             sample_interval_seconds=sample_interval_seconds,
             series=series,
         )
-
 
         resource_metrics_response.additional_properties = d
         return resource_metrics_response

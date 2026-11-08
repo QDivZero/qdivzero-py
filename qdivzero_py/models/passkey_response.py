@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="PasskeyResponse")
 
 
-
 @_attrs_define
 class PasskeyResponse:
-    """ 
-        Attributes:
-            credential_id (str | Unset):
-            public_key (str | Unset):
-            sign_count (int | Unset):
-     """
+    """
+    Attributes:
+        credential_id (str | Unset):
+        public_key (str | Unset):
+        sign_count (int | Unset):
+    """
 
     credential_id: str | Unset = UNSET
     public_key: str | Unset = UNSET
     sign_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         credential_id = self.credential_id
@@ -37,11 +32,9 @@ class PasskeyResponse:
 
         sign_count = self.sign_count
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if credential_id is not UNSET:
             field_dict["credential_id"] = credential_id
         if public_key is not UNSET:
@@ -50,8 +43,6 @@ class PasskeyResponse:
             field_dict["sign_count"] = sign_count
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class PasskeyResponse:
             public_key=public_key,
             sign_count=sign_count,
         )
-
 
         passkey_response.additional_properties = d
         return passkey_response

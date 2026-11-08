@@ -9,29 +9,21 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.catalog_gpu_response import CatalogGPUResponse
-
-
-
+    from ..models.catalog_gpu_response import CatalogGPUResponse
 
 
 T = TypeVar("T", bound="GpuListResponse")
 
 
-
 @_attrs_define
 class GpuListResponse:
-    """ 
-        Attributes:
-            gpus (list[CatalogGPUResponse] | Unset):
-     """
+    """
+    Attributes:
+        gpus (list[CatalogGPUResponse] | Unset):
+    """
 
     gpus: list[CatalogGPUResponse] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         gpus: list[dict[str, Any]] | Unset = UNSET
@@ -41,23 +33,18 @@ class GpuListResponse:
                 gpus_item = gpus_item_data.to_dict()
                 gpus.append(gpus_item)
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if gpus is not UNSET:
             field_dict["gpus"] = gpus
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.catalog_gpu_response import CatalogGPUResponse
+
         d = dict(src_dict)
         _gpus = d.pop("gpus", UNSET)
         gpus: list[CatalogGPUResponse] | Unset = UNSET
@@ -66,15 +53,11 @@ class GpuListResponse:
             for gpus_item_data in _gpus:
                 gpus_item = CatalogGPUResponse.from_dict(gpus_item_data)
 
-
-
                 gpus.append(gpus_item)
-
 
         gpu_list_response = cls(
             gpus=gpus,
         )
-
 
         gpu_list_response.additional_properties = d
         return gpu_list_response

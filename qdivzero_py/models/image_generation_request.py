@@ -11,25 +11,24 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ImageGenerationRequest")
 
 
-
 @_attrs_define
 class ImageGenerationRequest:
-    """ 
-        Attributes:
-            guidance_scale (float | Unset):
-            height (int | Unset):
-            model (str | Unset):
-            n (int | Unset):
-            num_inference_steps (int | Unset):
-            prompt (str | Unset):
-            quality (str | Unset):
-            response_format (str | Unset):
-            seed (int | Unset):
-            size (str | Unset):
-            style (str | Unset):
-            user (str | Unset):
-            width (int | Unset):
-     """
+    """
+    Attributes:
+        guidance_scale (float | Unset):
+        height (int | Unset):
+        model (str | Unset):
+        n (int | Unset):
+        num_inference_steps (int | Unset):
+        prompt (str | Unset):
+        quality (str | Unset):
+        response_format (str | Unset):
+        seed (int | Unset):
+        size (str | Unset):
+        style (str | Unset):
+        user (str | Unset):
+        width (int | Unset):
+    """
 
     guidance_scale: float | Unset = UNSET
     height: int | Unset = UNSET
@@ -45,10 +44,6 @@ class ImageGenerationRequest:
     user: str | Unset = UNSET
     width: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         guidance_scale = self.guidance_scale
@@ -77,11 +72,9 @@ class ImageGenerationRequest:
 
         width = self.width
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if guidance_scale is not UNSET:
             field_dict["guidance_scale"] = guidance_scale
         if height is not UNSET:
@@ -110,8 +103,6 @@ class ImageGenerationRequest:
             field_dict["width"] = width
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -157,7 +148,6 @@ class ImageGenerationRequest:
             user=user,
             width=width,
         )
-
 
         image_generation_request.additional_properties = d
         return image_generation_request

@@ -1,0 +1,8 @@
+from enum import IntEnum
+
+
+class PostV1VideoJobJsonBodyFps(IntEnum):
+    VALUE_24 = 24
+
+    def __str__(self) -> str:
+        return str(self.value)

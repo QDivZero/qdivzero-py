@@ -1,11 +1,12 @@
 [project]
 name = "qdivzero-py"
-version = "1.0.0"
+version = "1.0.2"
 description = "A client library for accessing Tokenfactory API Gateway"
 authors = []
 requires-python = ">=3.11"
 readme = "README.md"
 dependencies = [
+    "anyio>=4.0",
     "httpx>=0.23.1,<0.29.0",
     "attrs>=22.2.0",
 ]
@@ -18,13 +19,13 @@ module-root = ""
 requires = ["uv_build>=0.11.0,<0.12.0"]
 build-backend = "uv_build"
 
-[dependency-groups]
-dev = [
-    "pytest>=9.1.1",
-]
-
 [tool.ruff]
 line-length = 120
 
 [tool.ruff.lint]
 select = ["F", "I", "UP"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

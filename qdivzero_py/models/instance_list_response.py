@@ -9,29 +9,21 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.instance_response import InstanceResponse
-
-
-
+    from ..models.instance_response import InstanceResponse
 
 
 T = TypeVar("T", bound="InstanceListResponse")
 
 
-
 @_attrs_define
 class InstanceListResponse:
-    """ 
-        Attributes:
-            instances (list[InstanceResponse] | Unset):
-     """
+    """
+    Attributes:
+        instances (list[InstanceResponse] | Unset):
+    """
 
     instances: list[InstanceResponse] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         instances: list[dict[str, Any]] | Unset = UNSET
@@ -41,23 +33,18 @@ class InstanceListResponse:
                 instances_item = instances_item_data.to_dict()
                 instances.append(instances_item)
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if instances is not UNSET:
             field_dict["instances"] = instances
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.instance_response import InstanceResponse
+
         d = dict(src_dict)
         _instances = d.pop("instances", UNSET)
         instances: list[InstanceResponse] | Unset = UNSET
@@ -66,15 +53,11 @@ class InstanceListResponse:
             for instances_item_data in _instances:
                 instances_item = InstanceResponse.from_dict(instances_item_data)
 
-
-
                 instances.append(instances_item)
-
 
         instance_list_response = cls(
             instances=instances,
         )
-
 
         instance_list_response.additional_properties = d
         return instance_list_response

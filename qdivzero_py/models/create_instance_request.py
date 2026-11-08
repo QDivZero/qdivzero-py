@@ -6,50 +6,54 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.create_instance_request_workload_kind import CreateInstanceRequestWorkloadKind
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.public_gpu_preference_json import PublicGPUPreferenceJSON
-  from ..models.runtime_config_request import RuntimeConfigRequest
-
-
-
+    from ..models.public_gpu_preference_json import PublicGPUPreferenceJSON
+    from ..models.runtime_config_request import RuntimeConfigRequest
 
 
 T = TypeVar("T", bound="CreateInstanceRequest")
 
 
-
 @_attrs_define
 class CreateInstanceRequest:
-    """ 
-        Attributes:
-            description (str | Unset):
-            download_size_bytes (int | Unset):
-            gguf_model_path (str | Unset):
-            gpu_preferences (list[PublicGPUPreferenceJSON] | Unset):
-            huggingface_repo_id (str | Unset):
-            idle_timeout_seconds (int | Unset):
-            name (str | Unset):
-            replica_count (int | Unset):
-            runtime_config (RuntimeConfigRequest | Unset):
-            runtime_preset (str | Unset):
-            scheduling_mode (str | Unset):
-            serverless_enabled (bool | Unset):
-            serving_name (str | Unset):
-            smart_allow_community (bool | Unset):
-            smart_allow_spot (bool | Unset):
-            smart_max_price_per_hour_eur (float | Unset):
-            smart_min_gpu_class (str | Unset):
-            smart_min_total_tflops (float | Unset):
-            smart_provider_filter_mode (str | Unset):
-            smart_provider_preference (str | Unset):
-            smart_region (str | Unset):
-            smart_regions (list[str] | Unset):
-            smart_selection_label (str | Unset):
-            workload_kind (str | Unset):
-     """
+    """
+    Attributes:
+        cost_optimization_enabled (bool | Unset): Opt into automatic replacement with cheaper compatible Smart capacity.
+            Defaults to false; requires smart scheduling.
+        cost_optimization_min_savings_percent (float | Unset): Minimum percentage saving required for replacement.
+            Defaults to 20; must be finite, greater than 0 and less than 100. Decimals are accepted.
+        description (str | Unset):
+        download_size_bytes (int | Unset):
+        gguf_model_path (str | Unset):
+        gpu_preferences (list[PublicGPUPreferenceJSON] | Unset):
+        huggingface_repo_id (str | Unset):
+        idle_timeout_seconds (int | Unset):
+        name (str | Unset):
+        replica_count (int | Unset):
+        runtime_config (RuntimeConfigRequest | Unset):
+        runtime_preset (str | Unset):
+        scheduling_mode (str | Unset):
+        serverless_enabled (bool | Unset):
+        serving_name (str | Unset):
+        smart_allow_community (bool | Unset):
+        smart_allow_spot (bool | Unset):
+        smart_max_price_per_hour_eur (float | Unset):
+        smart_min_gpu_class (str | Unset):
+        smart_min_total_tflops (float | Unset):
+        smart_provider_filter_mode (str | Unset):
+        smart_provider_preference (str | Unset):
+        smart_region (str | Unset):
+        smart_regions (list[str] | Unset):
+        smart_selection_label (str | Unset):
+        supported_protocols (list[str] | Unset):
+        workload_kind (CreateInstanceRequestWorkloadKind | Unset):
+    """
 
+    cost_optimization_enabled: bool | Unset = UNSET
+    cost_optimization_min_savings_percent: float | Unset = UNSET
     description: str | Unset = UNSET
     download_size_bytes: int | Unset = UNSET
     gguf_model_path: str | Unset = UNSET
@@ -73,14 +77,15 @@ class CreateInstanceRequest:
     smart_region: str | Unset = UNSET
     smart_regions: list[str] | Unset = UNSET
     smart_selection_label: str | Unset = UNSET
-    workload_kind: str | Unset = UNSET
+    supported_protocols: list[str] | Unset = UNSET
+    workload_kind: CreateInstanceRequestWorkloadKind | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
+        cost_optimization_enabled = self.cost_optimization_enabled
+
+        cost_optimization_min_savings_percent = self.cost_optimization_min_savings_percent
+
         description = self.description
 
         download_size_bytes = self.download_size_bytes
@@ -93,8 +98,6 @@ class CreateInstanceRequest:
             for gpu_preferences_item_data in self.gpu_preferences:
                 gpu_preferences_item = gpu_preferences_item_data.to_dict()
                 gpu_preferences.append(gpu_preferences_item)
-
-
 
         huggingface_repo_id = self.huggingface_repo_id
 
@@ -136,17 +139,23 @@ class CreateInstanceRequest:
         if not isinstance(self.smart_regions, Unset):
             smart_regions = self.smart_regions
 
-
-
         smart_selection_label = self.smart_selection_label
 
-        workload_kind = self.workload_kind
+        supported_protocols: list[str] | Unset = UNSET
+        if not isinstance(self.supported_protocols, Unset):
+            supported_protocols = self.supported_protocols
 
+        workload_kind: str | Unset = UNSET
+        if not isinstance(self.workload_kind, Unset):
+            workload_kind = self.workload_kind.value
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
+        if cost_optimization_enabled is not UNSET:
+            field_dict["cost_optimization_enabled"] = cost_optimization_enabled
+        if cost_optimization_min_savings_percent is not UNSET:
+            field_dict["cost_optimization_min_savings_percent"] = cost_optimization_min_savings_percent
         if description is not UNSET:
             field_dict["description"] = description
         if download_size_bytes is not UNSET:
@@ -193,18 +202,23 @@ class CreateInstanceRequest:
             field_dict["smart_regions"] = smart_regions
         if smart_selection_label is not UNSET:
             field_dict["smart_selection_label"] = smart_selection_label
+        if supported_protocols is not UNSET:
+            field_dict["supported_protocols"] = supported_protocols
         if workload_kind is not UNSET:
             field_dict["workload_kind"] = workload_kind
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.public_gpu_preference_json import PublicGPUPreferenceJSON
         from ..models.runtime_config_request import RuntimeConfigRequest
+
         d = dict(src_dict)
+        cost_optimization_enabled = d.pop("cost_optimization_enabled", UNSET)
+
+        cost_optimization_min_savings_percent = d.pop("cost_optimization_min_savings_percent", UNSET)
+
         description = d.pop("description", UNSET)
 
         download_size_bytes = d.pop("download_size_bytes", UNSET)
@@ -218,10 +232,7 @@ class CreateInstanceRequest:
             for gpu_preferences_item_data in _gpu_preferences:
                 gpu_preferences_item = PublicGPUPreferenceJSON.from_dict(gpu_preferences_item_data)
 
-
-
                 gpu_preferences.append(gpu_preferences_item)
-
 
         huggingface_repo_id = d.pop("huggingface_repo_id", UNSET)
 
@@ -233,13 +244,10 @@ class CreateInstanceRequest:
 
         _runtime_config = d.pop("runtime_config", UNSET)
         runtime_config: RuntimeConfigRequest | Unset
-        if isinstance(_runtime_config,  Unset):
+        if isinstance(_runtime_config, Unset):
             runtime_config = UNSET
         else:
             runtime_config = RuntimeConfigRequest.from_dict(_runtime_config)
-
-
-
 
         runtime_preset = d.pop("runtime_preset", UNSET)
 
@@ -267,12 +275,20 @@ class CreateInstanceRequest:
 
         smart_regions = cast(list[str], d.pop("smart_regions", UNSET))
 
-
         smart_selection_label = d.pop("smart_selection_label", UNSET)
 
-        workload_kind = d.pop("workload_kind", UNSET)
+        supported_protocols = cast(list[str], d.pop("supported_protocols", UNSET))
+
+        _workload_kind = d.pop("workload_kind", UNSET)
+        workload_kind: CreateInstanceRequestWorkloadKind | Unset
+        if isinstance(_workload_kind, Unset):
+            workload_kind = UNSET
+        else:
+            workload_kind = CreateInstanceRequestWorkloadKind(_workload_kind)
 
         create_instance_request = cls(
+            cost_optimization_enabled=cost_optimization_enabled,
+            cost_optimization_min_savings_percent=cost_optimization_min_savings_percent,
             description=description,
             download_size_bytes=download_size_bytes,
             gguf_model_path=gguf_model_path,
@@ -296,9 +312,9 @@ class CreateInstanceRequest:
             smart_region=smart_region,
             smart_regions=smart_regions,
             smart_selection_label=smart_selection_label,
+            supported_protocols=supported_protocols,
             workload_kind=workload_kind,
         )
-
 
         create_instance_request.additional_properties = d
         return create_instance_request

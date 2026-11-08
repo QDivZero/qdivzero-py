@@ -11,24 +11,23 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="UpdateReplicaSetRequest")
 
 
-
 @_attrs_define
 class UpdateReplicaSetRequest:
-    """ 
-        Attributes:
-            desired_replicas (int | Unset):
-            name (str | Unset):
-            scheduling_mode (str | Unset):
-            serving_name (str | Unset):
-            smart_allow_community (bool | Unset):
-            smart_allow_spot (bool | Unset):
-            smart_max_price_per_hour_usd (float | Unset):
-            smart_min_gpu_class (str | Unset):
-            smart_min_total_tflops (float | Unset):
-            smart_provider_filter_mode (str | Unset):
-            smart_provider_preference (str | Unset):
-            smart_regions (list[str] | Unset):
-     """
+    """
+    Attributes:
+        desired_replicas (int | Unset):
+        name (str | Unset):
+        scheduling_mode (str | Unset):
+        serving_name (str | Unset):
+        smart_allow_community (bool | Unset):
+        smart_allow_spot (bool | Unset):
+        smart_max_price_per_hour_usd (float | Unset):
+        smart_min_gpu_class (str | Unset):
+        smart_min_total_tflops (float | Unset):
+        smart_provider_filter_mode (str | Unset):
+        smart_provider_preference (str | Unset):
+        smart_regions (list[str] | Unset):
+    """
 
     desired_replicas: int | Unset = UNSET
     name: str | Unset = UNSET
@@ -43,10 +42,6 @@ class UpdateReplicaSetRequest:
     smart_provider_preference: str | Unset = UNSET
     smart_regions: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         desired_replicas = self.desired_replicas
@@ -75,13 +70,9 @@ class UpdateReplicaSetRequest:
         if not isinstance(self.smart_regions, Unset):
             smart_regions = self.smart_regions
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if desired_replicas is not UNSET:
             field_dict["desired_replicas"] = desired_replicas
         if name is not UNSET:
@@ -108,8 +99,6 @@ class UpdateReplicaSetRequest:
             field_dict["smart_regions"] = smart_regions
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -138,7 +127,6 @@ class UpdateReplicaSetRequest:
 
         smart_regions = cast(list[str], d.pop("smart_regions", UNSET))
 
-
         update_replica_set_request = cls(
             desired_replicas=desired_replicas,
             name=name,
@@ -153,7 +141,6 @@ class UpdateReplicaSetRequest:
             smart_provider_preference=smart_provider_preference,
             smart_regions=smart_regions,
         )
-
 
         update_replica_set_request.additional_properties = d
         return update_replica_set_request

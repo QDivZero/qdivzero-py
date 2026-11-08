@@ -16,18 +16,14 @@ def _get_kwargs(
     firewall_slug: str,
     *,
     body: UpdateFirewallRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/firewalls/{firewall_slug}".format(firewall_slug=quote(str(firewall_slug), safe=""),),
+        "url": "/v1/firewalls/{firewall_slug}".format(
+            firewall_slug=quote(str(firewall_slug), safe=""),
+        ),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -38,40 +34,31 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | FirewallResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | FirewallResponse | None:
     if response.status_code == 200:
         response_200 = FirewallResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_401
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -81,7 +68,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | FirewallResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | FirewallResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -95,9 +84,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateFirewallRequest,
-
 ) -> Response[ErrorResponse | FirewallResponse]:
-    """ Update a firewall
+    """Update a firewall
 
      Partially updates a firewall by slug.
 
@@ -111,13 +99,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | FirewallResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         firewall_slug=firewall_slug,
-body=body,
-
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -126,14 +112,14 @@ body=body,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     firewall_slug: str,
     *,
     client: AuthenticatedClient,
     body: UpdateFirewallRequest,
-
 ) -> ErrorResponse | FirewallResponse | None:
-    """ Update a firewall
+    """Update a firewall
 
      Partially updates a firewall by slug.
 
@@ -147,24 +133,22 @@ def sync(
 
     Returns:
         ErrorResponse | FirewallResponse
-     """
-
+    """
 
     return sync_detailed(
         firewall_slug=firewall_slug,
-client=client,
-body=body,
-
+        client=client,
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     firewall_slug: str,
     *,
     client: AuthenticatedClient,
     body: UpdateFirewallRequest,
-
 ) -> Response[ErrorResponse | FirewallResponse]:
-    """ Update a firewall
+    """Update a firewall
 
      Partially updates a firewall by slug.
 
@@ -178,29 +162,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | FirewallResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         firewall_slug=firewall_slug,
-body=body,
-
+        body=body,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     firewall_slug: str,
     *,
     client: AuthenticatedClient,
     body: UpdateFirewallRequest,
-
 ) -> ErrorResponse | FirewallResponse | None:
-    """ Update a firewall
+    """Update a firewall
 
      Partially updates a firewall by slug.
 
@@ -214,12 +194,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | FirewallResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        firewall_slug=firewall_slug,
-client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            firewall_slug=firewall_slug,
+            client=client,
+            body=body,
+        )
+    ).parsed

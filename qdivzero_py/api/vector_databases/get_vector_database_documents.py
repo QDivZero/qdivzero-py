@@ -16,11 +16,7 @@ def _get_kwargs(
     *,
     limit: int | Unset = UNSET,
     cursor: str | Unset = UNSET,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
@@ -28,47 +24,39 @@ def _get_kwargs(
 
     params["cursor"] = cursor
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/flexible-vector-databases/{database_id}/documents".format(database_id=quote(str(database_id), safe=""),),
+        "url": "/v1/flexible-vector-databases/{database_id}/documents".format(
+            database_id=quote(str(database_id), safe=""),
+        ),
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | ListDocumentsResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | ListDocumentsResponse | None:
     if response.status_code == 200:
         response_200 = ListDocumentsResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -78,7 +66,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | ListDocumentsResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | ListDocumentsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,9 +83,8 @@ def sync_detailed(
     client: AuthenticatedClient,
     limit: int | Unset = UNSET,
     cursor: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | ListDocumentsResponse]:
-    """ List documents in a vector database
+    """List documents in a vector database
 
      Returns documents stored in a vector database with optional pagination.
 
@@ -110,14 +99,12 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | ListDocumentsResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-limit=limit,
-cursor=cursor,
-
+        limit=limit,
+        cursor=cursor,
     )
 
     response = client.get_httpx_client().request(
@@ -126,15 +113,15 @@ cursor=cursor,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     database_id: str,
     *,
     client: AuthenticatedClient,
     limit: int | Unset = UNSET,
     cursor: str | Unset = UNSET,
-
 ) -> ErrorResponse | ListDocumentsResponse | None:
-    """ List documents in a vector database
+    """List documents in a vector database
 
      Returns documents stored in a vector database with optional pagination.
 
@@ -149,16 +136,15 @@ def sync(
 
     Returns:
         ErrorResponse | ListDocumentsResponse
-     """
-
+    """
 
     return sync_detailed(
         database_id=database_id,
-client=client,
-limit=limit,
-cursor=cursor,
-
+        client=client,
+        limit=limit,
+        cursor=cursor,
     ).parsed
+
 
 async def asyncio_detailed(
     database_id: str,
@@ -166,9 +152,8 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     limit: int | Unset = UNSET,
     cursor: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | ListDocumentsResponse]:
-    """ List documents in a vector database
+    """List documents in a vector database
 
      Returns documents stored in a vector database with optional pagination.
 
@@ -183,21 +168,18 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | ListDocumentsResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-limit=limit,
-cursor=cursor,
-
+        limit=limit,
+        cursor=cursor,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     database_id: str,
@@ -205,9 +187,8 @@ async def asyncio(
     client: AuthenticatedClient,
     limit: int | Unset = UNSET,
     cursor: str | Unset = UNSET,
-
 ) -> ErrorResponse | ListDocumentsResponse | None:
-    """ List documents in a vector database
+    """List documents in a vector database
 
      Returns documents stored in a vector database with optional pagination.
 
@@ -222,13 +203,13 @@ async def asyncio(
 
     Returns:
         ErrorResponse | ListDocumentsResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        database_id=database_id,
-client=client,
-limit=limit,
-cursor=cursor,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            database_id=database_id,
+            client=client,
+            limit=limit,
+            cursor=cursor,
+        )
+    ).parsed

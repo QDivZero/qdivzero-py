@@ -11,17 +11,16 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="AccountMemberResponse")
 
 
-
 @_attrs_define
 class AccountMemberResponse:
-    """ 
-        Attributes:
-            account_id (str | Unset):
-            created_at_unix (int | Unset):
-            email (str | Unset):
-            role (str | Unset):
-            user_id (str | Unset):
-     """
+    """
+    Attributes:
+        account_id (str | Unset):
+        created_at_unix (int | Unset):
+        email (str | Unset):
+        role (str | Unset):
+        user_id (str | Unset):
+    """
 
     account_id: str | Unset = UNSET
     created_at_unix: int | Unset = UNSET
@@ -29,10 +28,6 @@ class AccountMemberResponse:
     role: str | Unset = UNSET
     user_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account_id = self.account_id
@@ -45,11 +40,9 @@ class AccountMemberResponse:
 
         user_id = self.user_id
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account_id is not UNSET:
             field_dict["account_id"] = account_id
         if created_at_unix is not UNSET:
@@ -62,8 +55,6 @@ class AccountMemberResponse:
             field_dict["user_id"] = user_id
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -85,7 +76,6 @@ class AccountMemberResponse:
             role=role,
             user_id=user_id,
         )
-
 
         account_member_response.additional_properties = d
         return account_member_response

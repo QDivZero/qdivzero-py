@@ -16,18 +16,14 @@ def _get_kwargs(
     database_id: str,
     *,
     body: ViewElementRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/flexible-vector-databases/{database_id}/view-element".format(database_id=quote(str(database_id), safe=""),),
+        "url": "/v1/flexible-vector-databases/{database_id}/view-element".format(
+            database_id=quote(str(database_id), safe=""),
+        ),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -38,33 +34,26 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | PostVectorDatabaseViewElementResponse200 | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | PostVectorDatabaseViewElementResponse200 | None:
     if response.status_code == 200:
         response_200 = PostVectorDatabaseViewElementResponse200.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -74,7 +63,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | PostVectorDatabaseViewElementResponse200]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | PostVectorDatabaseViewElementResponse200]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -88,9 +79,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: ViewElementRequest,
-
 ) -> Response[ErrorResponse | PostVectorDatabaseViewElementResponse200]:
-    """ View an element
+    """View an element
 
      Records a view for a document and returns a recommend token.
 
@@ -104,13 +94,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | PostVectorDatabaseViewElementResponse200]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-body=body,
-
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -119,14 +107,14 @@ body=body,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     database_id: str,
     *,
     client: AuthenticatedClient,
     body: ViewElementRequest,
-
 ) -> ErrorResponse | PostVectorDatabaseViewElementResponse200 | None:
-    """ View an element
+    """View an element
 
      Records a view for a document and returns a recommend token.
 
@@ -140,24 +128,22 @@ def sync(
 
     Returns:
         ErrorResponse | PostVectorDatabaseViewElementResponse200
-     """
-
+    """
 
     return sync_detailed(
         database_id=database_id,
-client=client,
-body=body,
-
+        client=client,
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     database_id: str,
     *,
     client: AuthenticatedClient,
     body: ViewElementRequest,
-
 ) -> Response[ErrorResponse | PostVectorDatabaseViewElementResponse200]:
-    """ View an element
+    """View an element
 
      Records a view for a document and returns a recommend token.
 
@@ -171,29 +157,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | PostVectorDatabaseViewElementResponse200]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-body=body,
-
+        body=body,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     database_id: str,
     *,
     client: AuthenticatedClient,
     body: ViewElementRequest,
-
 ) -> ErrorResponse | PostVectorDatabaseViewElementResponse200 | None:
-    """ View an element
+    """View an element
 
      Records a view for a document and returns a recommend token.
 
@@ -207,12 +189,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | PostVectorDatabaseViewElementResponse200
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        database_id=database_id,
-client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            database_id=database_id,
+            client=client,
+            body=body,
+        )
+    ).parsed

@@ -11,35 +11,26 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="UpdatePreferencesRequest")
 
 
-
 @_attrs_define
 class UpdatePreferencesRequest:
-    """ 
-        Attributes:
-            email_2fa_enabled (bool | Unset):
-     """
+    """
+    Attributes:
+        email_2fa_enabled (bool | Unset):
+    """
 
     email_2fa_enabled: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         email_2fa_enabled = self.email_2fa_enabled
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if email_2fa_enabled is not UNSET:
             field_dict["email_2fa_enabled"] = email_2fa_enabled
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,7 +40,6 @@ class UpdatePreferencesRequest:
         update_preferences_request = cls(
             email_2fa_enabled=email_2fa_enabled,
         )
-
 
         update_preferences_request.additional_properties = d
         return update_preferences_request

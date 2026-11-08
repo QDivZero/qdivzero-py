@@ -9,31 +9,23 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.ledger_entry_response import LedgerEntryResponse
-
-
-
+    from ..models.ledger_entry_response import LedgerEntryResponse
 
 
 T = TypeVar("T", bound="LedgerHistoryResponse")
 
 
-
 @_attrs_define
 class LedgerHistoryResponse:
-    """ 
-        Attributes:
-            entries (list[LedgerEntryResponse] | Unset):
-            total (int | Unset):
-     """
+    """
+    Attributes:
+        entries (list[LedgerEntryResponse] | Unset):
+        total (int | Unset):
+    """
 
     entries: list[LedgerEntryResponse] | Unset = UNSET
     total: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         entries: list[dict[str, Any]] | Unset = UNSET
@@ -43,15 +35,11 @@ class LedgerHistoryResponse:
                 entries_item = entries_item_data.to_dict()
                 entries.append(entries_item)
 
-
-
         total = self.total
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if entries is not UNSET:
             field_dict["entries"] = entries
         if total is not UNSET:
@@ -59,11 +47,10 @@ class LedgerHistoryResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ledger_entry_response import LedgerEntryResponse
+
         d = dict(src_dict)
         _entries = d.pop("entries", UNSET)
         entries: list[LedgerEntryResponse] | Unset = UNSET
@@ -72,10 +59,7 @@ class LedgerHistoryResponse:
             for entries_item_data in _entries:
                 entries_item = LedgerEntryResponse.from_dict(entries_item_data)
 
-
-
                 entries.append(entries_item)
-
 
         total = d.pop("total", UNSET)
 
@@ -83,7 +67,6 @@ class LedgerHistoryResponse:
             entries=entries,
             total=total,
         )
-
 
         ledger_history_response.additional_properties = d
         return ledger_history_response

@@ -16,18 +16,14 @@ def _get_kwargs(
     smart_balancer_id: str,
     *,
     body: UpdateSmartBalancerRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/smart-balancers/{smart_balancer_id}".format(smart_balancer_id=quote(str(smart_balancer_id), safe=""),),
+        "url": "/v1/smart-balancers/{smart_balancer_id}".format(
+            smart_balancer_id=quote(str(smart_balancer_id), safe=""),
+        ),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -38,19 +34,16 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | SmartBalancerViewResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | SmartBalancerViewResponse | str | None:
     if response.status_code == 200:
         response_200 = SmartBalancerViewResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -61,21 +54,15 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 403:
         response_403 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -85,7 +72,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | SmartBalancerViewResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | SmartBalancerViewResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -99,9 +88,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateSmartBalancerRequest,
-
 ) -> Response[ErrorResponse | SmartBalancerViewResponse | str]:
-    """ Update a smart balancer
+    """Update a smart balancer
 
     Args:
         smart_balancer_id (str):
@@ -113,13 +101,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | SmartBalancerViewResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         smart_balancer_id=smart_balancer_id,
-body=body,
-
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -128,14 +114,14 @@ body=body,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     smart_balancer_id: str,
     *,
     client: AuthenticatedClient,
     body: UpdateSmartBalancerRequest,
-
 ) -> ErrorResponse | SmartBalancerViewResponse | str | None:
-    """ Update a smart balancer
+    """Update a smart balancer
 
     Args:
         smart_balancer_id (str):
@@ -147,24 +133,22 @@ def sync(
 
     Returns:
         ErrorResponse | SmartBalancerViewResponse | str
-     """
-
+    """
 
     return sync_detailed(
         smart_balancer_id=smart_balancer_id,
-client=client,
-body=body,
-
+        client=client,
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     smart_balancer_id: str,
     *,
     client: AuthenticatedClient,
     body: UpdateSmartBalancerRequest,
-
 ) -> Response[ErrorResponse | SmartBalancerViewResponse | str]:
-    """ Update a smart balancer
+    """Update a smart balancer
 
     Args:
         smart_balancer_id (str):
@@ -176,29 +160,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | SmartBalancerViewResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         smart_balancer_id=smart_balancer_id,
-body=body,
-
+        body=body,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     smart_balancer_id: str,
     *,
     client: AuthenticatedClient,
     body: UpdateSmartBalancerRequest,
-
 ) -> ErrorResponse | SmartBalancerViewResponse | str | None:
-    """ Update a smart balancer
+    """Update a smart balancer
 
     Args:
         smart_balancer_id (str):
@@ -210,12 +190,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | SmartBalancerViewResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        smart_balancer_id=smart_balancer_id,
-client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            smart_balancer_id=smart_balancer_id,
+            client=client,
+            body=body,
+        )
+    ).parsed

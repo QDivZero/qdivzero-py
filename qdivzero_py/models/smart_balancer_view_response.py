@@ -9,34 +9,33 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.smart_balancer_route_response import SmartBalancerRouteResponse
-  from ..models.smart_balancer_router_model_response import SmartBalancerRouterModelResponse
-
-
-
+    from ..models.smart_balancer_route_response import SmartBalancerRouteResponse
+    from ..models.smart_balancer_router_model_response import SmartBalancerRouterModelResponse
 
 
 T = TypeVar("T", bound="SmartBalancerViewResponse")
 
 
-
 @_attrs_define
 class SmartBalancerViewResponse:
-    """ 
-        Attributes:
-            created_at (str | Unset):
-            default_route_id (str | Unset):
-            display_name (str | Unset):
-            enabled (bool | Unset):
-            id (str | Unset):
-            name (str | Unset):
-            router_model (SmartBalancerRouterModelResponse | Unset):
-            routes (list[SmartBalancerRouteResponse] | Unset):
-            routing_mode (str | Unset):
-            serving_endpoint_id (str | Unset):
-            updated_at (str | Unset):
-            workload_kind (str | Unset):
-     """
+    """
+    Attributes:
+        created_at (str | Unset):
+        default_route_id (str | Unset):
+        display_name (str | Unset):
+        enabled (bool | Unset):
+        id (str | Unset):
+        name (str | Unset):
+        router_model (SmartBalancerRouterModelResponse | Unset):
+        routes (list[SmartBalancerRouteResponse] | Unset):
+        routing_mode (str | Unset):
+        serverless_start_requests (int | Unset): Requests in the rolling window required before starting stopped
+            serverless destinations.
+        serverless_start_window_seconds (int | Unset): Rolling request window in seconds.
+        serving_endpoint_id (str | Unset):
+        updated_at (str | Unset):
+        workload_kind (str | Unset):
+    """
 
     created_at: str | Unset = UNSET
     default_route_id: str | Unset = UNSET
@@ -47,14 +46,12 @@ class SmartBalancerViewResponse:
     router_model: SmartBalancerRouterModelResponse | Unset = UNSET
     routes: list[SmartBalancerRouteResponse] | Unset = UNSET
     routing_mode: str | Unset = UNSET
+    serverless_start_requests: int | Unset = UNSET
+    serverless_start_window_seconds: int | Unset = UNSET
     serving_endpoint_id: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     workload_kind: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         created_at = self.created_at
@@ -80,9 +77,11 @@ class SmartBalancerViewResponse:
                 routes_item = routes_item_data.to_dict()
                 routes.append(routes_item)
 
-
-
         routing_mode = self.routing_mode
+
+        serverless_start_requests = self.serverless_start_requests
+
+        serverless_start_window_seconds = self.serverless_start_window_seconds
 
         serving_endpoint_id = self.serving_endpoint_id
 
@@ -90,11 +89,9 @@ class SmartBalancerViewResponse:
 
         workload_kind = self.workload_kind
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if default_route_id is not UNSET:
@@ -113,6 +110,10 @@ class SmartBalancerViewResponse:
             field_dict["routes"] = routes
         if routing_mode is not UNSET:
             field_dict["routing_mode"] = routing_mode
+        if serverless_start_requests is not UNSET:
+            field_dict["serverless_start_requests"] = serverless_start_requests
+        if serverless_start_window_seconds is not UNSET:
+            field_dict["serverless_start_window_seconds"] = serverless_start_window_seconds
         if serving_endpoint_id is not UNSET:
             field_dict["serving_endpoint_id"] = serving_endpoint_id
         if updated_at is not UNSET:
@@ -122,12 +123,11 @@ class SmartBalancerViewResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.smart_balancer_route_response import SmartBalancerRouteResponse
         from ..models.smart_balancer_router_model_response import SmartBalancerRouterModelResponse
+
         d = dict(src_dict)
         created_at = d.pop("created_at", UNSET)
 
@@ -143,13 +143,10 @@ class SmartBalancerViewResponse:
 
         _router_model = d.pop("router_model", UNSET)
         router_model: SmartBalancerRouterModelResponse | Unset
-        if isinstance(_router_model,  Unset):
+        if isinstance(_router_model, Unset):
             router_model = UNSET
         else:
             router_model = SmartBalancerRouterModelResponse.from_dict(_router_model)
-
-
-
 
         _routes = d.pop("routes", UNSET)
         routes: list[SmartBalancerRouteResponse] | Unset = UNSET
@@ -158,12 +155,13 @@ class SmartBalancerViewResponse:
             for routes_item_data in _routes:
                 routes_item = SmartBalancerRouteResponse.from_dict(routes_item_data)
 
-
-
                 routes.append(routes_item)
 
-
         routing_mode = d.pop("routing_mode", UNSET)
+
+        serverless_start_requests = d.pop("serverless_start_requests", UNSET)
+
+        serverless_start_window_seconds = d.pop("serverless_start_window_seconds", UNSET)
 
         serving_endpoint_id = d.pop("serving_endpoint_id", UNSET)
 
@@ -181,11 +179,12 @@ class SmartBalancerViewResponse:
             router_model=router_model,
             routes=routes,
             routing_mode=routing_mode,
+            serverless_start_requests=serverless_start_requests,
+            serverless_start_window_seconds=serverless_start_window_seconds,
             serving_endpoint_id=serving_endpoint_id,
             updated_at=updated_at,
             workload_kind=workload_kind,
         )
-
 
         smart_balancer_view_response.additional_properties = d
         return smart_balancer_view_response

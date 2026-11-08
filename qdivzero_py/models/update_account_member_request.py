@@ -11,35 +11,26 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="UpdateAccountMemberRequest")
 
 
-
 @_attrs_define
 class UpdateAccountMemberRequest:
-    """ 
-        Attributes:
-            role (str | Unset):
-     """
+    """
+    Attributes:
+        role (str | Unset):
+    """
 
     role: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         role = self.role
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if role is not UNSET:
             field_dict["role"] = role
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,7 +40,6 @@ class UpdateAccountMemberRequest:
         update_account_member_request = cls(
             role=role,
         )
-
 
         update_account_member_request.additional_properties = d
         return update_account_member_request

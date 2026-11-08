@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="HuggingFaceGGUFFileResponse")
 
 
-
 @_attrs_define
 class HuggingFaceGGUFFileResponse:
-    """ 
-        Attributes:
-            filename (str | Unset):
-            quantization (str | Unset):
-            size_bytes (int | Unset):
-     """
+    """
+    Attributes:
+        filename (str | Unset):
+        quantization (str | Unset):
+        size_bytes (int | Unset):
+    """
 
     filename: str | Unset = UNSET
     quantization: str | Unset = UNSET
     size_bytes: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         filename = self.filename
@@ -37,11 +32,9 @@ class HuggingFaceGGUFFileResponse:
 
         size_bytes = self.size_bytes
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if filename is not UNSET:
             field_dict["filename"] = filename
         if quantization is not UNSET:
@@ -50,8 +43,6 @@ class HuggingFaceGGUFFileResponse:
             field_dict["size_bytes"] = size_bytes
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class HuggingFaceGGUFFileResponse:
             quantization=quantization,
             size_bytes=size_bytes,
         )
-
 
         hugging_face_gguf_file_response.additional_properties = d
         return hugging_face_gguf_file_response

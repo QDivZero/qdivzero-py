@@ -10,44 +10,31 @@ from ...models.gpu_list_response import GpuListResponse
 from ...types import Response
 
 
-def _get_kwargs(
-    
-) -> dict[str, Any]:
-    
-
-    
-
-    
+def _get_kwargs() -> dict[str, Any]:
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/instance-config/gpus",
+        "url": "/v1/instance-config/gpus",
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | GpuListResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | GpuListResponse | None:
     if response.status_code == 200:
         response_200 = GpuListResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 502:
         response_502 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_502
 
@@ -57,7 +44,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | GpuListResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | GpuListResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -69,9 +58,8 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | GpuListResponse]:
-    """ List available GPUs
+    """List available GPUs
 
      Returns the GPU catalog with pricing, regions, and availability for the authenticated account.
 
@@ -81,12 +69,9 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | GpuListResponse]
-     """
+    """
 
-
-    kwargs = _get_kwargs(
-        
-    )
+    kwargs = _get_kwargs()
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -94,12 +79,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | GpuListResponse | None:
-    """ List available GPUs
+    """List available GPUs
 
      Returns the GPU catalog with pricing, regions, and availability for the authenticated account.
 
@@ -109,20 +94,18 @@ def sync(
 
     Returns:
         ErrorResponse | GpuListResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | GpuListResponse]:
-    """ List available GPUs
+    """List available GPUs
 
      Returns the GPU catalog with pricing, regions, and availability for the authenticated account.
 
@@ -132,25 +115,20 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | GpuListResponse]
-     """
+    """
 
+    kwargs = _get_kwargs()
 
-    kwargs = _get_kwargs(
-        
-    )
-
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | GpuListResponse | None:
-    """ List available GPUs
+    """List available GPUs
 
      Returns the GPU catalog with pricing, regions, and availability for the authenticated account.
 
@@ -160,10 +138,10 @@ async def asyncio(
 
     Returns:
         ErrorResponse | GpuListResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+        )
+    ).parsed

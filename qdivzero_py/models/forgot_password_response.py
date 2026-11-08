@@ -11,35 +11,26 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ForgotPasswordResponse")
 
 
-
 @_attrs_define
 class ForgotPasswordResponse:
-    """ 
-        Attributes:
-            message (str | Unset):
-     """
+    """
+    Attributes:
+        message (str | Unset):
+    """
 
     message: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         message = self.message
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if message is not UNSET:
             field_dict["message"] = message
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,7 +40,6 @@ class ForgotPasswordResponse:
         forgot_password_response = cls(
             message=message,
         )
-
 
         forgot_password_response.additional_properties = d
         return forgot_password_response

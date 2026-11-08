@@ -11,19 +11,18 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="LedgerEntryResponse")
 
 
-
 @_attrs_define
 class LedgerEntryResponse:
-    """ 
-        Attributes:
-            account_id (str | Unset):
-            amount (float | Unset):
-            balance (float | Unset):
-            created_at (str | Unset):
-            event_type (str | Unset):
-            id (str | Unset):
-            reference (str | Unset):
-     """
+    """
+    Attributes:
+        account_id (str | Unset):
+        amount (float | Unset):
+        balance (float | Unset):
+        created_at (str | Unset):
+        event_type (str | Unset):
+        id (str | Unset):
+        reference (str | Unset):
+    """
 
     account_id: str | Unset = UNSET
     amount: float | Unset = UNSET
@@ -33,10 +32,6 @@ class LedgerEntryResponse:
     id: str | Unset = UNSET
     reference: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account_id = self.account_id
@@ -53,11 +48,9 @@ class LedgerEntryResponse:
 
         reference = self.reference
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account_id is not UNSET:
             field_dict["account_id"] = account_id
         if amount is not UNSET:
@@ -74,8 +67,6 @@ class LedgerEntryResponse:
             field_dict["reference"] = reference
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -103,7 +94,6 @@ class LedgerEntryResponse:
             id=id,
             reference=reference,
         )
-
 
         ledger_entry_response.additional_properties = d
         return ledger_entry_response

@@ -11,72 +11,35 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="LoginResponse")
 
 
-
 @_attrs_define
 class LoginResponse:
-    """ 
-        Attributes:
-            access_token (str | Unset):
-            access_token_expiry (int | Unset):
-            next_step (str | Unset):
-            refresh_token (str | Unset):
-     """
+    """
+    Attributes:
+        next_step (str | Unset):
+    """
 
-    access_token: str | Unset = UNSET
-    access_token_expiry: int | Unset = UNSET
     next_step: str | Unset = UNSET
-    refresh_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        access_token = self.access_token
-
-        access_token_expiry = self.access_token_expiry
-
         next_step = self.next_step
-
-        refresh_token = self.refresh_token
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
-        if access_token is not UNSET:
-            field_dict["access_token"] = access_token
-        if access_token_expiry is not UNSET:
-            field_dict["access_token_expiry"] = access_token_expiry
+        field_dict.update({})
         if next_step is not UNSET:
             field_dict["next_step"] = next_step
-        if refresh_token is not UNSET:
-            field_dict["refresh_token"] = refresh_token
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        access_token = d.pop("access_token", UNSET)
-
-        access_token_expiry = d.pop("access_token_expiry", UNSET)
-
         next_step = d.pop("next_step", UNSET)
 
-        refresh_token = d.pop("refresh_token", UNSET)
-
         login_response = cls(
-            access_token=access_token,
-            access_token_expiry=access_token_expiry,
             next_step=next_step,
-            refresh_token=refresh_token,
         )
-
 
         login_response.additional_properties = d
         return login_response

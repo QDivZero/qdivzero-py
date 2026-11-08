@@ -18,11 +18,7 @@ def _get_kwargs(
     category: str | Unset = UNSET,
     tag: str | Unset = UNSET,
     featured_only: bool | Unset = UNSET,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
@@ -38,9 +34,7 @@ def _get_kwargs(
 
     params["featured_only"] = featured_only
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -48,23 +42,19 @@ def _get_kwargs(
         "params": params,
     }
 
-
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | ListUserVariantsResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | ListUserVariantsResponse | None:
     if response.status_code == 200:
         response_200 = ListUserVariantsResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 503:
         response_503 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_503
 
@@ -74,7 +64,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | ListUserVariantsResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | ListUserVariantsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -92,9 +84,8 @@ def sync_detailed(
     category: str | Unset = UNSET,
     tag: str | Unset = UNSET,
     featured_only: bool | Unset = UNSET,
-
 ) -> Response[ErrorResponse | ListUserVariantsResponse]:
-    """ List template variants
+    """List template variants
 
      Lists pre-configured deployment template variants visible to the authenticated user.
 
@@ -112,17 +103,15 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | ListUserVariantsResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         limit=limit,
-offset=offset,
-locale=locale,
-category=category,
-tag=tag,
-featured_only=featured_only,
-
+        offset=offset,
+        locale=locale,
+        category=category,
+        tag=tag,
+        featured_only=featured_only,
     )
 
     response = client.get_httpx_client().request(
@@ -130,6 +119,7 @@ featured_only=featured_only,
     )
 
     return _build_response(client=client, response=response)
+
 
 def sync(
     *,
@@ -140,9 +130,8 @@ def sync(
     category: str | Unset = UNSET,
     tag: str | Unset = UNSET,
     featured_only: bool | Unset = UNSET,
-
 ) -> ErrorResponse | ListUserVariantsResponse | None:
-    """ List template variants
+    """List template variants
 
      Lists pre-configured deployment template variants visible to the authenticated user.
 
@@ -160,19 +149,18 @@ def sync(
 
     Returns:
         ErrorResponse | ListUserVariantsResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-limit=limit,
-offset=offset,
-locale=locale,
-category=category,
-tag=tag,
-featured_only=featured_only,
-
+        limit=limit,
+        offset=offset,
+        locale=locale,
+        category=category,
+        tag=tag,
+        featured_only=featured_only,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
@@ -183,9 +171,8 @@ async def asyncio_detailed(
     category: str | Unset = UNSET,
     tag: str | Unset = UNSET,
     featured_only: bool | Unset = UNSET,
-
 ) -> Response[ErrorResponse | ListUserVariantsResponse]:
-    """ List template variants
+    """List template variants
 
      Lists pre-configured deployment template variants visible to the authenticated user.
 
@@ -203,24 +190,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | ListUserVariantsResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         limit=limit,
-offset=offset,
-locale=locale,
-category=category,
-tag=tag,
-featured_only=featured_only,
-
+        offset=offset,
+        locale=locale,
+        category=category,
+        tag=tag,
+        featured_only=featured_only,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
@@ -231,9 +215,8 @@ async def asyncio(
     category: str | Unset = UNSET,
     tag: str | Unset = UNSET,
     featured_only: bool | Unset = UNSET,
-
 ) -> ErrorResponse | ListUserVariantsResponse | None:
-    """ List template variants
+    """List template variants
 
      Lists pre-configured deployment template variants visible to the authenticated user.
 
@@ -251,16 +234,16 @@ async def asyncio(
 
     Returns:
         ErrorResponse | ListUserVariantsResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-limit=limit,
-offset=offset,
-locale=locale,
-category=category,
-tag=tag,
-featured_only=featured_only,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            limit=limit,
+            offset=offset,
+            locale=locale,
+            category=category,
+            tag=tag,
+            featured_only=featured_only,
+        )
+    ).parsed

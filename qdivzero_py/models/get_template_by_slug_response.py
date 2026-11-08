@@ -9,65 +9,50 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.template_with_variants import TemplateWithVariants
-
-
-
+    from ..models.template_with_variants import TemplateWithVariants
 
 
 T = TypeVar("T", bound="GetTemplateBySlugResponse")
 
 
-
 @_attrs_define
 class GetTemplateBySlugResponse:
-    """ 
-        Attributes:
-            template (TemplateWithVariants | Unset):
-     """
+    """
+    Attributes:
+        template (TemplateWithVariants | Unset):
+    """
 
     template: TemplateWithVariants | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         template: dict[str, Any] | Unset = UNSET
         if not isinstance(self.template, Unset):
             template = self.template.to_dict()
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if template is not UNSET:
             field_dict["template"] = template
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.template_with_variants import TemplateWithVariants
+
         d = dict(src_dict)
         _template = d.pop("template", UNSET)
         template: TemplateWithVariants | Unset
-        if isinstance(_template,  Unset):
+        if isinstance(_template, Unset):
             template = UNSET
         else:
             template = TemplateWithVariants.from_dict(_template)
 
-
-
-
         get_template_by_slug_response = cls(
             template=template,
         )
-
 
         get_template_by_slug_response.additional_properties = d
         return get_template_by_slug_response

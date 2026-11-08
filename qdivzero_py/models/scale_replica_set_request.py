@@ -11,35 +11,26 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ScaleReplicaSetRequest")
 
 
-
 @_attrs_define
 class ScaleReplicaSetRequest:
-    """ 
-        Attributes:
-            desired_replicas (int | Unset):
-     """
+    """
+    Attributes:
+        desired_replicas (int | Unset):
+    """
 
     desired_replicas: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         desired_replicas = self.desired_replicas
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if desired_replicas is not UNSET:
             field_dict["desired_replicas"] = desired_replicas
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,7 +40,6 @@ class ScaleReplicaSetRequest:
         scale_replica_set_request = cls(
             desired_replicas=desired_replicas,
         )
-
 
         scale_replica_set_request.additional_properties = d
         return scale_replica_set_request

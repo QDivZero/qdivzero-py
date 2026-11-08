@@ -16,11 +16,7 @@ def _get_kwargs(
     instance_id: str,
     *,
     range_: GetInstanceUsageRange | Unset = UNSET,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
@@ -30,33 +26,29 @@ def _get_kwargs(
 
     params["range"] = json_range_
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/instances/{instance_id}/usage".format(instance_id=quote(str(instance_id), safe=""),),
+        "url": "/v1/instances/{instance_id}/usage".format(
+            instance_id=quote(str(instance_id), safe=""),
+        ),
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | InstanceUsageResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | InstanceUsageResponse | str | None:
     if response.status_code == 200:
         response_200 = InstanceUsageResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -67,21 +59,15 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 403:
         response_403 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -91,7 +77,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | InstanceUsageResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | InstanceUsageResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -105,9 +93,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     range_: GetInstanceUsageRange | Unset = UNSET,
-
 ) -> Response[ErrorResponse | InstanceUsageResponse | str]:
-    """ Get an inference instance usage and cost breakdown
+    """Get an inference instance usage and cost breakdown
 
     Args:
         instance_id (str):
@@ -119,13 +106,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | InstanceUsageResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         instance_id=instance_id,
-range_=range_,
-
+        range_=range_,
     )
 
     response = client.get_httpx_client().request(
@@ -134,14 +119,14 @@ range_=range_,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     instance_id: str,
     *,
     client: AuthenticatedClient,
     range_: GetInstanceUsageRange | Unset = UNSET,
-
 ) -> ErrorResponse | InstanceUsageResponse | str | None:
-    """ Get an inference instance usage and cost breakdown
+    """Get an inference instance usage and cost breakdown
 
     Args:
         instance_id (str):
@@ -153,24 +138,22 @@ def sync(
 
     Returns:
         ErrorResponse | InstanceUsageResponse | str
-     """
-
+    """
 
     return sync_detailed(
         instance_id=instance_id,
-client=client,
-range_=range_,
-
+        client=client,
+        range_=range_,
     ).parsed
+
 
 async def asyncio_detailed(
     instance_id: str,
     *,
     client: AuthenticatedClient,
     range_: GetInstanceUsageRange | Unset = UNSET,
-
 ) -> Response[ErrorResponse | InstanceUsageResponse | str]:
-    """ Get an inference instance usage and cost breakdown
+    """Get an inference instance usage and cost breakdown
 
     Args:
         instance_id (str):
@@ -182,29 +165,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | InstanceUsageResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         instance_id=instance_id,
-range_=range_,
-
+        range_=range_,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     instance_id: str,
     *,
     client: AuthenticatedClient,
     range_: GetInstanceUsageRange | Unset = UNSET,
-
 ) -> ErrorResponse | InstanceUsageResponse | str | None:
-    """ Get an inference instance usage and cost breakdown
+    """Get an inference instance usage and cost breakdown
 
     Args:
         instance_id (str):
@@ -216,12 +195,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | InstanceUsageResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        instance_id=instance_id,
-client=client,
-range_=range_,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            instance_id=instance_id,
+            client=client,
+            range_=range_,
+        )
+    ).parsed

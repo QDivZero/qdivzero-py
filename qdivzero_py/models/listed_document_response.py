@@ -9,27 +9,23 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.listed_document_response_metadata import ListedDocumentResponseMetadata
-  from ..models.search_hit_source_response import SearchHitSourceResponse
-
-
-
+    from ..models.listed_document_response_metadata import ListedDocumentResponseMetadata
+    from ..models.search_hit_source_response import SearchHitSourceResponse
 
 
 T = TypeVar("T", bound="ListedDocumentResponse")
 
 
-
 @_attrs_define
 class ListedDocumentResponse:
-    """ 
-        Attributes:
-            content (str | Unset):
-            id (str | Unset):
-            metadata (ListedDocumentResponseMetadata | Unset):
-            source (SearchHitSourceResponse | Unset):
-            updated_at (str | Unset):
-     """
+    """
+    Attributes:
+        content (str | Unset):
+        id (str | Unset):
+        metadata (ListedDocumentResponseMetadata | Unset):
+        source (SearchHitSourceResponse | Unset):
+        updated_at (str | Unset):
+    """
 
     content: str | Unset = UNSET
     id: str | Unset = UNSET
@@ -37,10 +33,6 @@ class ListedDocumentResponse:
     source: SearchHitSourceResponse | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         content = self.content
@@ -57,11 +49,9 @@ class ListedDocumentResponse:
 
         updated_at = self.updated_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if content is not UNSET:
             field_dict["content"] = content
         if id is not UNSET:
@@ -75,12 +65,11 @@ class ListedDocumentResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.listed_document_response_metadata import ListedDocumentResponseMetadata
         from ..models.search_hit_source_response import SearchHitSourceResponse
+
         d = dict(src_dict)
         content = d.pop("content", UNSET)
 
@@ -88,23 +77,17 @@ class ListedDocumentResponse:
 
         _metadata = d.pop("metadata", UNSET)
         metadata: ListedDocumentResponseMetadata | Unset
-        if isinstance(_metadata,  Unset):
+        if isinstance(_metadata, Unset):
             metadata = UNSET
         else:
             metadata = ListedDocumentResponseMetadata.from_dict(_metadata)
 
-
-
-
         _source = d.pop("source", UNSET)
         source: SearchHitSourceResponse | Unset
-        if isinstance(_source,  Unset):
+        if isinstance(_source, Unset):
             source = UNSET
         else:
             source = SearchHitSourceResponse.from_dict(_source)
-
-
-
 
         updated_at = d.pop("updated_at", UNSET)
 
@@ -115,7 +98,6 @@ class ListedDocumentResponse:
             source=source,
             updated_at=updated_at,
         )
-
 
         listed_document_response.additional_properties = d
         return listed_document_response

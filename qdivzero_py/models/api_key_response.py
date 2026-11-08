@@ -11,17 +11,16 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ApiKeyResponse")
 
 
-
 @_attrs_define
 class ApiKeyResponse:
-    """ 
-        Attributes:
-            created_at (str | Unset):
-            id (str | Unset):
-            key_prefix (str | Unset):
-            plaintext_key (str | Unset):
-            revoked_at (str | Unset):
-     """
+    """
+    Attributes:
+        created_at (str | Unset):
+        id (str | Unset):
+        key_prefix (str | Unset):
+        plaintext_key (str | Unset):
+        revoked_at (str | Unset):
+    """
 
     created_at: str | Unset = UNSET
     id: str | Unset = UNSET
@@ -29,10 +28,6 @@ class ApiKeyResponse:
     plaintext_key: str | Unset = UNSET
     revoked_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         created_at = self.created_at
@@ -45,11 +40,9 @@ class ApiKeyResponse:
 
         revoked_at = self.revoked_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if id is not UNSET:
@@ -62,8 +55,6 @@ class ApiKeyResponse:
             field_dict["revoked_at"] = revoked_at
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -85,7 +76,6 @@ class ApiKeyResponse:
             plaintext_key=plaintext_key,
             revoked_at=revoked_at,
         )
-
 
         api_key_response.additional_properties = d
         return api_key_response

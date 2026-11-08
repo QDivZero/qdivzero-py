@@ -11,25 +11,24 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ScheduleRuleResponse")
 
 
-
 @_attrs_define
 class ScheduleRuleResponse:
-    """ 
-        Attributes:
-            action (str | Unset):
-            created_at (str | Unset):
-            cron (str | Unset):
-            desired_replicas (int | Unset):
-            enabled (bool | Unset):
-            id (str | Unset):
-            instance_id (str | Unset):
-            last_error (str | Unset):
-            last_run_at (str | Unset):
-            next_run_at (str | Unset):
-            replica_set_id (str | Unset):
-            timezone (str | Unset):
-            updated_at (str | Unset):
-     """
+    """
+    Attributes:
+        action (str | Unset):
+        created_at (str | Unset):
+        cron (str | Unset):
+        desired_replicas (int | Unset):
+        enabled (bool | Unset):
+        id (str | Unset):
+        instance_id (str | Unset):
+        last_error (str | Unset):
+        last_run_at (str | Unset):
+        next_run_at (str | Unset):
+        replica_set_id (str | Unset):
+        timezone (str | Unset):
+        updated_at (str | Unset):
+    """
 
     action: str | Unset = UNSET
     created_at: str | Unset = UNSET
@@ -45,10 +44,6 @@ class ScheduleRuleResponse:
     timezone: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         action = self.action
@@ -77,11 +72,9 @@ class ScheduleRuleResponse:
 
         updated_at = self.updated_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if action is not UNSET:
             field_dict["action"] = action
         if created_at is not UNSET:
@@ -110,8 +103,6 @@ class ScheduleRuleResponse:
             field_dict["updated_at"] = updated_at
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -157,7 +148,6 @@ class ScheduleRuleResponse:
             timezone=timezone,
             updated_at=updated_at,
         )
-
 
         schedule_rule_response.additional_properties = d
         return schedule_rule_response

@@ -11,17 +11,16 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="RecommendedGPU")
 
 
-
 @_attrs_define
 class RecommendedGPU:
-    """ 
-        Attributes:
-            availability (str | Unset):
-            display_name (str | Unset):
-            gpu_count (int | Unset):
-            market_type (str | Unset):
-            vram_gb (float | Unset):
-     """
+    """
+    Attributes:
+        availability (str | Unset):
+        display_name (str | Unset):
+        gpu_count (int | Unset):
+        market_type (str | Unset):
+        vram_gb (float | Unset):
+    """
 
     availability: str | Unset = UNSET
     display_name: str | Unset = UNSET
@@ -29,10 +28,6 @@ class RecommendedGPU:
     market_type: str | Unset = UNSET
     vram_gb: float | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         availability = self.availability
@@ -45,11 +40,9 @@ class RecommendedGPU:
 
         vram_gb = self.vram_gb
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if availability is not UNSET:
             field_dict["availability"] = availability
         if display_name is not UNSET:
@@ -62,8 +55,6 @@ class RecommendedGPU:
             field_dict["vram_gb"] = vram_gb
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -85,7 +76,6 @@ class RecommendedGPU:
             market_type=market_type,
             vram_gb=vram_gb,
         )
-
 
         recommended_gpu.additional_properties = d
         return recommended_gpu

@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="SmartBalancerRouteDestinationResponse")
 
 
-
 @_attrs_define
 class SmartBalancerRouteDestinationResponse:
-    """ 
-        Attributes:
-            label (str | Unset):
-            ref (str | Unset):
-            type_ (str | Unset):
-     """
+    """
+    Attributes:
+        label (str | Unset):
+        ref (str | Unset):
+        type_ (str | Unset):
+    """
 
     label: str | Unset = UNSET
     ref: str | Unset = UNSET
     type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         label = self.label
@@ -37,11 +32,9 @@ class SmartBalancerRouteDestinationResponse:
 
         type_ = self.type_
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if label is not UNSET:
             field_dict["label"] = label
         if ref is not UNSET:
@@ -50,8 +43,6 @@ class SmartBalancerRouteDestinationResponse:
             field_dict["type"] = type_
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class SmartBalancerRouteDestinationResponse:
             ref=ref,
             type_=type_,
         )
-
 
         smart_balancer_route_destination_response.additional_properties = d
         return smart_balancer_route_destination_response

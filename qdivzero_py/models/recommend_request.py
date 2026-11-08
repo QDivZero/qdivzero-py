@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="RecommendRequest")
 
 
-
 @_attrs_define
 class RecommendRequest:
-    """ 
-        Attributes:
-            recommend_token (str | Unset):
-            top_k (int | Unset):
-     """
+    """
+    Attributes:
+        recommend_token (str | Unset):
+        top_k (int | Unset):
+    """
 
     recommend_token: str | Unset = UNSET
     top_k: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         recommend_token = self.recommend_token
 
         top_k = self.top_k
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if recommend_token is not UNSET:
             field_dict["recommend_token"] = recommend_token
         if top_k is not UNSET:
             field_dict["top_k"] = top_k
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class RecommendRequest:
             recommend_token=recommend_token,
             top_k=top_k,
         )
-
 
         recommend_request.additional_properties = d
         return recommend_request

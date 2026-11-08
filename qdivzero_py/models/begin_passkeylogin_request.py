@@ -11,40 +11,34 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="BeginPasskeyloginRequest")
 
 
-
 @_attrs_define
 class BeginPasskeyloginRequest:
-    """ 
-        Attributes:
-            email (str):
-            cf_turnstile_response (str | Unset):
-     """
+    """
+    Attributes:
+        email (str):
+        cf_turnstile_response (str | Unset):
+    """
 
     email: str
     cf_turnstile_response: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         email = self.email
 
         cf_turnstile_response = self.cf_turnstile_response
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "email": email,
-        })
+        field_dict.update(
+            {
+                "email": email,
+            }
+        )
         if cf_turnstile_response is not UNSET:
             field_dict["cf_turnstile_response"] = cf_turnstile_response
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -57,7 +51,6 @@ class BeginPasskeyloginRequest:
             email=email,
             cf_turnstile_response=cf_turnstile_response,
         )
-
 
         begin_passkeylogin_request.additional_properties = d
         return begin_passkeylogin_request

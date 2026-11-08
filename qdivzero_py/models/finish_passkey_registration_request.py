@@ -9,41 +9,33 @@ from attrs import field as _attrs_field
 T = TypeVar("T", bound="FinishPasskeyRegistrationRequest")
 
 
-
 @_attrs_define
 class FinishPasskeyRegistrationRequest:
-    """ 
-        Attributes:
-            challenge_id (str):
-            credential (list[int]):
-     """
+    """
+    Attributes:
+        challenge_id (str):
+        credential (list[int]):
+    """
 
     challenge_id: str
     credential: list[int]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         challenge_id = self.challenge_id
 
         credential = self.credential
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "challenge_id": challenge_id,
-            "credential": credential,
-        })
+        field_dict.update(
+            {
+                "challenge_id": challenge_id,
+                "credential": credential,
+            }
+        )
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -52,12 +44,10 @@ class FinishPasskeyRegistrationRequest:
 
         credential = cast(list[int], d.pop("credential"))
 
-
         finish_passkey_registration_request = cls(
             challenge_id=challenge_id,
             credential=credential,
         )
-
 
         finish_passkey_registration_request.additional_properties = d
         return finish_passkey_registration_request
