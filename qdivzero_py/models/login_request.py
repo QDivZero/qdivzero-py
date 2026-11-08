@@ -11,26 +11,21 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="LoginRequest")
 
 
-
 @_attrs_define
 class LoginRequest:
-    """ 
-        Attributes:
-            email (str):
-            password (str):
-            cf_turnstile_response (str | Unset):
-            totp_code (str | Unset):
-     """
+    """
+    Attributes:
+        email (str):
+        password (str):
+        cf_turnstile_response (str | Unset):
+        totp_code (str | Unset):
+    """
 
     email: str
     password: str
     cf_turnstile_response: str | Unset = UNSET
     totp_code: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         email = self.email
@@ -41,21 +36,20 @@ class LoginRequest:
 
         totp_code = self.totp_code
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "email": email,
-            "password": password,
-        })
+        field_dict.update(
+            {
+                "email": email,
+                "password": password,
+            }
+        )
         if cf_turnstile_response is not UNSET:
             field_dict["cf_turnstile_response"] = cf_turnstile_response
         if totp_code is not UNSET:
             field_dict["totp_code"] = totp_code
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -74,7 +68,6 @@ class LoginRequest:
             cf_turnstile_response=cf_turnstile_response,
             totp_code=totp_code,
         )
-
 
         login_request.additional_properties = d
         return login_request

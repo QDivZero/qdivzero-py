@@ -9,29 +9,21 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.schedule_rule_response import ScheduleRuleResponse
-
-
-
+    from ..models.schedule_rule_response import ScheduleRuleResponse
 
 
 T = TypeVar("T", bound="ScheduleRuleListResponse")
 
 
-
 @_attrs_define
 class ScheduleRuleListResponse:
-    """ 
-        Attributes:
-            schedule_rules (list[ScheduleRuleResponse] | Unset):
-     """
+    """
+    Attributes:
+        schedule_rules (list[ScheduleRuleResponse] | Unset):
+    """
 
     schedule_rules: list[ScheduleRuleResponse] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         schedule_rules: list[dict[str, Any]] | Unset = UNSET
@@ -41,23 +33,18 @@ class ScheduleRuleListResponse:
                 schedule_rules_item = schedule_rules_item_data.to_dict()
                 schedule_rules.append(schedule_rules_item)
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if schedule_rules is not UNSET:
             field_dict["schedule_rules"] = schedule_rules
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.schedule_rule_response import ScheduleRuleResponse
+
         d = dict(src_dict)
         _schedule_rules = d.pop("schedule_rules", UNSET)
         schedule_rules: list[ScheduleRuleResponse] | Unset = UNSET
@@ -66,15 +53,11 @@ class ScheduleRuleListResponse:
             for schedule_rules_item_data in _schedule_rules:
                 schedule_rules_item = ScheduleRuleResponse.from_dict(schedule_rules_item_data)
 
-
-
                 schedule_rules.append(schedule_rules_item)
-
 
         schedule_rule_list_response = cls(
             schedule_rules=schedule_rules,
         )
-
 
         schedule_rule_list_response.additional_properties = d
         return schedule_rule_list_response

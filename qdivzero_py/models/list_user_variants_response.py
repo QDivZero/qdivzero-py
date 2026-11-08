@@ -9,31 +9,23 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.variant_with_relations import VariantWithRelations
-
-
-
+    from ..models.variant_with_relations import VariantWithRelations
 
 
 T = TypeVar("T", bound="ListUserVariantsResponse")
 
 
-
 @_attrs_define
 class ListUserVariantsResponse:
-    """ 
-        Attributes:
-            items (list[VariantWithRelations] | Unset):
-            total (int | Unset):
-     """
+    """
+    Attributes:
+        items (list[VariantWithRelations] | Unset):
+        total (int | Unset):
+    """
 
     items: list[VariantWithRelations] | Unset = UNSET
     total: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         items: list[dict[str, Any]] | Unset = UNSET
@@ -43,15 +35,11 @@ class ListUserVariantsResponse:
                 items_item = items_item_data.to_dict()
                 items.append(items_item)
 
-
-
         total = self.total
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if items is not UNSET:
             field_dict["items"] = items
         if total is not UNSET:
@@ -59,11 +47,10 @@ class ListUserVariantsResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.variant_with_relations import VariantWithRelations
+
         d = dict(src_dict)
         _items = d.pop("items", UNSET)
         items: list[VariantWithRelations] | Unset = UNSET
@@ -72,10 +59,7 @@ class ListUserVariantsResponse:
             for items_item_data in _items:
                 items_item = VariantWithRelations.from_dict(items_item_data)
 
-
-
                 items.append(items_item)
-
 
         total = d.pop("total", UNSET)
 
@@ -83,7 +67,6 @@ class ListUserVariantsResponse:
             items=items,
             total=total,
         )
-
 
         list_user_variants_response.additional_properties = d
         return list_user_variants_response

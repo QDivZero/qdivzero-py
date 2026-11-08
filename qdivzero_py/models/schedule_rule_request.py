@@ -11,18 +11,17 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ScheduleRuleRequest")
 
 
-
 @_attrs_define
 class ScheduleRuleRequest:
-    """ 
-        Attributes:
-            action (str | Unset):
-            cron (str | Unset):
-            desired_replicas (int | Unset):
-            enabled (bool | Unset):
-            replica_set_id (str | Unset):
-            timezone (str | Unset):
-     """
+    """
+    Attributes:
+        action (str | Unset):
+        cron (str | Unset):
+        desired_replicas (int | Unset):
+        enabled (bool | Unset):
+        replica_set_id (str | Unset):
+        timezone (str | Unset):
+    """
 
     action: str | Unset = UNSET
     cron: str | Unset = UNSET
@@ -31,10 +30,6 @@ class ScheduleRuleRequest:
     replica_set_id: str | Unset = UNSET
     timezone: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         action = self.action
@@ -49,11 +44,9 @@ class ScheduleRuleRequest:
 
         timezone = self.timezone
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if action is not UNSET:
             field_dict["action"] = action
         if cron is not UNSET:
@@ -68,8 +61,6 @@ class ScheduleRuleRequest:
             field_dict["timezone"] = timezone
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -94,7 +85,6 @@ class ScheduleRuleRequest:
             replica_set_id=replica_set_id,
             timezone=timezone,
         )
-
 
         schedule_rule_request.additional_properties = d
         return schedule_rule_request

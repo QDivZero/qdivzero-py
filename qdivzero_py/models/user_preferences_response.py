@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="UserPreferencesResponse")
 
 
-
 @_attrs_define
 class UserPreferencesResponse:
-    """ 
-        Attributes:
-            email_2fa_enabled (bool | Unset):
-            totp_enabled (bool | Unset):
-     """
+    """
+    Attributes:
+        email_2fa_enabled (bool | Unset):
+        totp_enabled (bool | Unset):
+    """
 
     email_2fa_enabled: bool | Unset = UNSET
     totp_enabled: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         email_2fa_enabled = self.email_2fa_enabled
 
         totp_enabled = self.totp_enabled
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if email_2fa_enabled is not UNSET:
             field_dict["email_2fa_enabled"] = email_2fa_enabled
         if totp_enabled is not UNSET:
             field_dict["totp_enabled"] = totp_enabled
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class UserPreferencesResponse:
             email_2fa_enabled=email_2fa_enabled,
             totp_enabled=totp_enabled,
         )
-
 
         user_preferences_response.additional_properties = d
         return user_preferences_response

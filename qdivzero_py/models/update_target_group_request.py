@@ -9,26 +9,22 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.target_group_member_request import TargetGroupMemberRequest
-
-
-
+    from ..models.target_group_member_request import TargetGroupMemberRequest
 
 
 T = TypeVar("T", bound="UpdateTargetGroupRequest")
 
 
-
 @_attrs_define
 class UpdateTargetGroupRequest:
-    """ 
-        Attributes:
-            description (str | Unset):
-            display_name (str | Unset):
-            enabled (bool | Unset):
-            members (list[TargetGroupMemberRequest] | Unset):
-            selection_policy (str | Unset):
-     """
+    """
+    Attributes:
+        description (str | Unset):
+        display_name (str | Unset):
+        enabled (bool | Unset):
+        members (list[TargetGroupMemberRequest] | Unset):
+        selection_policy (str | Unset):
+    """
 
     description: str | Unset = UNSET
     display_name: str | Unset = UNSET
@@ -36,10 +32,6 @@ class UpdateTargetGroupRequest:
     members: list[TargetGroupMemberRequest] | Unset = UNSET
     selection_policy: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         description = self.description
@@ -55,15 +47,11 @@ class UpdateTargetGroupRequest:
                 members_item = members_item_data.to_dict()
                 members.append(members_item)
 
-
-
         selection_policy = self.selection_policy
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if description is not UNSET:
             field_dict["description"] = description
         if display_name is not UNSET:
@@ -77,11 +65,10 @@ class UpdateTargetGroupRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.target_group_member_request import TargetGroupMemberRequest
+
         d = dict(src_dict)
         description = d.pop("description", UNSET)
 
@@ -96,10 +83,7 @@ class UpdateTargetGroupRequest:
             for members_item_data in _members:
                 members_item = TargetGroupMemberRequest.from_dict(members_item_data)
 
-
-
                 members.append(members_item)
-
 
         selection_policy = d.pop("selection_policy", UNSET)
 
@@ -110,7 +94,6 @@ class UpdateTargetGroupRequest:
             members=members,
             selection_policy=selection_policy,
         )
-
 
         update_target_group_request.additional_properties = d
         return update_target_group_request

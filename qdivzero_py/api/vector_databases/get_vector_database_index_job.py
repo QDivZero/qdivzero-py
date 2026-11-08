@@ -14,57 +14,44 @@ from ...types import Response
 def _get_kwargs(
     database_id: str,
     job_id: str,
-
 ) -> dict[str, Any]:
-    
-
-    
-
-    
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/flexible-vector-databases/{database_id}/index-jobs/{job_id}".format(database_id=quote(str(database_id), safe=""),job_id=quote(str(job_id), safe=""),),
+        "url": "/v1/flexible-vector-databases/{database_id}/index-jobs/{job_id}".format(
+            database_id=quote(str(database_id), safe=""),
+            job_id=quote(str(job_id), safe=""),
+        ),
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | IndexJobResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | IndexJobResponse | None:
     if response.status_code == 200:
         response_200 = IndexJobResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_401
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -74,7 +61,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | IndexJobResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | IndexJobResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -88,9 +77,8 @@ def sync_detailed(
     job_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | IndexJobResponse]:
-    """ Get an index job
+    """Get an index job
 
      Returns the status of an asynchronous index job.
 
@@ -104,13 +92,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | IndexJobResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-job_id=job_id,
-
+        job_id=job_id,
     )
 
     response = client.get_httpx_client().request(
@@ -119,14 +105,14 @@ job_id=job_id,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     database_id: str,
     job_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | IndexJobResponse | None:
-    """ Get an index job
+    """Get an index job
 
      Returns the status of an asynchronous index job.
 
@@ -140,24 +126,22 @@ def sync(
 
     Returns:
         ErrorResponse | IndexJobResponse
-     """
-
+    """
 
     return sync_detailed(
         database_id=database_id,
-job_id=job_id,
-client=client,
-
+        job_id=job_id,
+        client=client,
     ).parsed
+
 
 async def asyncio_detailed(
     database_id: str,
     job_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | IndexJobResponse]:
-    """ Get an index job
+    """Get an index job
 
      Returns the status of an asynchronous index job.
 
@@ -171,29 +155,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | IndexJobResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-job_id=job_id,
-
+        job_id=job_id,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     database_id: str,
     job_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | IndexJobResponse | None:
-    """ Get an index job
+    """Get an index job
 
      Returns the status of an asynchronous index job.
 
@@ -207,12 +187,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | IndexJobResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        database_id=database_id,
-job_id=job_id,
-client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            database_id=database_id,
+            job_id=job_id,
+            client=client,
+        )
+    ).parsed

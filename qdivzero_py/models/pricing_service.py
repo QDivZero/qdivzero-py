@@ -11,26 +11,21 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="PricingService")
 
 
-
 @_attrs_define
 class PricingService:
-    """ 
-        Attributes:
-            currency (str | Unset):
-            id (str | Unset):
-            price_eur_per_gb_hour (float | Unset):
-            status (str | Unset):
-     """
+    """
+    Attributes:
+        currency (str | Unset):
+        id (str | Unset):
+        price_eur_per_gb_hour (float | Unset):
+        status (str | Unset):
+    """
 
     currency: str | Unset = UNSET
     id: str | Unset = UNSET
     price_eur_per_gb_hour: float | Unset = UNSET
     status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         currency = self.currency
@@ -41,11 +36,9 @@ class PricingService:
 
         status = self.status
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if currency is not UNSET:
             field_dict["currency"] = currency
         if id is not UNSET:
@@ -56,8 +49,6 @@ class PricingService:
             field_dict["status"] = status
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,7 +67,6 @@ class PricingService:
             price_eur_per_gb_hour=price_eur_per_gb_hour,
             status=status,
         )
-
 
         pricing_service.additional_properties = d
         return pricing_service

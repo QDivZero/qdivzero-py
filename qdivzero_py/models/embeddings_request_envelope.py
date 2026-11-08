@@ -11,37 +11,28 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="EmbeddingsRequestEnvelope")
 
 
-
 @_attrs_define
 class EmbeddingsRequestEnvelope:
-    """ 
-        Attributes:
-            input_ (list[int] | Unset):
-            model (str | Unset):
-     """
+    """
+    Attributes:
+        input_ (list[int] | Unset):
+        model (str | Unset):
+    """
 
     input_: list[int] | Unset = UNSET
     model: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         input_: list[int] | Unset = UNSET
         if not isinstance(self.input_, Unset):
             input_ = self.input_
 
-
-
         model = self.model
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if input_ is not UNSET:
             field_dict["input"] = input_
         if model is not UNSET:
@@ -49,13 +40,10 @@ class EmbeddingsRequestEnvelope:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         input_ = cast(list[int], d.pop("input", UNSET))
-
 
         model = d.pop("model", UNSET)
 
@@ -63,7 +51,6 @@ class EmbeddingsRequestEnvelope:
             input_=input_,
             model=model,
         )
-
 
         embeddings_request_envelope.additional_properties = d
         return embeddings_request_envelope

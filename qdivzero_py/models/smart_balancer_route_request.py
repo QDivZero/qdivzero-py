@@ -9,27 +9,23 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.smart_balancer_route_destination_request import SmartBalancerRouteDestinationRequest
-
-
-
+    from ..models.smart_balancer_route_destination_request import SmartBalancerRouteDestinationRequest
 
 
 T = TypeVar("T", bound="SmartBalancerRouteRequest")
 
 
-
 @_attrs_define
 class SmartBalancerRouteRequest:
-    """ 
-        Attributes:
-            destination (SmartBalancerRouteDestinationRequest | Unset):
-            enabled (bool | Unset):
-            intent (str | Unset):
-            is_default (bool | Unset):
-            name (str | Unset):
-            priority (int | Unset):
-     """
+    """
+    Attributes:
+        destination (SmartBalancerRouteDestinationRequest | Unset):
+        enabled (bool | Unset):
+        intent (str | Unset):
+        is_default (bool | Unset):
+        name (str | Unset):
+        priority (int | Unset):
+    """
 
     destination: SmartBalancerRouteDestinationRequest | Unset = UNSET
     enabled: bool | Unset = UNSET
@@ -38,10 +34,6 @@ class SmartBalancerRouteRequest:
     name: str | Unset = UNSET
     priority: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         destination: dict[str, Any] | Unset = UNSET
@@ -58,11 +50,9 @@ class SmartBalancerRouteRequest:
 
         priority = self.priority
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if destination is not UNSET:
             field_dict["destination"] = destination
         if enabled is not UNSET:
@@ -78,21 +68,17 @@ class SmartBalancerRouteRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.smart_balancer_route_destination_request import SmartBalancerRouteDestinationRequest
+
         d = dict(src_dict)
         _destination = d.pop("destination", UNSET)
         destination: SmartBalancerRouteDestinationRequest | Unset
-        if isinstance(_destination,  Unset):
+        if isinstance(_destination, Unset):
             destination = UNSET
         else:
             destination = SmartBalancerRouteDestinationRequest.from_dict(_destination)
-
-
-
 
         enabled = d.pop("enabled", UNSET)
 
@@ -112,7 +98,6 @@ class SmartBalancerRouteRequest:
             name=name,
             priority=priority,
         )
-
 
         smart_balancer_route_request.additional_properties = d
         return smart_balancer_route_request

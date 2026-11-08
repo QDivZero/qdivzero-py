@@ -14,18 +14,12 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: CreateTargetGroupRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/target-groups",
+        "url": "/v1/target-groups",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -36,19 +30,16 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | TargetGroupResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | TargetGroupResponse | str | None:
     if response.status_code == 201:
         response_201 = TargetGroupResponse.from_dict(response.json())
-
-
 
         return response_201
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -59,8 +50,6 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_500
 
     if client.raise_on_unexpected_status:
@@ -69,7 +58,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | TargetGroupResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | TargetGroupResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -82,9 +73,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateTargetGroupRequest,
-
 ) -> Response[ErrorResponse | TargetGroupResponse | str]:
-    """ Create a target group
+    """Create a target group
 
     Args:
         body (CreateTargetGroupRequest):
@@ -95,12 +85,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | TargetGroupResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
     response = client.get_httpx_client().request(
@@ -109,13 +97,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     body: CreateTargetGroupRequest,
-
 ) -> ErrorResponse | TargetGroupResponse | str | None:
-    """ Create a target group
+    """Create a target group
 
     Args:
         body (CreateTargetGroupRequest):
@@ -126,22 +114,20 @@ def sync(
 
     Returns:
         ErrorResponse | TargetGroupResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateTargetGroupRequest,
-
 ) -> Response[ErrorResponse | TargetGroupResponse | str]:
-    """ Create a target group
+    """Create a target group
 
     Args:
         body (CreateTargetGroupRequest):
@@ -152,27 +138,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | TargetGroupResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateTargetGroupRequest,
-
 ) -> ErrorResponse | TargetGroupResponse | str | None:
-    """ Create a target group
+    """Create a target group
 
     Args:
         body (CreateTargetGroupRequest):
@@ -183,11 +165,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | TargetGroupResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+        )
+    ).parsed

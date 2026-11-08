@@ -11,16 +11,15 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="FinishPasskeyloginRequest")
 
 
-
 @_attrs_define
 class FinishPasskeyloginRequest:
-    """ 
-        Attributes:
-            challenge_id (str):
-            credential (list[int]):
-            email (str):
-            cf_turnstile_response (str | Unset):
-     """
+    """
+    Attributes:
+        challenge_id (str):
+        credential (list[int]):
+        email (str):
+        cf_turnstile_response (str | Unset):
+    """
 
     challenge_id: str
     credential: list[int]
@@ -28,35 +27,28 @@ class FinishPasskeyloginRequest:
     cf_turnstile_response: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         challenge_id = self.challenge_id
 
         credential = self.credential
 
-
-
         email = self.email
 
         cf_turnstile_response = self.cf_turnstile_response
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "challenge_id": challenge_id,
-            "credential": credential,
-            "email": email,
-        })
+        field_dict.update(
+            {
+                "challenge_id": challenge_id,
+                "credential": credential,
+                "email": email,
+            }
+        )
         if cf_turnstile_response is not UNSET:
             field_dict["cf_turnstile_response"] = cf_turnstile_response
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -64,7 +56,6 @@ class FinishPasskeyloginRequest:
         challenge_id = d.pop("challenge_id")
 
         credential = cast(list[int], d.pop("credential"))
-
 
         email = d.pop("email")
 
@@ -76,7 +67,6 @@ class FinishPasskeyloginRequest:
             email=email,
             cf_turnstile_response=cf_turnstile_response,
         )
-
 
         finish_passkeylogin_request.additional_properties = d
         return finish_passkeylogin_request

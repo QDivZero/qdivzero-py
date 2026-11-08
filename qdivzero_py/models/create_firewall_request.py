@@ -11,18 +11,17 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="CreateFirewallRequest")
 
 
-
 @_attrs_define
 class CreateFirewallRequest:
-    """ 
-        Attributes:
-            description (str | Unset):
-            evaluator_serving_name (str | Unset):
-            mode (str | Unset):
-            name (str | Unset):
-            rule_slugs (list[str] | Unset):
-            slug (str | Unset):
-     """
+    """
+    Attributes:
+        description (str | Unset):
+        evaluator_serving_name (str | Unset):
+        mode (str | Unset):
+        name (str | Unset):
+        rule_slugs (list[str] | Unset):
+        slug (str | Unset):
+    """
 
     description: str | Unset = UNSET
     evaluator_serving_name: str | Unset = UNSET
@@ -31,10 +30,6 @@ class CreateFirewallRequest:
     rule_slugs: list[str] | Unset = UNSET
     slug: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         description = self.description
@@ -49,15 +44,11 @@ class CreateFirewallRequest:
         if not isinstance(self.rule_slugs, Unset):
             rule_slugs = self.rule_slugs
 
-
-
         slug = self.slug
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if description is not UNSET:
             field_dict["description"] = description
         if evaluator_serving_name is not UNSET:
@@ -73,8 +64,6 @@ class CreateFirewallRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -88,7 +77,6 @@ class CreateFirewallRequest:
 
         rule_slugs = cast(list[str], d.pop("rule_slugs", UNSET))
 
-
         slug = d.pop("slug", UNSET)
 
         create_firewall_request = cls(
@@ -99,7 +87,6 @@ class CreateFirewallRequest:
             rule_slugs=rule_slugs,
             slug=slug,
         )
-
 
         create_firewall_request.additional_properties = d
         return create_firewall_request

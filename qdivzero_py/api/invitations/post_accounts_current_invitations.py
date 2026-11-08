@@ -14,18 +14,12 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: CreateInvitationRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/accounts/current/invitations",
+        "url": "/v1/accounts/current/invitations",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -36,19 +30,16 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | InvitationResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | InvitationResponse | str | None:
     if response.status_code == 201:
         response_201 = InvitationResponse.from_dict(response.json())
-
-
 
         return response_201
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -59,28 +50,20 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 403:
         response_403 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_404
 
     if response.status_code == 412:
         response_412 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_412
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -90,7 +73,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | InvitationResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | InvitationResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -103,9 +88,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateInvitationRequest,
-
 ) -> Response[ErrorResponse | InvitationResponse | str]:
-    """ Create an invitation for the selected account
+    """Create an invitation for the selected account
 
      Invites a user by email to join the active account context with a given role.
 
@@ -118,12 +102,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | InvitationResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
     response = client.get_httpx_client().request(
@@ -132,13 +114,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     body: CreateInvitationRequest,
-
 ) -> ErrorResponse | InvitationResponse | str | None:
-    """ Create an invitation for the selected account
+    """Create an invitation for the selected account
 
      Invites a user by email to join the active account context with a given role.
 
@@ -151,22 +133,20 @@ def sync(
 
     Returns:
         ErrorResponse | InvitationResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateInvitationRequest,
-
 ) -> Response[ErrorResponse | InvitationResponse | str]:
-    """ Create an invitation for the selected account
+    """Create an invitation for the selected account
 
      Invites a user by email to join the active account context with a given role.
 
@@ -179,27 +159,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | InvitationResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateInvitationRequest,
-
 ) -> ErrorResponse | InvitationResponse | str | None:
-    """ Create an invitation for the selected account
+    """Create an invitation for the selected account
 
      Invites a user by email to join the active account context with a given role.
 
@@ -212,11 +188,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | InvitationResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+        )
+    ).parsed

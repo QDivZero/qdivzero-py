@@ -10,33 +10,24 @@ from ...models.firewall_response import FirewallResponse
 from ...types import Response
 
 
-def _get_kwargs(
-    
-) -> dict[str, Any]:
-    
-
-    
-
-    
+def _get_kwargs() -> dict[str, Any]:
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/firewalls",
+        "url": "/v1/firewalls",
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | list[FirewallResponse] | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | list[FirewallResponse] | None:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
-        for response_200_item_data in (_response_200):
+        for response_200_item_data in _response_200:
             response_200_item = FirewallResponse.from_dict(response_200_item_data)
-
-
 
             response_200.append(response_200_item)
 
@@ -45,14 +36,10 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -62,7 +49,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | list[FirewallResponse]]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | list[FirewallResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -74,9 +63,8 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | list[FirewallResponse]]:
-    """ List firewalls
+    """List firewalls
 
      Returns all firewalls for the authenticated account.
 
@@ -86,12 +74,9 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | list[FirewallResponse]]
-     """
+    """
 
-
-    kwargs = _get_kwargs(
-        
-    )
+    kwargs = _get_kwargs()
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -99,12 +84,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | list[FirewallResponse] | None:
-    """ List firewalls
+    """List firewalls
 
      Returns all firewalls for the authenticated account.
 
@@ -114,20 +99,18 @@ def sync(
 
     Returns:
         ErrorResponse | list[FirewallResponse]
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | list[FirewallResponse]]:
-    """ List firewalls
+    """List firewalls
 
      Returns all firewalls for the authenticated account.
 
@@ -137,25 +120,20 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | list[FirewallResponse]]
-     """
+    """
 
+    kwargs = _get_kwargs()
 
-    kwargs = _get_kwargs(
-        
-    )
-
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | list[FirewallResponse] | None:
-    """ List firewalls
+    """List firewalls
 
      Returns all firewalls for the authenticated account.
 
@@ -165,10 +143,10 @@ async def asyncio(
 
     Returns:
         ErrorResponse | list[FirewallResponse]
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+        )
+    ).parsed

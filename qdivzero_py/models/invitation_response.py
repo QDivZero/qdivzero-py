@@ -11,25 +11,24 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="InvitationResponse")
 
 
-
 @_attrs_define
 class InvitationResponse:
-    """ 
-        Attributes:
-            accepted_at_unix (int | Unset):
-            accepted_by (str | Unset):
-            account_description (str | Unset):
-            account_id (str | Unset):
-            account_name (str | Unset):
-            created_at_unix (int | Unset):
-            email (str | Unset):
-            expires_at_unix (int | Unset):
-            id (str | Unset):
-            invited_by (str | Unset):
-            role (str | Unset):
-            status (str | Unset):
-            token (str | Unset):
-     """
+    """
+    Attributes:
+        accepted_at_unix (int | Unset):
+        accepted_by (str | Unset):
+        account_description (str | Unset):
+        account_id (str | Unset):
+        account_name (str | Unset):
+        created_at_unix (int | Unset):
+        email (str | Unset):
+        expires_at_unix (int | Unset):
+        id (str | Unset):
+        invited_by (str | Unset):
+        role (str | Unset):
+        status (str | Unset):
+        token (str | Unset):
+    """
 
     accepted_at_unix: int | Unset = UNSET
     accepted_by: str | Unset = UNSET
@@ -45,10 +44,6 @@ class InvitationResponse:
     status: str | Unset = UNSET
     token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         accepted_at_unix = self.accepted_at_unix
@@ -77,11 +72,9 @@ class InvitationResponse:
 
         token = self.token
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if accepted_at_unix is not UNSET:
             field_dict["accepted_at_unix"] = accepted_at_unix
         if accepted_by is not UNSET:
@@ -110,8 +103,6 @@ class InvitationResponse:
             field_dict["token"] = token
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -157,7 +148,6 @@ class InvitationResponse:
             status=status,
             token=token,
         )
-
 
         invitation_response.additional_properties = d
         return invitation_response

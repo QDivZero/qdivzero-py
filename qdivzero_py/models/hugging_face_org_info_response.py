@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="HuggingFaceOrgInfoResponse")
 
 
-
 @_attrs_define
 class HuggingFaceOrgInfoResponse:
-    """ 
-        Attributes:
-            avatar_url (str | Unset):
-            fullname (str | Unset):
-     """
+    """
+    Attributes:
+        avatar_url (str | Unset):
+        fullname (str | Unset):
+    """
 
     avatar_url: str | Unset = UNSET
     fullname: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         avatar_url = self.avatar_url
 
         fullname = self.fullname
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if avatar_url is not UNSET:
             field_dict["avatar_url"] = avatar_url
         if fullname is not UNSET:
             field_dict["fullname"] = fullname
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class HuggingFaceOrgInfoResponse:
             avatar_url=avatar_url,
             fullname=fullname,
         )
-
 
         hugging_face_org_info_response.additional_properties = d
         return hugging_face_org_info_response

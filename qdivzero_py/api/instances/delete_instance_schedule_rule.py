@@ -13,33 +13,28 @@ from ...types import Response
 def _get_kwargs(
     instance_id: str,
     rule_id: str,
-
 ) -> dict[str, Any]:
-    
-
-    
-
-    
 
     _kwargs: dict[str, Any] = {
         "method": "delete",
-        "url": "/instances/{instance_id}/schedule-rules/{rule_id}".format(instance_id=quote(str(instance_id), safe=""),rule_id=quote(str(rule_id), safe=""),),
+        "url": "/v1/instances/{instance_id}/schedule-rules/{rule_id}".format(
+            instance_id=quote(str(instance_id), safe=""),
+            rule_id=quote(str(rule_id), safe=""),
+        ),
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | ErrorResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Any | ErrorResponse | str | None:
     if response.status_code == 204:
         response_204 = cast(Any, None)
         return response_204
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -50,21 +45,15 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 403:
         response_403 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -74,7 +63,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | ErrorResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Any | ErrorResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -88,9 +79,8 @@ def sync_detailed(
     rule_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[Any | ErrorResponse | str]:
-    """ Delete a schedule rule for an instance
+    """Delete a schedule rule for an instance
 
     Args:
         instance_id (str):
@@ -102,13 +92,11 @@ def sync_detailed(
 
     Returns:
         Response[Any | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         instance_id=instance_id,
-rule_id=rule_id,
-
+        rule_id=rule_id,
     )
 
     response = client.get_httpx_client().request(
@@ -117,14 +105,14 @@ rule_id=rule_id,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     instance_id: str,
     rule_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Any | ErrorResponse | str | None:
-    """ Delete a schedule rule for an instance
+    """Delete a schedule rule for an instance
 
     Args:
         instance_id (str):
@@ -136,24 +124,22 @@ def sync(
 
     Returns:
         Any | ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         instance_id=instance_id,
-rule_id=rule_id,
-client=client,
-
+        rule_id=rule_id,
+        client=client,
     ).parsed
+
 
 async def asyncio_detailed(
     instance_id: str,
     rule_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[Any | ErrorResponse | str]:
-    """ Delete a schedule rule for an instance
+    """Delete a schedule rule for an instance
 
     Args:
         instance_id (str):
@@ -165,29 +151,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[Any | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         instance_id=instance_id,
-rule_id=rule_id,
-
+        rule_id=rule_id,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     instance_id: str,
     rule_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Any | ErrorResponse | str | None:
-    """ Delete a schedule rule for an instance
+    """Delete a schedule rule for an instance
 
     Args:
         instance_id (str):
@@ -199,12 +181,12 @@ async def asyncio(
 
     Returns:
         Any | ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        instance_id=instance_id,
-rule_id=rule_id,
-client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            instance_id=instance_id,
+            rule_id=rule_id,
+            client=client,
+        )
+    ).parsed

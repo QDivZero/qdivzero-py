@@ -8,23 +8,14 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 
 
-def _get_kwargs(
-    
-) -> dict[str, Any]:
-    
-
-    
-
-    
+def _get_kwargs() -> dict[str, Any]:
 
     _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/health",
     }
 
-
     return _kwargs
-
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> str | None:
@@ -50,9 +41,8 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
-
 ) -> Response[str]:
-    """ Health check
+    """Health check
 
      Returns service health
 
@@ -62,12 +52,9 @@ def sync_detailed(
 
     Returns:
         Response[str]
-     """
+    """
 
-
-    kwargs = _get_kwargs(
-        
-    )
+    kwargs = _get_kwargs()
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -75,12 +62,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient | Client,
-
 ) -> str | None:
-    """ Health check
+    """Health check
 
      Returns service health
 
@@ -90,20 +77,18 @@ def sync(
 
     Returns:
         str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
-
 ) -> Response[str]:
-    """ Health check
+    """Health check
 
      Returns service health
 
@@ -113,25 +98,20 @@ async def asyncio_detailed(
 
     Returns:
         Response[str]
-     """
+    """
 
+    kwargs = _get_kwargs()
 
-    kwargs = _get_kwargs(
-        
-    )
-
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
-
 ) -> str | None:
-    """ Health check
+    """Health check
 
      Returns service health
 
@@ -141,10 +121,10 @@ async def asyncio(
 
     Returns:
         str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+        )
+    ).parsed

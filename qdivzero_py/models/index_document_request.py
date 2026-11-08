@@ -9,27 +9,23 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.index_document_request_metadata import IndexDocumentRequestMetadata
-  from ..models.index_document_source_request import IndexDocumentSourceRequest
-
-
-
+    from ..models.index_document_request_metadata import IndexDocumentRequestMetadata
+    from ..models.index_document_source_request import IndexDocumentSourceRequest
 
 
 T = TypeVar("T", bound="IndexDocumentRequest")
 
 
-
 @_attrs_define
 class IndexDocumentRequest:
-    """ 
-        Attributes:
-            content (str | Unset):
-            content_image_url (str | Unset):
-            id (str | Unset):
-            metadata (IndexDocumentRequestMetadata | Unset):
-            source (IndexDocumentSourceRequest | Unset):
-     """
+    """
+    Attributes:
+        content (str | Unset):
+        content_image_url (str | Unset):
+        id (str | Unset):
+        metadata (IndexDocumentRequestMetadata | Unset): Up to 28 exact-match filterable metadata fields per document.
+        source (IndexDocumentSourceRequest | Unset):
+    """
 
     content: str | Unset = UNSET
     content_image_url: str | Unset = UNSET
@@ -37,10 +33,6 @@ class IndexDocumentRequest:
     metadata: IndexDocumentRequestMetadata | Unset = UNSET
     source: IndexDocumentSourceRequest | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         content = self.content
@@ -57,11 +49,9 @@ class IndexDocumentRequest:
         if not isinstance(self.source, Unset):
             source = self.source.to_dict()
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if content is not UNSET:
             field_dict["content"] = content
         if content_image_url is not UNSET:
@@ -75,12 +65,11 @@ class IndexDocumentRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.index_document_request_metadata import IndexDocumentRequestMetadata
         from ..models.index_document_source_request import IndexDocumentSourceRequest
+
         d = dict(src_dict)
         content = d.pop("content", UNSET)
 
@@ -90,23 +79,17 @@ class IndexDocumentRequest:
 
         _metadata = d.pop("metadata", UNSET)
         metadata: IndexDocumentRequestMetadata | Unset
-        if isinstance(_metadata,  Unset):
+        if isinstance(_metadata, Unset):
             metadata = UNSET
         else:
             metadata = IndexDocumentRequestMetadata.from_dict(_metadata)
 
-
-
-
         _source = d.pop("source", UNSET)
         source: IndexDocumentSourceRequest | Unset
-        if isinstance(_source,  Unset):
+        if isinstance(_source, Unset):
             source = UNSET
         else:
             source = IndexDocumentSourceRequest.from_dict(_source)
-
-
-
 
         index_document_request = cls(
             content=content,
@@ -115,7 +98,6 @@ class IndexDocumentRequest:
             metadata=metadata,
             source=source,
         )
-
 
         index_document_request.additional_properties = d
         return index_document_request

@@ -15,20 +15,13 @@ def _get_kwargs(
     *,
     body: CreateCheckoutSessionRequest,
     idempotency_key: str,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
     headers["Idempotency-Key"] = idempotency_key
 
-
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/billing/checkout",
+        "url": "/v1/billing/checkout",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -39,19 +32,16 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CheckoutSessionResponse | ErrorResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> CheckoutSessionResponse | ErrorResponse | str | None:
     if response.status_code == 200:
         response_200 = CheckoutSessionResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -62,14 +52,10 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 409:
         response_409 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_409
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -79,7 +65,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CheckoutSessionResponse | ErrorResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[CheckoutSessionResponse | ErrorResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,9 +81,8 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: CreateCheckoutSessionRequest,
     idempotency_key: str,
-
 ) -> Response[CheckoutSessionResponse | ErrorResponse | str]:
-    """ Create a checkout session
+    """Create a checkout session
 
      Creates a billing checkout session for the authenticated account.
 
@@ -109,13 +96,11 @@ def sync_detailed(
 
     Returns:
         Response[CheckoutSessionResponse | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-idempotency_key=idempotency_key,
-
+        idempotency_key=idempotency_key,
     )
 
     response = client.get_httpx_client().request(
@@ -124,14 +109,14 @@ idempotency_key=idempotency_key,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     body: CreateCheckoutSessionRequest,
     idempotency_key: str,
-
 ) -> CheckoutSessionResponse | ErrorResponse | str | None:
-    """ Create a checkout session
+    """Create a checkout session
 
      Creates a billing checkout session for the authenticated account.
 
@@ -145,24 +130,22 @@ def sync(
 
     Returns:
         CheckoutSessionResponse | ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-idempotency_key=idempotency_key,
-
+        body=body,
+        idempotency_key=idempotency_key,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateCheckoutSessionRequest,
     idempotency_key: str,
-
 ) -> Response[CheckoutSessionResponse | ErrorResponse | str]:
-    """ Create a checkout session
+    """Create a checkout session
 
      Creates a billing checkout session for the authenticated account.
 
@@ -176,29 +159,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[CheckoutSessionResponse | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-idempotency_key=idempotency_key,
-
+        idempotency_key=idempotency_key,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateCheckoutSessionRequest,
     idempotency_key: str,
-
 ) -> CheckoutSessionResponse | ErrorResponse | str | None:
-    """ Create a checkout session
+    """Create a checkout session
 
      Creates a billing checkout session for the authenticated account.
 
@@ -212,12 +191,12 @@ async def asyncio(
 
     Returns:
         CheckoutSessionResponse | ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-idempotency_key=idempotency_key,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+            idempotency_key=idempotency_key,
+        )
+    ).parsed

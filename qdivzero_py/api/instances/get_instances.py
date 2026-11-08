@@ -13,43 +13,33 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     state: str | Unset = UNSET,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
     params["state"] = state
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/instances",
+        "url": "/v1/instances",
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | InstanceListResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | InstanceListResponse | str | None:
     if response.status_code == 200:
         response_200 = InstanceListResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -60,8 +50,6 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_500
 
     if client.raise_on_unexpected_status:
@@ -70,7 +58,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | InstanceListResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | InstanceListResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,9 +73,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     state: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | InstanceListResponse | str]:
-    """ List inference instances
+    """List inference instances
 
     Args:
         state (str | Unset):
@@ -96,12 +85,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | InstanceListResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         state=state,
-
     )
 
     response = client.get_httpx_client().request(
@@ -110,13 +97,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     state: str | Unset = UNSET,
-
 ) -> ErrorResponse | InstanceListResponse | str | None:
-    """ List inference instances
+    """List inference instances
 
     Args:
         state (str | Unset):
@@ -127,22 +114,20 @@ def sync(
 
     Returns:
         ErrorResponse | InstanceListResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-state=state,
-
+        state=state,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     state: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | InstanceListResponse | str]:
-    """ List inference instances
+    """List inference instances
 
     Args:
         state (str | Unset):
@@ -153,27 +138,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | InstanceListResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         state=state,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     state: str | Unset = UNSET,
-
 ) -> ErrorResponse | InstanceListResponse | str | None:
-    """ List inference instances
+    """List inference instances
 
     Args:
         state (str | Unset):
@@ -184,11 +165,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | InstanceListResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-state=state,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            state=state,
+        )
+    ).parsed

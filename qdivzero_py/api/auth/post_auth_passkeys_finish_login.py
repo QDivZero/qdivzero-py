@@ -14,18 +14,12 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: FinishPasskeyloginRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/auth/passkeys/finish-login",
+        "url": "/v1/auth/passkeys/finish-login",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -36,40 +30,31 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | FinishPasskeyloginResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | FinishPasskeyloginResponse | None:
     if response.status_code == 200:
         response_200 = FinishPasskeyloginResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_401
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -79,7 +64,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | FinishPasskeyloginResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | FinishPasskeyloginResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -92,9 +79,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: FinishPasskeyloginRequest,
-
 ) -> Response[ErrorResponse | FinishPasskeyloginResponse]:
-    """ Finish passkey login
+    """Finish passkey login
 
      Consumes a passkey login challenge and returns a session.
 
@@ -107,12 +93,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | FinishPasskeyloginResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
     response = client.get_httpx_client().request(
@@ -121,13 +105,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: FinishPasskeyloginRequest,
-
 ) -> ErrorResponse | FinishPasskeyloginResponse | None:
-    """ Finish passkey login
+    """Finish passkey login
 
      Consumes a passkey login challenge and returns a session.
 
@@ -140,22 +124,20 @@ def sync(
 
     Returns:
         ErrorResponse | FinishPasskeyloginResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: FinishPasskeyloginRequest,
-
 ) -> Response[ErrorResponse | FinishPasskeyloginResponse]:
-    """ Finish passkey login
+    """Finish passkey login
 
      Consumes a passkey login challenge and returns a session.
 
@@ -168,27 +150,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | FinishPasskeyloginResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: FinishPasskeyloginRequest,
-
 ) -> ErrorResponse | FinishPasskeyloginResponse | None:
-    """ Finish passkey login
+    """Finish passkey login
 
      Consumes a passkey login challenge and returns a session.
 
@@ -201,11 +179,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | FinishPasskeyloginResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+        )
+    ).parsed

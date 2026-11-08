@@ -11,26 +11,21 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="InstanceUsageBucketResponse")
 
 
-
 @_attrs_define
 class InstanceUsageBucketResponse:
-    """ 
-        Attributes:
-            billable_seconds (int | Unset):
-            cost_eur (float | Unset):
-            end_at (str | Unset):
-            start_at (str | Unset):
-     """
+    """
+    Attributes:
+        billable_seconds (int | Unset):
+        cost_eur (float | Unset):
+        end_at (str | Unset):
+        start_at (str | Unset):
+    """
 
     billable_seconds: int | Unset = UNSET
     cost_eur: float | Unset = UNSET
     end_at: str | Unset = UNSET
     start_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         billable_seconds = self.billable_seconds
@@ -41,11 +36,9 @@ class InstanceUsageBucketResponse:
 
         start_at = self.start_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if billable_seconds is not UNSET:
             field_dict["billable_seconds"] = billable_seconds
         if cost_eur is not UNSET:
@@ -56,8 +49,6 @@ class InstanceUsageBucketResponse:
             field_dict["start_at"] = start_at
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,7 +67,6 @@ class InstanceUsageBucketResponse:
             end_at=end_at,
             start_at=start_at,
         )
-
 
         instance_usage_bucket_response.additional_properties = d
         return instance_usage_bucket_response

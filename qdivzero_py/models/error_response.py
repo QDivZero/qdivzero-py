@@ -11,35 +11,26 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ErrorResponse")
 
 
-
 @_attrs_define
 class ErrorResponse:
-    """ 
-        Attributes:
-            error (str | Unset):
-     """
+    """
+    Attributes:
+        error (str | Unset):
+    """
 
     error: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         error = self.error
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if error is not UNSET:
             field_dict["error"] = error
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,7 +40,6 @@ class ErrorResponse:
         error_response = cls(
             error=error,
         )
-
 
         error_response.additional_properties = d
         return error_response

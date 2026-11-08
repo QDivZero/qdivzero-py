@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -11,24 +11,23 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ServingProviderResponse")
 
 
-
 @_attrs_define
 class ServingProviderResponse:
-    """ 
-        Attributes:
-            model_id (str | Unset):
-            name (str | Unset):
-            region (str | Unset):
-     """
+    """
+    Attributes:
+        model_id (str | Unset):
+        name (str | Unset):
+        region (str | Unset):
+        supported_protocols (list[str] | Unset):
+        supports_tools (bool | Unset):
+    """
 
     model_id: str | Unset = UNSET
     name: str | Unset = UNSET
     region: str | Unset = UNSET
+    supported_protocols: list[str] | Unset = UNSET
+    supports_tools: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         model_id = self.model_id
@@ -37,21 +36,27 @@ class ServingProviderResponse:
 
         region = self.region
 
+        supported_protocols: list[str] | Unset = UNSET
+        if not isinstance(self.supported_protocols, Unset):
+            supported_protocols = self.supported_protocols
+
+        supports_tools = self.supports_tools
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if model_id is not UNSET:
             field_dict["model_id"] = model_id
         if name is not UNSET:
             field_dict["name"] = name
         if region is not UNSET:
             field_dict["region"] = region
+        if supported_protocols is not UNSET:
+            field_dict["supported_protocols"] = supported_protocols
+        if supports_tools is not UNSET:
+            field_dict["supports_tools"] = supports_tools
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -62,12 +67,17 @@ class ServingProviderResponse:
 
         region = d.pop("region", UNSET)
 
+        supported_protocols = cast(list[str], d.pop("supported_protocols", UNSET))
+
+        supports_tools = d.pop("supports_tools", UNSET)
+
         serving_provider_response = cls(
             model_id=model_id,
             name=name,
             region=region,
+            supported_protocols=supported_protocols,
+            supports_tools=supports_tools,
         )
-
 
         serving_provider_response.additional_properties = d
         return serving_provider_response

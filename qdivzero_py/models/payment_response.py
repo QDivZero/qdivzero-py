@@ -11,41 +11,36 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="PaymentResponse")
 
 
-
 @_attrs_define
 class PaymentResponse:
-    """ 
-        Attributes:
-            account_id (str | Unset):
-            amount_credit_base_minor (int | Unset):
-            amount_discount_minor (int | Unset):
-            amount_subtotal_minor (int | Unset):
-            amount_tax_minor (int | Unset):
-            amount_total_minor (int | Unset):
-            created_at (str | Unset):
-            credited_at (str | Unset):
-            credited_eur_cents (int | Unset):
-            currency (str | Unset):
-            discount_code_snapshot (str | Unset):
-            discount_ticket_id (str | Unset):
-            holded_contact_id (str | Unset):
-            holded_invoice_id (str | Unset):
-            holded_invoice_number (str | Unset):
-            holded_invoice_status (str | Unset):
-            holded_invoice_url (str | Unset):
-            id (str | Unset):
-            invoice_state (str | Unset):
-            ledger_entry_id (str | Unset):
-            paid_at (str | Unset):
-            provider (str | Unset):
-            reference (str | Unset):
-            status (str | Unset):
-            stripe_customer_id (str | Unset):
-            stripe_event_id (str | Unset):
-            stripe_payment_intent_id (str | Unset):
-            stripe_session_id (str | Unset):
-            updated_at (str | Unset):
-     """
+    """
+    Attributes:
+        account_id (str | Unset):
+        amount_credit_base_minor (int | Unset):
+        amount_discount_minor (int | Unset):
+        amount_subtotal_minor (int | Unset):
+        amount_tax_minor (int | Unset):
+        amount_total_minor (int | Unset):
+        created_at (str | Unset):
+        credited_at (str | Unset):
+        credited_eur_cents (int | Unset):
+        currency (str | Unset):
+        discount_code_snapshot (str | Unset):
+        discount_ticket_id (str | Unset):
+        document_status (str | Unset):
+        id (str | Unset):
+        ledger_entry_id (str | Unset):
+        paid_at (str | Unset):
+        provider (str | Unset):
+        reference (str | Unset):
+        status (str | Unset):
+        stripe_customer_id (str | Unset):
+        stripe_event_id (str | Unset):
+        stripe_invoice_id (str | Unset):
+        stripe_payment_intent_id (str | Unset):
+        stripe_session_id (str | Unset):
+        updated_at (str | Unset):
+    """
 
     account_id: str | Unset = UNSET
     amount_credit_base_minor: int | Unset = UNSET
@@ -59,13 +54,8 @@ class PaymentResponse:
     currency: str | Unset = UNSET
     discount_code_snapshot: str | Unset = UNSET
     discount_ticket_id: str | Unset = UNSET
-    holded_contact_id: str | Unset = UNSET
-    holded_invoice_id: str | Unset = UNSET
-    holded_invoice_number: str | Unset = UNSET
-    holded_invoice_status: str | Unset = UNSET
-    holded_invoice_url: str | Unset = UNSET
+    document_status: str | Unset = UNSET
     id: str | Unset = UNSET
-    invoice_state: str | Unset = UNSET
     ledger_entry_id: str | Unset = UNSET
     paid_at: str | Unset = UNSET
     provider: str | Unset = UNSET
@@ -73,14 +63,11 @@ class PaymentResponse:
     status: str | Unset = UNSET
     stripe_customer_id: str | Unset = UNSET
     stripe_event_id: str | Unset = UNSET
+    stripe_invoice_id: str | Unset = UNSET
     stripe_payment_intent_id: str | Unset = UNSET
     stripe_session_id: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account_id = self.account_id
@@ -107,19 +94,9 @@ class PaymentResponse:
 
         discount_ticket_id = self.discount_ticket_id
 
-        holded_contact_id = self.holded_contact_id
-
-        holded_invoice_id = self.holded_invoice_id
-
-        holded_invoice_number = self.holded_invoice_number
-
-        holded_invoice_status = self.holded_invoice_status
-
-        holded_invoice_url = self.holded_invoice_url
+        document_status = self.document_status
 
         id = self.id
-
-        invoice_state = self.invoice_state
 
         ledger_entry_id = self.ledger_entry_id
 
@@ -135,17 +112,17 @@ class PaymentResponse:
 
         stripe_event_id = self.stripe_event_id
 
+        stripe_invoice_id = self.stripe_invoice_id
+
         stripe_payment_intent_id = self.stripe_payment_intent_id
 
         stripe_session_id = self.stripe_session_id
 
         updated_at = self.updated_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account_id is not UNSET:
             field_dict["account_id"] = account_id
         if amount_credit_base_minor is not UNSET:
@@ -170,20 +147,10 @@ class PaymentResponse:
             field_dict["discount_code_snapshot"] = discount_code_snapshot
         if discount_ticket_id is not UNSET:
             field_dict["discount_ticket_id"] = discount_ticket_id
-        if holded_contact_id is not UNSET:
-            field_dict["holded_contact_id"] = holded_contact_id
-        if holded_invoice_id is not UNSET:
-            field_dict["holded_invoice_id"] = holded_invoice_id
-        if holded_invoice_number is not UNSET:
-            field_dict["holded_invoice_number"] = holded_invoice_number
-        if holded_invoice_status is not UNSET:
-            field_dict["holded_invoice_status"] = holded_invoice_status
-        if holded_invoice_url is not UNSET:
-            field_dict["holded_invoice_url"] = holded_invoice_url
+        if document_status is not UNSET:
+            field_dict["document_status"] = document_status
         if id is not UNSET:
             field_dict["id"] = id
-        if invoice_state is not UNSET:
-            field_dict["invoice_state"] = invoice_state
         if ledger_entry_id is not UNSET:
             field_dict["ledger_entry_id"] = ledger_entry_id
         if paid_at is not UNSET:
@@ -198,6 +165,8 @@ class PaymentResponse:
             field_dict["stripe_customer_id"] = stripe_customer_id
         if stripe_event_id is not UNSET:
             field_dict["stripe_event_id"] = stripe_event_id
+        if stripe_invoice_id is not UNSET:
+            field_dict["stripe_invoice_id"] = stripe_invoice_id
         if stripe_payment_intent_id is not UNSET:
             field_dict["stripe_payment_intent_id"] = stripe_payment_intent_id
         if stripe_session_id is not UNSET:
@@ -206,8 +175,6 @@ class PaymentResponse:
             field_dict["updated_at"] = updated_at
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -236,19 +203,9 @@ class PaymentResponse:
 
         discount_ticket_id = d.pop("discount_ticket_id", UNSET)
 
-        holded_contact_id = d.pop("holded_contact_id", UNSET)
-
-        holded_invoice_id = d.pop("holded_invoice_id", UNSET)
-
-        holded_invoice_number = d.pop("holded_invoice_number", UNSET)
-
-        holded_invoice_status = d.pop("holded_invoice_status", UNSET)
-
-        holded_invoice_url = d.pop("holded_invoice_url", UNSET)
+        document_status = d.pop("document_status", UNSET)
 
         id = d.pop("id", UNSET)
-
-        invoice_state = d.pop("invoice_state", UNSET)
 
         ledger_entry_id = d.pop("ledger_entry_id", UNSET)
 
@@ -263,6 +220,8 @@ class PaymentResponse:
         stripe_customer_id = d.pop("stripe_customer_id", UNSET)
 
         stripe_event_id = d.pop("stripe_event_id", UNSET)
+
+        stripe_invoice_id = d.pop("stripe_invoice_id", UNSET)
 
         stripe_payment_intent_id = d.pop("stripe_payment_intent_id", UNSET)
 
@@ -283,13 +242,8 @@ class PaymentResponse:
             currency=currency,
             discount_code_snapshot=discount_code_snapshot,
             discount_ticket_id=discount_ticket_id,
-            holded_contact_id=holded_contact_id,
-            holded_invoice_id=holded_invoice_id,
-            holded_invoice_number=holded_invoice_number,
-            holded_invoice_status=holded_invoice_status,
-            holded_invoice_url=holded_invoice_url,
+            document_status=document_status,
             id=id,
-            invoice_state=invoice_state,
             ledger_entry_id=ledger_entry_id,
             paid_at=paid_at,
             provider=provider,
@@ -297,11 +251,11 @@ class PaymentResponse:
             status=status,
             stripe_customer_id=stripe_customer_id,
             stripe_event_id=stripe_event_id,
+            stripe_invoice_id=stripe_invoice_id,
             stripe_payment_intent_id=stripe_payment_intent_id,
             stripe_session_id=stripe_session_id,
             updated_at=updated_at,
         )
-
 
         payment_response.additional_properties = d
         return payment_response

@@ -12,33 +12,27 @@ from ...types import Response
 
 def _get_kwargs(
     key_id: str,
-
 ) -> dict[str, Any]:
-    
-
-    
-
-    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/api-keys/{key_id}/revoke".format(key_id=quote(str(key_id), safe=""),),
+        "url": "/v1/api-keys/{key_id}/revoke".format(
+            key_id=quote(str(key_id), safe=""),
+        ),
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | ErrorResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Any | ErrorResponse | str | None:
     if response.status_code == 204:
         response_204 = cast(Any, None)
         return response_204
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -49,21 +43,15 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 403:
         response_403 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -73,7 +61,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | ErrorResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Any | ErrorResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -86,9 +76,8 @@ def sync_detailed(
     key_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[Any | ErrorResponse | str]:
-    """ Revoke an API key
+    """Revoke an API key
 
      Revokes an API key issued for the active account context.
 
@@ -101,12 +90,10 @@ def sync_detailed(
 
     Returns:
         Response[Any | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         key_id=key_id,
-
     )
 
     response = client.get_httpx_client().request(
@@ -115,13 +102,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     key_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Any | ErrorResponse | str | None:
-    """ Revoke an API key
+    """Revoke an API key
 
      Revokes an API key issued for the active account context.
 
@@ -134,22 +121,20 @@ def sync(
 
     Returns:
         Any | ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         key_id=key_id,
-client=client,
-
+        client=client,
     ).parsed
+
 
 async def asyncio_detailed(
     key_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Response[Any | ErrorResponse | str]:
-    """ Revoke an API key
+    """Revoke an API key
 
      Revokes an API key issued for the active account context.
 
@@ -162,27 +147,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[Any | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         key_id=key_id,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     key_id: str,
     *,
     client: AuthenticatedClient,
-
 ) -> Any | ErrorResponse | str | None:
-    """ Revoke an API key
+    """Revoke an API key
 
      Revokes an API key issued for the active account context.
 
@@ -195,11 +176,11 @@ async def asyncio(
 
     Returns:
         Any | ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        key_id=key_id,
-client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            key_id=key_id,
+            client=client,
+        )
+    ).parsed

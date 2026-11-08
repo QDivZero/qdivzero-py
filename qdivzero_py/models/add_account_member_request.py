@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="AddAccountMemberRequest")
 
 
-
 @_attrs_define
 class AddAccountMemberRequest:
-    """ 
-        Attributes:
-            email (str | Unset):
-            role (str | Unset):
-     """
+    """
+    Attributes:
+        email (str | Unset):
+        role (str | Unset):
+    """
 
     email: str | Unset = UNSET
     role: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         email = self.email
 
         role = self.role
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if email is not UNSET:
             field_dict["email"] = email
         if role is not UNSET:
             field_dict["role"] = role
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class AddAccountMemberRequest:
             email=email,
             role=role,
         )
-
 
         add_account_member_request.additional_properties = d
         return add_account_member_request

@@ -9,47 +9,43 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.catalog_gpu_response import CatalogGPUResponse
-  from ..models.runtime_config_response import RuntimeConfigResponse
-  from ..models.runtime_memory_estimate_response import RuntimeMemoryEstimateResponse
-
-
-
+    from ..models.catalog_gpu_response import CatalogGPUResponse
+    from ..models.runtime_config_response import RuntimeConfigResponse
+    from ..models.runtime_memory_estimate_response import RuntimeMemoryEstimateResponse
 
 
 T = TypeVar("T", bound="PreviewInstanceResponse")
 
 
-
 @_attrs_define
 class PreviewInstanceResponse:
-    """ 
-        Attributes:
-            capacity_tier (str | Unset):
-            compatible_gpus (list[CatalogGPUResponse] | Unset):
-            estimate (RuntimeMemoryEstimateResponse | Unset):
-            huggingface_repo_id (str | Unset):
-            max_context_size (int | Unset):
-            recommended_gpu (CatalogGPUResponse | Unset):
-            runtime_config (RuntimeConfigResponse | Unset):
-            runtime_preset (str | Unset):
-            scheduling_mode (str | Unset):
-            smart_allow_community (bool | Unset):
-            smart_allow_spot (bool | Unset):
-            smart_current_gpu (CatalogGPUResponse | Unset):
-            smart_current_price_per_hour_eur (float | Unset):
-            smart_max_price_per_hour_eur (float | Unset):
-            smart_min_gpu_class (str | Unset):
-            smart_min_total_tflops (float | Unset):
-            smart_provider_filter_mode (str | Unset):
-            smart_provider_preference (str | Unset):
-            smart_recommended_max_price_per_hour_eur (float | Unset):
-            smart_region (str | Unset):
-            smart_regions (list[str] | Unset):
-            smart_selection_label (str | Unset):
-            warnings (list[str] | Unset):
-            workload_kind (str | Unset):
-     """
+    """
+    Attributes:
+        capacity_tier (str | Unset):
+        compatible_gpus (list[CatalogGPUResponse] | Unset):
+        estimate (RuntimeMemoryEstimateResponse | Unset):
+        huggingface_repo_id (str | Unset):
+        max_context_size (int | Unset):
+        recommended_gpu (CatalogGPUResponse | Unset):
+        runtime_config (RuntimeConfigResponse | Unset):
+        runtime_preset (str | Unset):
+        scheduling_mode (str | Unset):
+        smart_allow_community (bool | Unset):
+        smart_allow_spot (bool | Unset):
+        smart_current_gpu (CatalogGPUResponse | Unset):
+        smart_current_price_per_hour_eur (float | Unset):
+        smart_max_price_per_hour_eur (float | Unset):
+        smart_min_gpu_class (str | Unset):
+        smart_min_total_tflops (float | Unset):
+        smart_provider_filter_mode (str | Unset):
+        smart_provider_preference (str | Unset):
+        smart_recommended_max_price_per_hour_eur (float | Unset):
+        smart_region (str | Unset):
+        smart_regions (list[str] | Unset):
+        smart_selection_label (str | Unset):
+        warnings (list[str] | Unset):
+        workload_kind (str | Unset):
+    """
 
     capacity_tier: str | Unset = UNSET
     compatible_gpus: list[CatalogGPUResponse] | Unset = UNSET
@@ -77,10 +73,6 @@ class PreviewInstanceResponse:
     workload_kind: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         capacity_tier = self.capacity_tier
 
@@ -90,8 +82,6 @@ class PreviewInstanceResponse:
             for compatible_gpus_item_data in self.compatible_gpus:
                 compatible_gpus_item = compatible_gpus_item_data.to_dict()
                 compatible_gpus.append(compatible_gpus_item)
-
-
 
         estimate: dict[str, Any] | Unset = UNSET
         if not isinstance(self.estimate, Unset):
@@ -141,23 +131,17 @@ class PreviewInstanceResponse:
         if not isinstance(self.smart_regions, Unset):
             smart_regions = self.smart_regions
 
-
-
         smart_selection_label = self.smart_selection_label
 
         warnings: list[str] | Unset = UNSET
         if not isinstance(self.warnings, Unset):
             warnings = self.warnings
 
-
-
         workload_kind = self.workload_kind
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if capacity_tier is not UNSET:
             field_dict["capacity_tier"] = capacity_tier
         if compatible_gpus is not UNSET:
@@ -209,13 +193,12 @@ class PreviewInstanceResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.catalog_gpu_response import CatalogGPUResponse
         from ..models.runtime_config_response import RuntimeConfigResponse
         from ..models.runtime_memory_estimate_response import RuntimeMemoryEstimateResponse
+
         d = dict(src_dict)
         capacity_tier = d.pop("capacity_tier", UNSET)
 
@@ -226,20 +209,14 @@ class PreviewInstanceResponse:
             for compatible_gpus_item_data in _compatible_gpus:
                 compatible_gpus_item = CatalogGPUResponse.from_dict(compatible_gpus_item_data)
 
-
-
                 compatible_gpus.append(compatible_gpus_item)
-
 
         _estimate = d.pop("estimate", UNSET)
         estimate: RuntimeMemoryEstimateResponse | Unset
-        if isinstance(_estimate,  Unset):
+        if isinstance(_estimate, Unset):
             estimate = UNSET
         else:
             estimate = RuntimeMemoryEstimateResponse.from_dict(_estimate)
-
-
-
 
         huggingface_repo_id = d.pop("huggingface_repo_id", UNSET)
 
@@ -247,23 +224,17 @@ class PreviewInstanceResponse:
 
         _recommended_gpu = d.pop("recommended_gpu", UNSET)
         recommended_gpu: CatalogGPUResponse | Unset
-        if isinstance(_recommended_gpu,  Unset):
+        if isinstance(_recommended_gpu, Unset):
             recommended_gpu = UNSET
         else:
             recommended_gpu = CatalogGPUResponse.from_dict(_recommended_gpu)
 
-
-
-
         _runtime_config = d.pop("runtime_config", UNSET)
         runtime_config: RuntimeConfigResponse | Unset
-        if isinstance(_runtime_config,  Unset):
+        if isinstance(_runtime_config, Unset):
             runtime_config = UNSET
         else:
             runtime_config = RuntimeConfigResponse.from_dict(_runtime_config)
-
-
-
 
         runtime_preset = d.pop("runtime_preset", UNSET)
 
@@ -275,13 +246,10 @@ class PreviewInstanceResponse:
 
         _smart_current_gpu = d.pop("smart_current_gpu", UNSET)
         smart_current_gpu: CatalogGPUResponse | Unset
-        if isinstance(_smart_current_gpu,  Unset):
+        if isinstance(_smart_current_gpu, Unset):
             smart_current_gpu = UNSET
         else:
             smart_current_gpu = CatalogGPUResponse.from_dict(_smart_current_gpu)
-
-
-
 
         smart_current_price_per_hour_eur = d.pop("smart_current_price_per_hour_eur", UNSET)
 
@@ -301,11 +269,9 @@ class PreviewInstanceResponse:
 
         smart_regions = cast(list[str], d.pop("smart_regions", UNSET))
 
-
         smart_selection_label = d.pop("smart_selection_label", UNSET)
 
         warnings = cast(list[str], d.pop("warnings", UNSET))
-
 
         workload_kind = d.pop("workload_kind", UNSET)
 
@@ -335,7 +301,6 @@ class PreviewInstanceResponse:
             warnings=warnings,
             workload_kind=workload_kind,
         )
-
 
         preview_instance_response.additional_properties = d
         return preview_instance_response

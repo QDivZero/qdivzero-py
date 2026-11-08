@@ -11,39 +11,38 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="UpdateVectorDatabaseRequest")
 
 
-
 @_attrs_define
 class UpdateVectorDatabaseRequest:
-    """ 
-        Attributes:
-            description (str | Unset):
-            name (str | Unset):
-            slug (str | Unset):
-     """
+    """
+    Attributes:
+        description (str | Unset):
+        embedding_serving_name (str | Unset):
+        name (str | Unset):
+        slug (str | Unset):
+    """
 
     description: str | Unset = UNSET
+    embedding_serving_name: str | Unset = UNSET
     name: str | Unset = UNSET
     slug: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         description = self.description
+
+        embedding_serving_name = self.embedding_serving_name
 
         name = self.name
 
         slug = self.slug
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if description is not UNSET:
             field_dict["description"] = description
+        if embedding_serving_name is not UNSET:
+            field_dict["embedding_serving_name"] = embedding_serving_name
         if name is not UNSET:
             field_dict["name"] = name
         if slug is not UNSET:
@@ -51,12 +50,12 @@ class UpdateVectorDatabaseRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         description = d.pop("description", UNSET)
+
+        embedding_serving_name = d.pop("embedding_serving_name", UNSET)
 
         name = d.pop("name", UNSET)
 
@@ -64,10 +63,10 @@ class UpdateVectorDatabaseRequest:
 
         update_vector_database_request = cls(
             description=description,
+            embedding_serving_name=embedding_serving_name,
             name=name,
             slug=slug,
         )
-
 
         update_vector_database_request.additional_properties = d
         return update_vector_database_request

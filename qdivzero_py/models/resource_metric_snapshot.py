@@ -11,108 +11,152 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ResourceMetricSnapshot")
 
 
-
 @_attrs_define
 class ResourceMetricSnapshot:
-    """ 
-        Attributes:
-            cpu_utilization_percent (float | Unset):
-            disk_utilization_percent (float | Unset):
-            gpu_memory_utilization_percent (float | Unset):
-            gpu_power_watts (float | Unset):
-            gpu_temperature_celsius (float | Unset):
-            gpu_utilization_percent (float | Unset):
-            memory_utilization_percent (float | Unset):
-            sampled_at (str | Unset):
-     """
+    """
+    Attributes:
+        e2e_request_latency_p95_seconds (float | Unset):
+        generation_tokens_per_second (float | Unset):
+        generation_tokens_total (float | Unset):
+        inter_token_latency_p95_seconds (float | Unset):
+        kv_cache_usage_percent (float | Unset):
+        prefix_cache_hit_percent (float | Unset):
+        prompt_tokens_per_second (float | Unset):
+        prompt_tokens_total (float | Unset):
+        requests_running (float | Unset):
+        requests_waiting (float | Unset):
+        runtime_cpu_seconds_per_second (float | Unset):
+        runtime_memory_bytes (float | Unset):
+        sampled_at (str | Unset):
+        time_to_first_token_p95_seconds (float | Unset):
+    """
 
-    cpu_utilization_percent: float | Unset = UNSET
-    disk_utilization_percent: float | Unset = UNSET
-    gpu_memory_utilization_percent: float | Unset = UNSET
-    gpu_power_watts: float | Unset = UNSET
-    gpu_temperature_celsius: float | Unset = UNSET
-    gpu_utilization_percent: float | Unset = UNSET
-    memory_utilization_percent: float | Unset = UNSET
+    e2e_request_latency_p95_seconds: float | Unset = UNSET
+    generation_tokens_per_second: float | Unset = UNSET
+    generation_tokens_total: float | Unset = UNSET
+    inter_token_latency_p95_seconds: float | Unset = UNSET
+    kv_cache_usage_percent: float | Unset = UNSET
+    prefix_cache_hit_percent: float | Unset = UNSET
+    prompt_tokens_per_second: float | Unset = UNSET
+    prompt_tokens_total: float | Unset = UNSET
+    requests_running: float | Unset = UNSET
+    requests_waiting: float | Unset = UNSET
+    runtime_cpu_seconds_per_second: float | Unset = UNSET
+    runtime_memory_bytes: float | Unset = UNSET
     sampled_at: str | Unset = UNSET
+    time_to_first_token_p95_seconds: float | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        cpu_utilization_percent = self.cpu_utilization_percent
+        e2e_request_latency_p95_seconds = self.e2e_request_latency_p95_seconds
 
-        disk_utilization_percent = self.disk_utilization_percent
+        generation_tokens_per_second = self.generation_tokens_per_second
 
-        gpu_memory_utilization_percent = self.gpu_memory_utilization_percent
+        generation_tokens_total = self.generation_tokens_total
 
-        gpu_power_watts = self.gpu_power_watts
+        inter_token_latency_p95_seconds = self.inter_token_latency_p95_seconds
 
-        gpu_temperature_celsius = self.gpu_temperature_celsius
+        kv_cache_usage_percent = self.kv_cache_usage_percent
 
-        gpu_utilization_percent = self.gpu_utilization_percent
+        prefix_cache_hit_percent = self.prefix_cache_hit_percent
 
-        memory_utilization_percent = self.memory_utilization_percent
+        prompt_tokens_per_second = self.prompt_tokens_per_second
+
+        prompt_tokens_total = self.prompt_tokens_total
+
+        requests_running = self.requests_running
+
+        requests_waiting = self.requests_waiting
+
+        runtime_cpu_seconds_per_second = self.runtime_cpu_seconds_per_second
+
+        runtime_memory_bytes = self.runtime_memory_bytes
 
         sampled_at = self.sampled_at
 
+        time_to_first_token_p95_seconds = self.time_to_first_token_p95_seconds
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
-        if cpu_utilization_percent is not UNSET:
-            field_dict["cpu_utilization_percent"] = cpu_utilization_percent
-        if disk_utilization_percent is not UNSET:
-            field_dict["disk_utilization_percent"] = disk_utilization_percent
-        if gpu_memory_utilization_percent is not UNSET:
-            field_dict["gpu_memory_utilization_percent"] = gpu_memory_utilization_percent
-        if gpu_power_watts is not UNSET:
-            field_dict["gpu_power_watts"] = gpu_power_watts
-        if gpu_temperature_celsius is not UNSET:
-            field_dict["gpu_temperature_celsius"] = gpu_temperature_celsius
-        if gpu_utilization_percent is not UNSET:
-            field_dict["gpu_utilization_percent"] = gpu_utilization_percent
-        if memory_utilization_percent is not UNSET:
-            field_dict["memory_utilization_percent"] = memory_utilization_percent
+        field_dict.update({})
+        if e2e_request_latency_p95_seconds is not UNSET:
+            field_dict["e2e_request_latency_p95_seconds"] = e2e_request_latency_p95_seconds
+        if generation_tokens_per_second is not UNSET:
+            field_dict["generation_tokens_per_second"] = generation_tokens_per_second
+        if generation_tokens_total is not UNSET:
+            field_dict["generation_tokens_total"] = generation_tokens_total
+        if inter_token_latency_p95_seconds is not UNSET:
+            field_dict["inter_token_latency_p95_seconds"] = inter_token_latency_p95_seconds
+        if kv_cache_usage_percent is not UNSET:
+            field_dict["kv_cache_usage_percent"] = kv_cache_usage_percent
+        if prefix_cache_hit_percent is not UNSET:
+            field_dict["prefix_cache_hit_percent"] = prefix_cache_hit_percent
+        if prompt_tokens_per_second is not UNSET:
+            field_dict["prompt_tokens_per_second"] = prompt_tokens_per_second
+        if prompt_tokens_total is not UNSET:
+            field_dict["prompt_tokens_total"] = prompt_tokens_total
+        if requests_running is not UNSET:
+            field_dict["requests_running"] = requests_running
+        if requests_waiting is not UNSET:
+            field_dict["requests_waiting"] = requests_waiting
+        if runtime_cpu_seconds_per_second is not UNSET:
+            field_dict["runtime_cpu_seconds_per_second"] = runtime_cpu_seconds_per_second
+        if runtime_memory_bytes is not UNSET:
+            field_dict["runtime_memory_bytes"] = runtime_memory_bytes
         if sampled_at is not UNSET:
             field_dict["sampled_at"] = sampled_at
+        if time_to_first_token_p95_seconds is not UNSET:
+            field_dict["time_to_first_token_p95_seconds"] = time_to_first_token_p95_seconds
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        cpu_utilization_percent = d.pop("cpu_utilization_percent", UNSET)
+        e2e_request_latency_p95_seconds = d.pop("e2e_request_latency_p95_seconds", UNSET)
 
-        disk_utilization_percent = d.pop("disk_utilization_percent", UNSET)
+        generation_tokens_per_second = d.pop("generation_tokens_per_second", UNSET)
 
-        gpu_memory_utilization_percent = d.pop("gpu_memory_utilization_percent", UNSET)
+        generation_tokens_total = d.pop("generation_tokens_total", UNSET)
 
-        gpu_power_watts = d.pop("gpu_power_watts", UNSET)
+        inter_token_latency_p95_seconds = d.pop("inter_token_latency_p95_seconds", UNSET)
 
-        gpu_temperature_celsius = d.pop("gpu_temperature_celsius", UNSET)
+        kv_cache_usage_percent = d.pop("kv_cache_usage_percent", UNSET)
 
-        gpu_utilization_percent = d.pop("gpu_utilization_percent", UNSET)
+        prefix_cache_hit_percent = d.pop("prefix_cache_hit_percent", UNSET)
 
-        memory_utilization_percent = d.pop("memory_utilization_percent", UNSET)
+        prompt_tokens_per_second = d.pop("prompt_tokens_per_second", UNSET)
+
+        prompt_tokens_total = d.pop("prompt_tokens_total", UNSET)
+
+        requests_running = d.pop("requests_running", UNSET)
+
+        requests_waiting = d.pop("requests_waiting", UNSET)
+
+        runtime_cpu_seconds_per_second = d.pop("runtime_cpu_seconds_per_second", UNSET)
+
+        runtime_memory_bytes = d.pop("runtime_memory_bytes", UNSET)
 
         sampled_at = d.pop("sampled_at", UNSET)
 
-        resource_metric_snapshot = cls(
-            cpu_utilization_percent=cpu_utilization_percent,
-            disk_utilization_percent=disk_utilization_percent,
-            gpu_memory_utilization_percent=gpu_memory_utilization_percent,
-            gpu_power_watts=gpu_power_watts,
-            gpu_temperature_celsius=gpu_temperature_celsius,
-            gpu_utilization_percent=gpu_utilization_percent,
-            memory_utilization_percent=memory_utilization_percent,
-            sampled_at=sampled_at,
-        )
+        time_to_first_token_p95_seconds = d.pop("time_to_first_token_p95_seconds", UNSET)
 
+        resource_metric_snapshot = cls(
+            e2e_request_latency_p95_seconds=e2e_request_latency_p95_seconds,
+            generation_tokens_per_second=generation_tokens_per_second,
+            generation_tokens_total=generation_tokens_total,
+            inter_token_latency_p95_seconds=inter_token_latency_p95_seconds,
+            kv_cache_usage_percent=kv_cache_usage_percent,
+            prefix_cache_hit_percent=prefix_cache_hit_percent,
+            prompt_tokens_per_second=prompt_tokens_per_second,
+            prompt_tokens_total=prompt_tokens_total,
+            requests_running=requests_running,
+            requests_waiting=requests_waiting,
+            runtime_cpu_seconds_per_second=runtime_cpu_seconds_per_second,
+            runtime_memory_bytes=runtime_memory_bytes,
+            sampled_at=sampled_at,
+            time_to_first_token_p95_seconds=time_to_first_token_p95_seconds,
+        )
 
         resource_metric_snapshot.additional_properties = d
         return resource_metric_snapshot

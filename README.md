@@ -40,20 +40,20 @@ for m in getattr(response.parsed, "memberships", None) or []:
 
 ## Authentication
 
-Tokens come first: an API key, access token, and refresh token can each be
-supplied, and a configured access token takes precedence over the API key when
-sending the `Authorization: Bearer <token>` header.
+API keys are recommended for programmatic access. A configured session access
+cookie takes precedence over the API key.
 
 - `QDivZero(api_key="...")` sends the API key as `Authorization: Bearer <key>`.
 - `QDivZero(access_token="...")` / `QDivZero(refresh_token="...")` pre-configure
-  bearer tokens without logging in.
+  session-cookie values without logging in.
 - `qd.login(email, password)` authenticates with credentials and stores the
-  access and refresh tokens.
+  access and refresh cookies. It raises an error when further verification is
+  required.
 - When a request fails with `401`, the client transparently refreshes the
-  access token (using the refresh token, or re-logging in with stored
+  session (using the refresh cookie, or re-logging in with stored
   credentials) and retries the request once. Concurrent 401s trigger a single
   refresh. This is implemented as an `httpx.Auth` flow.
-- `qd.refresh()` forces a token refresh.
+- `qd.refresh()` forces a session refresh.
 
 ## Credentials file
 
@@ -71,7 +71,7 @@ If `~/.qdivzero/credentials` exists, the client loads it automatically on
 ```
 
 `email`/`password` enable on-demand login; `access_token`/`refresh_token`
-authenticate directly. Explicit constructor options override file values. Pass
+provide session-cookie values. Explicit constructor options override file values. Pass
 `load_credentials_file=False` to disable auto-loading. Keep the file private
 (`chmod 600 ~/.qdivzero/credentials`) and never commit it.
 
@@ -90,14 +90,14 @@ workflow (daily at 06:00 UTC, or manually via *Actions → update → Run
 workflow*). The upstream spec snapshot is committed at `api/openapi.json`, and
 generation is driven by `api/opc-config.yaml`.
 
-**`qdivzero_py/` is generated — do not edit it by hand** (only
-`qdivzero_py/__init__.py` is hand-written and preserved). A new release tag
+**`qdivzero_py/` is generated — do not edit it by hand** except for the
+hand-written `qdivzero_py/__init__.py` and `qdivzero_py/auth.py`, which the
+update script preserves. A new release tag
 (`v1.0.<n>`) is published on every change.
 
-Known limitation: the PDF invoice response of
-`GET /billing/payments/{paymentID}/invoice.pdf` is not generated (the operation
-only returns the documented error statuses), so use the endpoint directly with
-`httpx` if you need the invoice binary.
+Known limitation: the generator omits the successful binary responses for
+`GET /v1/billing/payments/{paymentID}/invoice.pdf` and `POST /v1/videos`.
+Use the endpoints directly with `httpx` when those binary responses are needed.
 
 ## Development
 

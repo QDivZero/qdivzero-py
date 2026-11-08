@@ -14,18 +14,12 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: RegisterRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/auth/register",
+        "url": "/v1/auth/register",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -36,33 +30,26 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | RegisterResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | RegisterResponse | None:
     if response.status_code == 201:
         response_201 = RegisterResponse.from_dict(response.json())
-
-
 
         return response_201
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 409:
         response_409 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_409
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -72,7 +59,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | RegisterResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | RegisterResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -85,11 +74,12 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: RegisterRequest,
-
 ) -> Response[ErrorResponse | RegisterResponse]:
-    """ Register a new user
+    """Register a new user
 
-     Creates a new account using email and password credentials.
+     Creates a pending account using email and password credentials. Email verification is required;
+    registration does not issue session tokens or cookies, and the JSON response contains no access or
+    refresh token values.
 
     Args:
         body (RegisterRequest):
@@ -100,12 +90,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | RegisterResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
     response = client.get_httpx_client().request(
@@ -114,15 +102,17 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: RegisterRequest,
-
 ) -> ErrorResponse | RegisterResponse | None:
-    """ Register a new user
+    """Register a new user
 
-     Creates a new account using email and password credentials.
+     Creates a pending account using email and password credentials. Email verification is required;
+    registration does not issue session tokens or cookies, and the JSON response contains no access or
+    refresh token values.
 
     Args:
         body (RegisterRequest):
@@ -133,24 +123,24 @@ def sync(
 
     Returns:
         ErrorResponse | RegisterResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: RegisterRequest,
-
 ) -> Response[ErrorResponse | RegisterResponse]:
-    """ Register a new user
+    """Register a new user
 
-     Creates a new account using email and password credentials.
+     Creates a pending account using email and password credentials. Email verification is required;
+    registration does not issue session tokens or cookies, and the JSON response contains no access or
+    refresh token values.
 
     Args:
         body (RegisterRequest):
@@ -161,29 +151,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | RegisterResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: RegisterRequest,
-
 ) -> ErrorResponse | RegisterResponse | None:
-    """ Register a new user
+    """Register a new user
 
-     Creates a new account using email and password credentials.
+     Creates a pending account using email and password credentials. Email verification is required;
+    registration does not issue session tokens or cookies, and the JSON response contains no access or
+    refresh token values.
 
     Args:
         body (RegisterRequest):
@@ -194,11 +182,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | RegisterResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+        )
+    ).parsed

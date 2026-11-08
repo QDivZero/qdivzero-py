@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="DebitBalanceResponse")
 
 
-
 @_attrs_define
 class DebitBalanceResponse:
-    """ 
-        Attributes:
-            new_balance (float | Unset):
-            success (bool | Unset):
-     """
+    """
+    Attributes:
+        new_balance (float | Unset):
+        success (bool | Unset):
+    """
 
     new_balance: float | Unset = UNSET
     success: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         new_balance = self.new_balance
 
         success = self.success
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if new_balance is not UNSET:
             field_dict["new_balance"] = new_balance
         if success is not UNSET:
             field_dict["success"] = success
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class DebitBalanceResponse:
             new_balance=new_balance,
             success=success,
         )
-
 
         debit_balance_response.additional_properties = d
         return debit_balance_response

@@ -9,30 +9,26 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.model import Model
-  from ..models.pricing_service import PricingService
-
-
-
+    from ..models.model import Model
+    from ..models.pricing_service import PricingService
 
 
 T = TypeVar("T", bound="ModelPricesResponse")
 
 
-
 @_attrs_define
 class ModelPricesResponse:
-    """ 
-        Attributes:
-            models (list[Model] | Unset):
-            query (str | Unset):
-            services (list[PricingService] | Unset):
-            source (str | Unset):
-            source_status (str | Unset):
-            stale (bool | Unset):
-            updated_at (str | Unset):
-            version (int | Unset):
-     """
+    """
+    Attributes:
+        models (list[Model] | Unset):
+        query (str | Unset):
+        services (list[PricingService] | Unset):
+        source (str | Unset):
+        source_status (str | Unset):
+        stale (bool | Unset):
+        updated_at (str | Unset):
+        version (int | Unset):
+    """
 
     models: list[Model] | Unset = UNSET
     query: str | Unset = UNSET
@@ -44,10 +40,6 @@ class ModelPricesResponse:
     version: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         models: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.models, Unset):
@@ -55,8 +47,6 @@ class ModelPricesResponse:
             for models_item_data in self.models:
                 models_item = models_item_data.to_dict()
                 models.append(models_item)
-
-
 
         query = self.query
 
@@ -66,8 +56,6 @@ class ModelPricesResponse:
             for services_item_data in self.services:
                 services_item = services_item_data.to_dict()
                 services.append(services_item)
-
-
 
         source = self.source
 
@@ -79,11 +67,9 @@ class ModelPricesResponse:
 
         version = self.version
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if models is not UNSET:
             field_dict["models"] = models
         if query is not UNSET:
@@ -103,12 +89,11 @@ class ModelPricesResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.model import Model
         from ..models.pricing_service import PricingService
+
         d = dict(src_dict)
         _models = d.pop("models", UNSET)
         models: list[Model] | Unset = UNSET
@@ -117,10 +102,7 @@ class ModelPricesResponse:
             for models_item_data in _models:
                 models_item = Model.from_dict(models_item_data)
 
-
-
                 models.append(models_item)
-
 
         query = d.pop("query", UNSET)
 
@@ -131,10 +113,7 @@ class ModelPricesResponse:
             for services_item_data in _services:
                 services_item = PricingService.from_dict(services_item_data)
 
-
-
                 services.append(services_item)
-
 
         source = d.pop("source", UNSET)
 
@@ -156,7 +135,6 @@ class ModelPricesResponse:
             updated_at=updated_at,
             version=version,
         )
-
 
         model_prices_response.additional_properties = d
         return model_prices_response

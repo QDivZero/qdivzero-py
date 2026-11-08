@@ -14,18 +14,12 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: UpdateAccountRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/accounts/current",
+        "url": "/v1/accounts/current",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -36,19 +30,16 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> AccountResponse | ErrorResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> AccountResponse | ErrorResponse | str | None:
     if response.status_code == 200:
         response_200 = AccountResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -59,21 +50,15 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 403:
         response_403 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -83,7 +68,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[AccountResponse | ErrorResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[AccountResponse | ErrorResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -96,9 +83,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateAccountRequest,
-
 ) -> Response[AccountResponse | ErrorResponse | str]:
-    """ Update the selected account
+    """Update the selected account
 
      Updates editable metadata for the active account context.
 
@@ -111,12 +97,10 @@ def sync_detailed(
 
     Returns:
         Response[AccountResponse | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
     response = client.get_httpx_client().request(
@@ -125,13 +109,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     body: UpdateAccountRequest,
-
 ) -> AccountResponse | ErrorResponse | str | None:
-    """ Update the selected account
+    """Update the selected account
 
      Updates editable metadata for the active account context.
 
@@ -144,22 +128,20 @@ def sync(
 
     Returns:
         AccountResponse | ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateAccountRequest,
-
 ) -> Response[AccountResponse | ErrorResponse | str]:
-    """ Update the selected account
+    """Update the selected account
 
      Updates editable metadata for the active account context.
 
@@ -172,27 +154,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[AccountResponse | ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     body: UpdateAccountRequest,
-
 ) -> AccountResponse | ErrorResponse | str | None:
-    """ Update the selected account
+    """Update the selected account
 
      Updates editable metadata for the active account context.
 
@@ -205,11 +183,11 @@ async def asyncio(
 
     Returns:
         AccountResponse | ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+        )
+    ).parsed

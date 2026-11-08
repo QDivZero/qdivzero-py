@@ -1,64 +1,76 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="UserInfoResponse")
+if TYPE_CHECKING:
+    from ..models.impersonation_info import ImpersonationInfo
 
+
+T = TypeVar("T", bound="UserInfoResponse")
 
 
 @_attrs_define
 class UserInfoResponse:
-    """ 
-        Attributes:
-            email (str | Unset):
-            user_id (str | Unset):
-     """
+    """
+    Attributes:
+        email (str | Unset):
+        impersonating (ImpersonationInfo | Unset):
+        user_id (str | Unset):
+    """
 
     email: str | Unset = UNSET
+    impersonating: ImpersonationInfo | Unset = UNSET
     user_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         email = self.email
 
-        user_id = self.user_id
+        impersonating: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.impersonating, Unset):
+            impersonating = self.impersonating.to_dict()
 
+        user_id = self.user_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if email is not UNSET:
             field_dict["email"] = email
+        if impersonating is not UNSET:
+            field_dict["impersonating"] = impersonating
         if user_id is not UNSET:
             field_dict["user_id"] = user_id
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.impersonation_info import ImpersonationInfo
+
         d = dict(src_dict)
         email = d.pop("email", UNSET)
+
+        _impersonating = d.pop("impersonating", UNSET)
+        impersonating: ImpersonationInfo | Unset
+        if isinstance(_impersonating, Unset):
+            impersonating = UNSET
+        else:
+            impersonating = ImpersonationInfo.from_dict(_impersonating)
 
         user_id = d.pop("user_id", UNSET)
 
         user_info_response = cls(
             email=email,
+            impersonating=impersonating,
             user_id=user_id,
         )
-
 
         user_info_response.additional_properties = d
         return user_info_response

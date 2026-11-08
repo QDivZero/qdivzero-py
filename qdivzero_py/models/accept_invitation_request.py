@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="AcceptInvitationRequest")
 
 
-
 @_attrs_define
 class AcceptInvitationRequest:
-    """ 
-        Attributes:
-            invitation_id (str | Unset):
-            token (str | Unset):
-     """
+    """
+    Attributes:
+        invitation_id (str | Unset):
+        token (str | Unset):
+    """
 
     invitation_id: str | Unset = UNSET
     token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         invitation_id = self.invitation_id
 
         token = self.token
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if invitation_id is not UNSET:
             field_dict["invitation_id"] = invitation_id
         if token is not UNSET:
             field_dict["token"] = token
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class AcceptInvitationRequest:
             invitation_id=invitation_id,
             token=token,
         )
-
 
         accept_invitation_request.additional_properties = d
         return accept_invitation_request

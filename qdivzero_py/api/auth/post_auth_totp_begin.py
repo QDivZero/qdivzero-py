@@ -10,51 +10,36 @@ from ...models.error_response import ErrorResponse
 from ...types import Response
 
 
-def _get_kwargs(
-    
-) -> dict[str, Any]:
-    
-
-    
-
-    
+def _get_kwargs() -> dict[str, Any]:
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/auth/totp/begin",
+        "url": "/v1/auth/totp/begin",
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> BeginTotpEnrollmentResponse | ErrorResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> BeginTotpEnrollmentResponse | ErrorResponse | None:
     if response.status_code == 200:
         response_200 = BeginTotpEnrollmentResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -64,7 +49,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[BeginTotpEnrollmentResponse | ErrorResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[BeginTotpEnrollmentResponse | ErrorResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,9 +63,8 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[BeginTotpEnrollmentResponse | ErrorResponse]:
-    """ Start TOTP enrollment
+    """Start TOTP enrollment
 
      Returns a new TOTP secret and otpauth URI for the authenticated user.
 
@@ -88,12 +74,9 @@ def sync_detailed(
 
     Returns:
         Response[BeginTotpEnrollmentResponse | ErrorResponse]
-     """
+    """
 
-
-    kwargs = _get_kwargs(
-        
-    )
+    kwargs = _get_kwargs()
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -101,12 +84,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
-
 ) -> BeginTotpEnrollmentResponse | ErrorResponse | None:
-    """ Start TOTP enrollment
+    """Start TOTP enrollment
 
      Returns a new TOTP secret and otpauth URI for the authenticated user.
 
@@ -116,20 +99,18 @@ def sync(
 
     Returns:
         BeginTotpEnrollmentResponse | ErrorResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[BeginTotpEnrollmentResponse | ErrorResponse]:
-    """ Start TOTP enrollment
+    """Start TOTP enrollment
 
      Returns a new TOTP secret and otpauth URI for the authenticated user.
 
@@ -139,25 +120,20 @@ async def asyncio_detailed(
 
     Returns:
         Response[BeginTotpEnrollmentResponse | ErrorResponse]
-     """
+    """
 
+    kwargs = _get_kwargs()
 
-    kwargs = _get_kwargs(
-        
-    )
-
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
-
 ) -> BeginTotpEnrollmentResponse | ErrorResponse | None:
-    """ Start TOTP enrollment
+    """Start TOTP enrollment
 
      Returns a new TOTP secret and otpauth URI for the authenticated user.
 
@@ -167,10 +143,10 @@ async def asyncio(
 
     Returns:
         BeginTotpEnrollmentResponse | ErrorResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+        )
+    ).parsed

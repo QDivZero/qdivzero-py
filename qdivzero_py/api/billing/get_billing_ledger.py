@@ -14,11 +14,7 @@ def _get_kwargs(
     *,
     limit: int | Unset = 20,
     offset: int | Unset = 0,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
@@ -26,33 +22,27 @@ def _get_kwargs(
 
     params["offset"] = offset
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/billing/ledger",
+        "url": "/v1/billing/ledger",
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | LedgerHistoryResponse | str | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | LedgerHistoryResponse | str | None:
     if response.status_code == 200:
         response_200 = LedgerHistoryResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_400
 
@@ -63,8 +53,6 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_500
 
     if client.raise_on_unexpected_status:
@@ -73,7 +61,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | LedgerHistoryResponse | str]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | LedgerHistoryResponse | str]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -87,9 +77,8 @@ def sync_detailed(
     client: AuthenticatedClient,
     limit: int | Unset = 20,
     offset: int | Unset = 0,
-
 ) -> Response[ErrorResponse | LedgerHistoryResponse | str]:
-    """ List ledger entries
+    """List ledger entries
 
      Returns ledger movements for the authenticated account.
 
@@ -103,13 +92,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | LedgerHistoryResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         limit=limit,
-offset=offset,
-
+        offset=offset,
     )
 
     response = client.get_httpx_client().request(
@@ -118,14 +105,14 @@ offset=offset,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     limit: int | Unset = 20,
     offset: int | Unset = 0,
-
 ) -> ErrorResponse | LedgerHistoryResponse | str | None:
-    """ List ledger entries
+    """List ledger entries
 
      Returns ledger movements for the authenticated account.
 
@@ -139,24 +126,22 @@ def sync(
 
     Returns:
         ErrorResponse | LedgerHistoryResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-limit=limit,
-offset=offset,
-
+        limit=limit,
+        offset=offset,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     limit: int | Unset = 20,
     offset: int | Unset = 0,
-
 ) -> Response[ErrorResponse | LedgerHistoryResponse | str]:
-    """ List ledger entries
+    """List ledger entries
 
      Returns ledger movements for the authenticated account.
 
@@ -170,29 +155,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | LedgerHistoryResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         limit=limit,
-offset=offset,
-
+        offset=offset,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     limit: int | Unset = 20,
     offset: int | Unset = 0,
-
 ) -> ErrorResponse | LedgerHistoryResponse | str | None:
-    """ List ledger entries
+    """List ledger entries
 
      Returns ledger movements for the authenticated account.
 
@@ -206,12 +187,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | LedgerHistoryResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-limit=limit,
-offset=offset,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            limit=limit,
+            offset=offset,
+        )
+    ).parsed

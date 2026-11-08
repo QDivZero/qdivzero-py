@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="VariantTranslation")
 
 
-
 @_attrs_define
 class VariantTranslation:
-    """ 
-        Attributes:
-            description (str | Unset):
-            locale (str | Unset):
-            name (str | Unset):
-     """
+    """
+    Attributes:
+        description (str | Unset):
+        locale (str | Unset):
+        name (str | Unset):
+    """
 
     description: str | Unset = UNSET
     locale: str | Unset = UNSET
     name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         description = self.description
@@ -37,11 +32,9 @@ class VariantTranslation:
 
         name = self.name
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if description is not UNSET:
             field_dict["description"] = description
         if locale is not UNSET:
@@ -50,8 +43,6 @@ class VariantTranslation:
             field_dict["name"] = name
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class VariantTranslation:
             locale=locale,
             name=name,
         )
-
 
         variant_translation.additional_properties = d
         return variant_translation

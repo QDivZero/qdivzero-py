@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="PublicPricingAvailability")
 
 
-
 @_attrs_define
 class PublicPricingAvailability:
-    """ 
-        Attributes:
-            count (int | Unset):
-            status (str | Unset):
-            total (int | Unset):
-     """
+    """
+    Attributes:
+        count (int | Unset):
+        status (str | Unset):
+        total (int | Unset):
+    """
 
     count: int | Unset = UNSET
     status: str | Unset = UNSET
     total: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         count = self.count
@@ -37,11 +32,9 @@ class PublicPricingAvailability:
 
         total = self.total
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if count is not UNSET:
             field_dict["count"] = count
         if status is not UNSET:
@@ -50,8 +43,6 @@ class PublicPricingAvailability:
             field_dict["total"] = total
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class PublicPricingAvailability:
             status=status,
             total=total,
         )
-
 
         public_pricing_availability.additional_properties = d
         return public_pricing_availability

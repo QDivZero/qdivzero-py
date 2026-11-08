@@ -9,43 +9,39 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.timestamp import Timestamp
-  from ..models.variant_translation import VariantTranslation
-
-
-
+    from ..models.timestamp import Timestamp
+    from ..models.variant_translation import VariantTranslation
 
 
 T = TypeVar("T", bound="Variant")
 
 
-
 @_attrs_define
 class Variant:
-    """ 
-        Attributes:
-            artifact_type (str | Unset):
-            created_at (Timestamp | Unset):
-            gguf_files (list[str] | Unset):
-            health_checked_at (Timestamp | Unset):
-            health_error (str | Unset):
-            health_status (str | Unset):
-            icon_url (str | Unset):
-            id (str | Unset):
-            is_active (bool | Unset):
-            max_context_tokens (int | Unset):
-            model_id (str | Unset):
-            ordering (int | Unset):
-            quantization (str | Unset):
-            recommended_preset (str | Unset):
-            revision (str | Unset):
-            stop_sequences (list[str] | Unset):
-            system_prompt (str | Unset):
-            temperature (float | Unset):
-            template_id (str | Unset):
-            translations (list[VariantTranslation] | Unset):
-            updated_at (Timestamp | Unset):
-     """
+    """
+    Attributes:
+        artifact_type (str | Unset):
+        created_at (Timestamp | Unset):
+        gguf_files (list[str] | Unset):
+        health_checked_at (Timestamp | Unset):
+        health_error (str | Unset):
+        health_status (str | Unset):
+        icon_url (str | Unset):
+        id (str | Unset):
+        is_active (bool | Unset):
+        max_context_tokens (int | Unset):
+        model_id (str | Unset):
+        ordering (int | Unset):
+        quantization (str | Unset):
+        recommended_preset (str | Unset):
+        revision (str | Unset):
+        stop_sequences (list[str] | Unset):
+        system_prompt (str | Unset):
+        temperature (float | Unset):
+        template_id (str | Unset):
+        translations (list[VariantTranslation] | Unset):
+        updated_at (Timestamp | Unset):
+    """
 
     artifact_type: str | Unset = UNSET
     created_at: Timestamp | Unset = UNSET
@@ -70,10 +66,6 @@ class Variant:
     updated_at: Timestamp | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         artifact_type = self.artifact_type
 
@@ -84,8 +76,6 @@ class Variant:
         gguf_files: list[str] | Unset = UNSET
         if not isinstance(self.gguf_files, Unset):
             gguf_files = self.gguf_files
-
-
 
         health_checked_at: dict[str, Any] | Unset = UNSET
         if not isinstance(self.health_checked_at, Unset):
@@ -117,8 +107,6 @@ class Variant:
         if not isinstance(self.stop_sequences, Unset):
             stop_sequences = self.stop_sequences
 
-
-
         system_prompt = self.system_prompt
 
         temperature = self.temperature
@@ -132,17 +120,13 @@ class Variant:
                 translations_item = translations_item_data.to_dict()
                 translations.append(translations_item)
 
-
-
         updated_at: dict[str, Any] | Unset = UNSET
         if not isinstance(self.updated_at, Unset):
             updated_at = self.updated_at.to_dict()
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if artifact_type is not UNSET:
             field_dict["artifact_type"] = artifact_type
         if created_at is not UNSET:
@@ -188,37 +172,29 @@ class Variant:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.timestamp import Timestamp
         from ..models.variant_translation import VariantTranslation
+
         d = dict(src_dict)
         artifact_type = d.pop("artifact_type", UNSET)
 
         _created_at = d.pop("created_at", UNSET)
         created_at: Timestamp | Unset
-        if isinstance(_created_at,  Unset):
+        if isinstance(_created_at, Unset):
             created_at = UNSET
         else:
             created_at = Timestamp.from_dict(_created_at)
 
-
-
-
         gguf_files = cast(list[str], d.pop("gguf_files", UNSET))
-
 
         _health_checked_at = d.pop("health_checked_at", UNSET)
         health_checked_at: Timestamp | Unset
-        if isinstance(_health_checked_at,  Unset):
+        if isinstance(_health_checked_at, Unset):
             health_checked_at = UNSET
         else:
             health_checked_at = Timestamp.from_dict(_health_checked_at)
-
-
-
 
         health_error = d.pop("health_error", UNSET)
 
@@ -244,7 +220,6 @@ class Variant:
 
         stop_sequences = cast(list[str], d.pop("stop_sequences", UNSET))
 
-
         system_prompt = d.pop("system_prompt", UNSET)
 
         temperature = d.pop("temperature", UNSET)
@@ -258,20 +233,14 @@ class Variant:
             for translations_item_data in _translations:
                 translations_item = VariantTranslation.from_dict(translations_item_data)
 
-
-
                 translations.append(translations_item)
-
 
         _updated_at = d.pop("updated_at", UNSET)
         updated_at: Timestamp | Unset
-        if isinstance(_updated_at,  Unset):
+        if isinstance(_updated_at, Unset):
             updated_at = UNSET
         else:
             updated_at = Timestamp.from_dict(_updated_at)
-
-
-
 
         variant = cls(
             artifact_type=artifact_type,
@@ -296,7 +265,6 @@ class Variant:
             translations=translations,
             updated_at=updated_at,
         )
-
 
         variant.additional_properties = d
         return variant

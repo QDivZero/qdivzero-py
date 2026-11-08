@@ -11,51 +11,26 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="RegisterResponse")
 
 
-
 @_attrs_define
 class RegisterResponse:
-    """ 
-        Attributes:
-            access_token (str | Unset):
-            access_token_expiry (int | Unset):
-            refresh_token (str | Unset):
-            requires_verification (bool | Unset):
-            user_id (str | Unset):
-     """
+    """
+    Attributes:
+        requires_verification (bool | Unset):
+        user_id (str | Unset):
+    """
 
-    access_token: str | Unset = UNSET
-    access_token_expiry: int | Unset = UNSET
-    refresh_token: str | Unset = UNSET
     requires_verification: bool | Unset = UNSET
     user_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        access_token = self.access_token
-
-        access_token_expiry = self.access_token_expiry
-
-        refresh_token = self.refresh_token
-
         requires_verification = self.requires_verification
 
         user_id = self.user_id
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
-        if access_token is not UNSET:
-            field_dict["access_token"] = access_token
-        if access_token_expiry is not UNSET:
-            field_dict["access_token_expiry"] = access_token_expiry
-        if refresh_token is not UNSET:
-            field_dict["refresh_token"] = refresh_token
+        field_dict.update({})
         if requires_verification is not UNSET:
             field_dict["requires_verification"] = requires_verification
         if user_id is not UNSET:
@@ -63,29 +38,17 @@ class RegisterResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        access_token = d.pop("access_token", UNSET)
-
-        access_token_expiry = d.pop("access_token_expiry", UNSET)
-
-        refresh_token = d.pop("refresh_token", UNSET)
-
         requires_verification = d.pop("requires_verification", UNSET)
 
         user_id = d.pop("user_id", UNSET)
 
         register_response = cls(
-            access_token=access_token,
-            access_token_expiry=access_token_expiry,
-            refresh_token=refresh_token,
             requires_verification=requires_verification,
             user_id=user_id,
         )
-
 
         register_response.additional_properties = d
         return register_response

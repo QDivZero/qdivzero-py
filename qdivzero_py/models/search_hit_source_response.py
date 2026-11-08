@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="SearchHitSourceResponse")
 
 
-
 @_attrs_define
 class SearchHitSourceResponse:
-    """ 
-        Attributes:
-            image_url (str | Unset):
-            text (str | Unset):
-            truncate (bool | Unset):
-     """
+    """
+    Attributes:
+        image_url (str | Unset):
+        text (str | Unset):
+        truncate (bool | Unset):
+    """
 
     image_url: str | Unset = UNSET
     text: str | Unset = UNSET
     truncate: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         image_url = self.image_url
@@ -37,11 +32,9 @@ class SearchHitSourceResponse:
 
         truncate = self.truncate
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if image_url is not UNSET:
             field_dict["image_url"] = image_url
         if text is not UNSET:
@@ -50,8 +43,6 @@ class SearchHitSourceResponse:
             field_dict["truncate"] = truncate
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class SearchHitSourceResponse:
             text=text,
             truncate=truncate,
         )
-
 
         search_hit_source_response.additional_properties = d
         return search_hit_source_response

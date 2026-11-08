@@ -13,19 +13,13 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     query: str | Unset = UNSET,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
     params["query"] = query
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -33,30 +27,24 @@ def _get_kwargs(
         "params": params,
     }
 
-
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | ModelPricesResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | ModelPricesResponse | None:
     if response.status_code == 200:
         response_200 = ModelPricesResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 502:
         response_502 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_502
 
     if response.status_code == 504:
         response_504 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_504
 
@@ -66,7 +54,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | ModelPricesResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | ModelPricesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,9 +69,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     query: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | ModelPricesResponse]:
-    """ Public model prices
+    """Public model prices
 
      Returns provider model pricing for cost comparison. No authentication required.
 
@@ -94,12 +83,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | ModelPricesResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         query=query,
-
     )
 
     response = client.get_httpx_client().request(
@@ -108,13 +95,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient | Client,
     query: str | Unset = UNSET,
-
 ) -> ErrorResponse | ModelPricesResponse | None:
-    """ Public model prices
+    """Public model prices
 
      Returns provider model pricing for cost comparison. No authentication required.
 
@@ -127,22 +114,20 @@ def sync(
 
     Returns:
         ErrorResponse | ModelPricesResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-query=query,
-
+        query=query,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     query: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | ModelPricesResponse]:
-    """ Public model prices
+    """Public model prices
 
      Returns provider model pricing for cost comparison. No authentication required.
 
@@ -155,27 +140,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | ModelPricesResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         query=query,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     query: str | Unset = UNSET,
-
 ) -> ErrorResponse | ModelPricesResponse | None:
-    """ Public model prices
+    """Public model prices
 
      Returns provider model pricing for cost comparison. No authentication required.
 
@@ -188,11 +169,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | ModelPricesResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-query=query,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            query=query,
+        )
+    ).parsed

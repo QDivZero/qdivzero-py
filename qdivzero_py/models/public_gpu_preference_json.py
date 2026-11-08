@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="PublicGPUPreferenceJSON")
 
 
-
 @_attrs_define
 class PublicGPUPreferenceJSON:
-    """ 
-        Attributes:
-            count (int | Unset):
-            public_gpu_id (str | Unset):
-     """
+    """
+    Attributes:
+        count (int | Unset):
+        public_gpu_id (str | Unset):
+    """
 
     count: int | Unset = UNSET
     public_gpu_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         count = self.count
 
         public_gpu_id = self.public_gpu_id
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if count is not UNSET:
             field_dict["count"] = count
         if public_gpu_id is not UNSET:
             field_dict["public_gpu_id"] = public_gpu_id
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class PublicGPUPreferenceJSON:
             count=count,
             public_gpu_id=public_gpu_id,
         )
-
 
         public_gpu_preference_json.additional_properties = d
         return public_gpu_preference_json

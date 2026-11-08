@@ -13,43 +13,33 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     limit: int | Unset = UNSET,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
     params["limit"] = limit
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/huggingface/trending",
+        "url": "/v1/huggingface/trending",
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | HuggingFaceModelsResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | HuggingFaceModelsResponse | None:
     if response.status_code == 200:
         response_200 = HuggingFaceModelsResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_401
 
@@ -59,7 +49,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | HuggingFaceModelsResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | HuggingFaceModelsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -72,9 +64,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     limit: int | Unset = UNSET,
-
 ) -> Response[ErrorResponse | HuggingFaceModelsResponse]:
-    """ Trending Hugging Face models
+    """Trending Hugging Face models
 
      Returns trending Hugging Face models.
 
@@ -87,12 +78,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | HuggingFaceModelsResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         limit=limit,
-
     )
 
     response = client.get_httpx_client().request(
@@ -101,13 +90,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     limit: int | Unset = UNSET,
-
 ) -> ErrorResponse | HuggingFaceModelsResponse | None:
-    """ Trending Hugging Face models
+    """Trending Hugging Face models
 
      Returns trending Hugging Face models.
 
@@ -120,22 +109,20 @@ def sync(
 
     Returns:
         ErrorResponse | HuggingFaceModelsResponse
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-limit=limit,
-
+        limit=limit,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     limit: int | Unset = UNSET,
-
 ) -> Response[ErrorResponse | HuggingFaceModelsResponse]:
-    """ Trending Hugging Face models
+    """Trending Hugging Face models
 
      Returns trending Hugging Face models.
 
@@ -148,27 +135,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | HuggingFaceModelsResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         limit=limit,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     limit: int | Unset = UNSET,
-
 ) -> ErrorResponse | HuggingFaceModelsResponse | None:
-    """ Trending Hugging Face models
+    """Trending Hugging Face models
 
      Returns trending Hugging Face models.
 
@@ -181,11 +164,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | HuggingFaceModelsResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-limit=limit,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            limit=limit,
+        )
+    ).parsed

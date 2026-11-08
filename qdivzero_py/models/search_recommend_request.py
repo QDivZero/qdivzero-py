@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="SearchRecommendRequest")
 
 
-
 @_attrs_define
 class SearchRecommendRequest:
-    """ 
-        Attributes:
-            bias (float | Unset):
-            token (str | Unset):
-     """
+    """
+    Attributes:
+        bias (float | Unset):
+        token (str | Unset):
+    """
 
     bias: float | Unset = UNSET
     token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         bias = self.bias
 
         token = self.token
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if bias is not UNSET:
             field_dict["bias"] = bias
         if token is not UNSET:
             field_dict["token"] = token
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class SearchRecommendRequest:
             bias=bias,
             token=token,
         )
-
 
         search_recommend_request.additional_properties = d
         return search_recommend_request

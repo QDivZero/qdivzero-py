@@ -9,29 +9,25 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.public_pricing_gpu import PublicPricingGPU
-
-
-
+    from ..models.public_pricing_gpu import PublicPricingGPU
 
 
 T = TypeVar("T", bound="PublicPricingService")
 
 
-
 @_attrs_define
 class PublicPricingService:
-    """ 
-        Attributes:
-            billing_model (str | Unset):
-            currency (str | Unset):
-            gpus (list[PublicPricingGPU] | Unset):
-            id (str | Unset):
-            name (str | Unset):
-            price_eur_per_gb_hour (float | Unset):
-            status (str | Unset):
-            unit (str | Unset):
-     """
+    """
+    Attributes:
+        billing_model (str | Unset):
+        currency (str | Unset):
+        gpus (list[PublicPricingGPU] | Unset):
+        id (str | Unset):
+        name (str | Unset):
+        price_eur_per_gb_hour (float | Unset):
+        status (str | Unset):
+        unit (str | Unset):
+    """
 
     billing_model: str | Unset = UNSET
     currency: str | Unset = UNSET
@@ -42,10 +38,6 @@ class PublicPricingService:
     status: str | Unset = UNSET
     unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         billing_model = self.billing_model
@@ -59,8 +51,6 @@ class PublicPricingService:
                 gpus_item = gpus_item_data.to_dict()
                 gpus.append(gpus_item)
 
-
-
         id = self.id
 
         name = self.name
@@ -71,11 +61,9 @@ class PublicPricingService:
 
         unit = self.unit
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if billing_model is not UNSET:
             field_dict["billing_model"] = billing_model
         if currency is not UNSET:
@@ -95,11 +83,10 @@ class PublicPricingService:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.public_pricing_gpu import PublicPricingGPU
+
         d = dict(src_dict)
         billing_model = d.pop("billing_model", UNSET)
 
@@ -112,10 +99,7 @@ class PublicPricingService:
             for gpus_item_data in _gpus:
                 gpus_item = PublicPricingGPU.from_dict(gpus_item_data)
 
-
-
                 gpus.append(gpus_item)
-
 
         id = d.pop("id", UNSET)
 
@@ -137,7 +121,6 @@ class PublicPricingService:
             status=status,
             unit=unit,
         )
-
 
         public_pricing_service.additional_properties = d
         return public_pricing_service

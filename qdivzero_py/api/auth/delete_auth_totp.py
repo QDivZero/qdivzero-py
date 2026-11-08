@@ -9,23 +9,14 @@ from ...models.error_response import ErrorResponse
 from ...types import Response
 
 
-def _get_kwargs(
-    
-) -> dict[str, Any]:
-    
-
-    
-
-    
+def _get_kwargs() -> dict[str, Any]:
 
     _kwargs: dict[str, Any] = {
         "method": "delete",
-        "url": "/auth/totp",
+        "url": "/v1/auth/totp",
     }
 
-
     return _kwargs
-
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | str | None:
@@ -36,21 +27,15 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -72,9 +57,8 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | str]:
-    """ Disable TOTP
+    """Disable TOTP
 
      Removes the current user's TOTP credential.
 
@@ -84,12 +68,9 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | str]
-     """
+    """
 
-
-    kwargs = _get_kwargs(
-        
-    )
+    kwargs = _get_kwargs()
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -97,12 +78,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | str | None:
-    """ Disable TOTP
+    """Disable TOTP
 
      Removes the current user's TOTP credential.
 
@@ -112,20 +93,18 @@ def sync(
 
     Returns:
         ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-
 ) -> Response[ErrorResponse | str]:
-    """ Disable TOTP
+    """Disable TOTP
 
      Removes the current user's TOTP credential.
 
@@ -135,25 +114,20 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | str]
-     """
+    """
 
+    kwargs = _get_kwargs()
 
-    kwargs = _get_kwargs(
-        
-    )
-
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
-
 ) -> ErrorResponse | str | None:
-    """ Disable TOTP
+    """Disable TOTP
 
      Removes the current user's TOTP credential.
 
@@ -163,10 +137,10 @@ async def asyncio(
 
     Returns:
         ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+        )
+    ).parsed

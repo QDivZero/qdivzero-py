@@ -11,19 +11,18 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="FirewallEvaluationResponse")
 
 
-
 @_attrs_define
 class FirewallEvaluationResponse:
-    """ 
-        Attributes:
-            allowed (bool | Unset):
-            evaluator_serving_name (str | Unset):
-            firewall_slug (str | Unset):
-            matched_rules (list[str] | Unset):
-            mode (str | Unset):
-            reason (str | Unset):
-            severity (str | Unset):
-     """
+    """
+    Attributes:
+        allowed (bool | Unset):
+        evaluator_serving_name (str | Unset):
+        firewall_slug (str | Unset):
+        matched_rules (list[str] | Unset):
+        mode (str | Unset):
+        reason (str | Unset):
+        severity (str | Unset):
+    """
 
     allowed: bool | Unset = UNSET
     evaluator_serving_name: str | Unset = UNSET
@@ -33,10 +32,6 @@ class FirewallEvaluationResponse:
     reason: str | Unset = UNSET
     severity: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         allowed = self.allowed
@@ -49,19 +44,15 @@ class FirewallEvaluationResponse:
         if not isinstance(self.matched_rules, Unset):
             matched_rules = self.matched_rules
 
-
-
         mode = self.mode
 
         reason = self.reason
 
         severity = self.severity
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if allowed is not UNSET:
             field_dict["allowed"] = allowed
         if evaluator_serving_name is not UNSET:
@@ -79,8 +70,6 @@ class FirewallEvaluationResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -91,7 +80,6 @@ class FirewallEvaluationResponse:
         firewall_slug = d.pop("firewall_slug", UNSET)
 
         matched_rules = cast(list[str], d.pop("matched_rules", UNSET))
-
 
         mode = d.pop("mode", UNSET)
 
@@ -108,7 +96,6 @@ class FirewallEvaluationResponse:
             reason=reason,
             severity=severity,
         )
-
 
         firewall_evaluation_response.additional_properties = d
         return firewall_evaluation_response

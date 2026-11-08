@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="GpuPreferenceResponse")
 
 
-
 @_attrs_define
 class GpuPreferenceResponse:
-    """ 
-        Attributes:
-            count (int | Unset):
-            provider_codename (str | Unset):
-            public_gpu_id (str | Unset):
-     """
+    """
+    Attributes:
+        count (int | Unset):
+        provider_codename (str | Unset):
+        public_gpu_id (str | Unset):
+    """
 
     count: int | Unset = UNSET
     provider_codename: str | Unset = UNSET
     public_gpu_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         count = self.count
@@ -37,11 +32,9 @@ class GpuPreferenceResponse:
 
         public_gpu_id = self.public_gpu_id
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if count is not UNSET:
             field_dict["count"] = count
         if provider_codename is not UNSET:
@@ -50,8 +43,6 @@ class GpuPreferenceResponse:
             field_dict["public_gpu_id"] = public_gpu_id
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class GpuPreferenceResponse:
             provider_codename=provider_codename,
             public_gpu_id=public_gpu_id,
         )
-
 
         gpu_preference_response.additional_properties = d
         return gpu_preference_response

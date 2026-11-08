@@ -9,26 +9,22 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.account_response import AccountResponse
-
-
-
+    from ..models.account_response import AccountResponse
 
 
 T = TypeVar("T", bound="AccountMembershipResponse")
 
 
-
 @_attrs_define
 class AccountMembershipResponse:
-    """ 
-        Attributes:
-            account (AccountResponse | Unset):
-            account_id (str | Unset):
-            created_at_unix (int | Unset):
-            role (str | Unset):
-            user_id (str | Unset):
-     """
+    """
+    Attributes:
+        account (AccountResponse | Unset):
+        account_id (str | Unset):
+        created_at_unix (int | Unset):
+        role (str | Unset):
+        user_id (str | Unset):
+    """
 
     account: AccountResponse | Unset = UNSET
     account_id: str | Unset = UNSET
@@ -36,10 +32,6 @@ class AccountMembershipResponse:
     role: str | Unset = UNSET
     user_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account: dict[str, Any] | Unset = UNSET
@@ -54,11 +46,9 @@ class AccountMembershipResponse:
 
         user_id = self.user_id
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account is not UNSET:
             field_dict["account"] = account
         if account_id is not UNSET:
@@ -72,21 +62,17 @@ class AccountMembershipResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.account_response import AccountResponse
+
         d = dict(src_dict)
         _account = d.pop("account", UNSET)
         account: AccountResponse | Unset
-        if isinstance(_account,  Unset):
+        if isinstance(_account, Unset):
             account = UNSET
         else:
             account = AccountResponse.from_dict(_account)
-
-
-
 
         account_id = d.pop("account_id", UNSET)
 
@@ -103,7 +89,6 @@ class AccountMembershipResponse:
             role=role,
             user_id=user_id,
         )
-
 
         account_membership_response.additional_properties = d
         return account_membership_response

@@ -11,18 +11,17 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="UpdateFirewallRuleRequest")
 
 
-
 @_attrs_define
 class UpdateFirewallRuleRequest:
-    """ 
-        Attributes:
-            category (str | Unset):
-            default_severity (str | Unset):
-            description (str | Unset):
-            name (str | Unset):
-            prompt (str | Unset):
-            slug (str | Unset):
-     """
+    """
+    Attributes:
+        category (str | Unset):
+        default_severity (str | Unset):
+        description (str | Unset):
+        name (str | Unset):
+        prompt (str | Unset):
+        slug (str | Unset):
+    """
 
     category: str | Unset = UNSET
     default_severity: str | Unset = UNSET
@@ -31,10 +30,6 @@ class UpdateFirewallRuleRequest:
     prompt: str | Unset = UNSET
     slug: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         category = self.category
@@ -49,11 +44,9 @@ class UpdateFirewallRuleRequest:
 
         slug = self.slug
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if category is not UNSET:
             field_dict["category"] = category
         if default_severity is not UNSET:
@@ -68,8 +61,6 @@ class UpdateFirewallRuleRequest:
             field_dict["slug"] = slug
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -94,7 +85,6 @@ class UpdateFirewallRuleRequest:
             prompt=prompt,
             slug=slug,
         )
-
 
         update_firewall_rule_request.additional_properties = d
         return update_firewall_rule_request

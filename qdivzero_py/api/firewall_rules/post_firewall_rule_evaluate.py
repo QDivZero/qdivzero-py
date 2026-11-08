@@ -16,18 +16,14 @@ def _get_kwargs(
     rule_slug: str,
     *,
     body: FirewallRuleEvaluationRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/firewall-rules/{rule_slug}:evaluate".format(rule_slug=quote(str(rule_slug), safe=""),),
+        "url": "/v1/firewall-rules/{rule_slug}:evaluate".format(
+            rule_slug=quote(str(rule_slug), safe=""),
+        ),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -38,40 +34,31 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | FirewallEvaluationResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | FirewallEvaluationResponse | None:
     if response.status_code == 200:
         response_200 = FirewallEvaluationResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_401
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -81,7 +68,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | FirewallEvaluationResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | FirewallEvaluationResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -95,9 +84,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: FirewallRuleEvaluationRequest,
-
 ) -> Response[ErrorResponse | FirewallEvaluationResponse]:
-    """ Evaluate a firewall rule
+    """Evaluate a firewall rule
 
      Runs input against a single firewall rule and returns the evaluation result.
 
@@ -111,13 +99,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | FirewallEvaluationResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         rule_slug=rule_slug,
-body=body,
-
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -126,14 +112,14 @@ body=body,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     rule_slug: str,
     *,
     client: AuthenticatedClient,
     body: FirewallRuleEvaluationRequest,
-
 ) -> ErrorResponse | FirewallEvaluationResponse | None:
-    """ Evaluate a firewall rule
+    """Evaluate a firewall rule
 
      Runs input against a single firewall rule and returns the evaluation result.
 
@@ -147,24 +133,22 @@ def sync(
 
     Returns:
         ErrorResponse | FirewallEvaluationResponse
-     """
-
+    """
 
     return sync_detailed(
         rule_slug=rule_slug,
-client=client,
-body=body,
-
+        client=client,
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     rule_slug: str,
     *,
     client: AuthenticatedClient,
     body: FirewallRuleEvaluationRequest,
-
 ) -> Response[ErrorResponse | FirewallEvaluationResponse]:
-    """ Evaluate a firewall rule
+    """Evaluate a firewall rule
 
      Runs input against a single firewall rule and returns the evaluation result.
 
@@ -178,29 +162,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | FirewallEvaluationResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         rule_slug=rule_slug,
-body=body,
-
+        body=body,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     rule_slug: str,
     *,
     client: AuthenticatedClient,
     body: FirewallRuleEvaluationRequest,
-
 ) -> ErrorResponse | FirewallEvaluationResponse | None:
-    """ Evaluate a firewall rule
+    """Evaluate a firewall rule
 
      Runs input against a single firewall rule and returns the evaluation result.
 
@@ -214,12 +194,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | FirewallEvaluationResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        rule_slug=rule_slug,
-client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            rule_slug=rule_slug,
+            client=client,
+            body=body,
+        )
+    ).parsed

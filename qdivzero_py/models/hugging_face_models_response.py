@@ -9,29 +9,23 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.hugging_face_model_response import HuggingFaceModelResponse
-
-
-
+    from ..models.hugging_face_model_response import HuggingFaceModelResponse
 
 
 T = TypeVar("T", bound="HuggingFaceModelsResponse")
 
 
-
 @_attrs_define
 class HuggingFaceModelsResponse:
-    """ 
-        Attributes:
-            models (list[HuggingFaceModelResponse] | Unset):
-     """
+    """
+    Attributes:
+        models (list[HuggingFaceModelResponse] | Unset):
+        next_cursor (str | Unset):
+    """
 
     models: list[HuggingFaceModelResponse] | Unset = UNSET
+    next_cursor: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         models: list[dict[str, Any]] | Unset = UNSET
@@ -41,23 +35,22 @@ class HuggingFaceModelsResponse:
                 models_item = models_item_data.to_dict()
                 models.append(models_item)
 
-
-
+        next_cursor = self.next_cursor
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if models is not UNSET:
             field_dict["models"] = models
+        if next_cursor is not UNSET:
+            field_dict["next_cursor"] = next_cursor
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.hugging_face_model_response import HuggingFaceModelResponse
+
         d = dict(src_dict)
         _models = d.pop("models", UNSET)
         models: list[HuggingFaceModelResponse] | Unset = UNSET
@@ -66,15 +59,14 @@ class HuggingFaceModelsResponse:
             for models_item_data in _models:
                 models_item = HuggingFaceModelResponse.from_dict(models_item_data)
 
-
-
                 models.append(models_item)
 
+        next_cursor = d.pop("next_cursor", UNSET)
 
         hugging_face_models_response = cls(
             models=models,
+            next_cursor=next_cursor,
         )
-
 
         hugging_face_models_response.additional_properties = d
         return hugging_face_models_response

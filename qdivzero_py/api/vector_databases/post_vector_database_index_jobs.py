@@ -16,18 +16,14 @@ def _get_kwargs(
     database_id: str,
     *,
     body: IndexDocumentsRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/flexible-vector-databases/{database_id}/index-jobs".format(database_id=quote(str(database_id), safe=""),),
+        "url": "/v1/flexible-vector-databases/{database_id}/index-jobs".format(
+            database_id=quote(str(database_id), safe=""),
+        ),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -38,33 +34,26 @@ def _get_kwargs(
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | PostVectorDatabaseIndexJobsResponse202 | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | PostVectorDatabaseIndexJobsResponse202 | None:
     if response.status_code == 202:
         response_202 = PostVectorDatabaseIndexJobsResponse202.from_dict(response.json())
-
-
 
         return response_202
 
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -74,7 +63,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | PostVectorDatabaseIndexJobsResponse202]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | PostVectorDatabaseIndexJobsResponse202]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -88,9 +79,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: IndexDocumentsRequest,
-
 ) -> Response[ErrorResponse | PostVectorDatabaseIndexJobsResponse202]:
-    """ Enqueue an index job
+    """Enqueue an index job
 
      Enqueues documents for asynchronous indexing into a vector database.
 
@@ -104,13 +94,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | PostVectorDatabaseIndexJobsResponse202]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-body=body,
-
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -119,14 +107,14 @@ body=body,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     database_id: str,
     *,
     client: AuthenticatedClient,
     body: IndexDocumentsRequest,
-
 ) -> ErrorResponse | PostVectorDatabaseIndexJobsResponse202 | None:
-    """ Enqueue an index job
+    """Enqueue an index job
 
      Enqueues documents for asynchronous indexing into a vector database.
 
@@ -140,24 +128,22 @@ def sync(
 
     Returns:
         ErrorResponse | PostVectorDatabaseIndexJobsResponse202
-     """
-
+    """
 
     return sync_detailed(
         database_id=database_id,
-client=client,
-body=body,
-
+        client=client,
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     database_id: str,
     *,
     client: AuthenticatedClient,
     body: IndexDocumentsRequest,
-
 ) -> Response[ErrorResponse | PostVectorDatabaseIndexJobsResponse202]:
-    """ Enqueue an index job
+    """Enqueue an index job
 
      Enqueues documents for asynchronous indexing into a vector database.
 
@@ -171,29 +157,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | PostVectorDatabaseIndexJobsResponse202]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         database_id=database_id,
-body=body,
-
+        body=body,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     database_id: str,
     *,
     client: AuthenticatedClient,
     body: IndexDocumentsRequest,
-
 ) -> ErrorResponse | PostVectorDatabaseIndexJobsResponse202 | None:
-    """ Enqueue an index job
+    """Enqueue an index job
 
      Enqueues documents for asynchronous indexing into a vector database.
 
@@ -207,12 +189,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | PostVectorDatabaseIndexJobsResponse202
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        database_id=database_id,
-client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            database_id=database_id,
+            client=client,
+            body=body,
+        )
+    ).parsed

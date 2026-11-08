@@ -11,23 +11,22 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="PreviewInstanceUpdateRequest")
 
 
-
 @_attrs_define
 class PreviewInstanceUpdateRequest:
-    """ 
-        Attributes:
-            scheduling_mode (str | Unset):
-            smart_allow_community (bool | Unset):
-            smart_allow_spot (bool | Unset):
-            smart_max_price_per_hour_eur (float | Unset):
-            smart_min_gpu_class (str | Unset):
-            smart_min_total_tflops (float | Unset):
-            smart_provider_filter_mode (str | Unset):
-            smart_provider_preference (str | Unset):
-            smart_region (str | Unset):
-            smart_regions (list[str] | Unset):
-            smart_selection_label (str | Unset):
-     """
+    """
+    Attributes:
+        scheduling_mode (str | Unset):
+        smart_allow_community (bool | Unset):
+        smart_allow_spot (bool | Unset):
+        smart_max_price_per_hour_eur (float | Unset):
+        smart_min_gpu_class (str | Unset):
+        smart_min_total_tflops (float | Unset):
+        smart_provider_filter_mode (str | Unset):
+        smart_provider_preference (str | Unset):
+        smart_region (str | Unset):
+        smart_regions (list[str] | Unset):
+        smart_selection_label (str | Unset):
+    """
 
     scheduling_mode: str | Unset = UNSET
     smart_allow_community: bool | Unset = UNSET
@@ -41,10 +40,6 @@ class PreviewInstanceUpdateRequest:
     smart_regions: list[str] | Unset = UNSET
     smart_selection_label: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         scheduling_mode = self.scheduling_mode
@@ -69,15 +64,11 @@ class PreviewInstanceUpdateRequest:
         if not isinstance(self.smart_regions, Unset):
             smart_regions = self.smart_regions
 
-
-
         smart_selection_label = self.smart_selection_label
-
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if scheduling_mode is not UNSET:
             field_dict["scheduling_mode"] = scheduling_mode
         if smart_allow_community is not UNSET:
@@ -103,8 +94,6 @@ class PreviewInstanceUpdateRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -128,7 +117,6 @@ class PreviewInstanceUpdateRequest:
 
         smart_regions = cast(list[str], d.pop("smart_regions", UNSET))
 
-
         smart_selection_label = d.pop("smart_selection_label", UNSET)
 
         preview_instance_update_request = cls(
@@ -144,7 +132,6 @@ class PreviewInstanceUpdateRequest:
             smart_regions=smart_regions,
             smart_selection_label=smart_selection_label,
         )
-
 
         preview_instance_update_request.additional_properties = d
         return preview_instance_update_request

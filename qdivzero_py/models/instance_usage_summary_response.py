@@ -11,24 +11,19 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="InstanceUsageSummaryResponse")
 
 
-
 @_attrs_define
 class InstanceUsageSummaryResponse:
-    """ 
-        Attributes:
-            month_billable_seconds (int | Unset):
-            month_daily_average_cost_eur (float | Unset):
-            month_total_cost_eur (float | Unset):
-     """
+    """
+    Attributes:
+        month_billable_seconds (int | Unset):
+        month_daily_average_cost_eur (float | Unset):
+        month_total_cost_eur (float | Unset):
+    """
 
     month_billable_seconds: int | Unset = UNSET
     month_daily_average_cost_eur: float | Unset = UNSET
     month_total_cost_eur: float | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         month_billable_seconds = self.month_billable_seconds
@@ -37,11 +32,9 @@ class InstanceUsageSummaryResponse:
 
         month_total_cost_eur = self.month_total_cost_eur
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if month_billable_seconds is not UNSET:
             field_dict["month_billable_seconds"] = month_billable_seconds
         if month_daily_average_cost_eur is not UNSET:
@@ -50,8 +43,6 @@ class InstanceUsageSummaryResponse:
             field_dict["month_total_cost_eur"] = month_total_cost_eur
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,7 +58,6 @@ class InstanceUsageSummaryResponse:
             month_daily_average_cost_eur=month_daily_average_cost_eur,
             month_total_cost_eur=month_total_cost_eur,
         )
-
 
         instance_usage_summary_response.additional_properties = d
         return instance_usage_summary_response

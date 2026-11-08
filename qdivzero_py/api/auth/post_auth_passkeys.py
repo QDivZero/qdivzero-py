@@ -13,18 +13,12 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: RegisterPasskeyRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
-
-    
-
-    
-
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/auth/passkeys",
+        "url": "/v1/auth/passkeys",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -35,7 +29,6 @@ def _get_kwargs(
     return _kwargs
 
 
-
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | str | None:
     if response.status_code == 204:
         response_204 = cast(str, response.json())
@@ -44,21 +37,15 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 400:
         response_400 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 500:
         response_500 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_500
 
@@ -81,9 +68,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: RegisterPasskeyRequest,
-
 ) -> Response[ErrorResponse | str]:
-    """ Register a passkey
+    """Register a passkey
 
      Stores a passkey credential for the authenticated user.
 
@@ -96,12 +82,10 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
     response = client.get_httpx_client().request(
@@ -110,13 +94,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient,
     body: RegisterPasskeyRequest,
-
 ) -> ErrorResponse | str | None:
-    """ Register a passkey
+    """Register a passkey
 
      Stores a passkey credential for the authenticated user.
 
@@ -129,22 +113,20 @@ def sync(
 
     Returns:
         ErrorResponse | str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: RegisterPasskeyRequest,
-
 ) -> Response[ErrorResponse | str]:
-    """ Register a passkey
+    """Register a passkey
 
      Stores a passkey credential for the authenticated user.
 
@@ -157,27 +139,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | str]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient,
     body: RegisterPasskeyRequest,
-
 ) -> ErrorResponse | str | None:
-    """ Register a passkey
+    """Register a passkey
 
      Stores a passkey credential for the authenticated user.
 
@@ -190,11 +168,11 @@ async def asyncio(
 
     Returns:
         ErrorResponse | str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+        )
+    ).parsed

@@ -9,33 +9,23 @@ from attrs import field as _attrs_field
 T = TypeVar("T", bound="PostRuntimeNotifyCrashBody")
 
 
-
 @_attrs_define
 class PostRuntimeNotifyCrashBody:
-    """ 
-     """
+    """ """
 
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        post_runtime_notify_crash_body = cls(
-        )
-
+        post_runtime_notify_crash_body = cls()
 
         post_runtime_notify_crash_body.additional_properties = d
         return post_runtime_notify_crash_body

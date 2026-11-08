@@ -11,24 +11,23 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="VectorDatabaseResponse")
 
 
-
 @_attrs_define
 class VectorDatabaseResponse:
-    """ 
-        Attributes:
-            account_id (str | Unset):
-            created_at (str | Unset):
-            description (str | Unset):
-            embedding_model_ref (str | Unset):
-            embedding_serving_name (str | Unset):
-            error_message (str | Unset):
-            id (str | Unset):
-            name (str | Unset):
-            opensearch_index_name (str | Unset):
-            slug (str | Unset):
-            status (str | Unset):
-            updated_at (str | Unset):
-     """
+    """
+    Attributes:
+        account_id (str | Unset):
+        created_at (str | Unset):
+        description (str | Unset):
+        embedding_model_ref (str | Unset):
+        embedding_serving_name (str | Unset):
+        error_message (str | Unset):
+        id (str | Unset):
+        name (str | Unset):
+        opensearch_index_name (str | Unset):
+        slug (str | Unset):
+        status (str | Unset):
+        updated_at (str | Unset):
+    """
 
     account_id: str | Unset = UNSET
     created_at: str | Unset = UNSET
@@ -43,10 +42,6 @@ class VectorDatabaseResponse:
     status: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         account_id = self.account_id
@@ -73,11 +68,9 @@ class VectorDatabaseResponse:
 
         updated_at = self.updated_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if account_id is not UNSET:
             field_dict["account_id"] = account_id
         if created_at is not UNSET:
@@ -104,8 +97,6 @@ class VectorDatabaseResponse:
             field_dict["updated_at"] = updated_at
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -148,7 +139,6 @@ class VectorDatabaseResponse:
             status=status,
             updated_at=updated_at,
         )
-
 
         vector_database_response.additional_properties = d
         return vector_database_response

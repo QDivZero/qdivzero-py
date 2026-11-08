@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ChatToolCallFunctionEnvelope")
 
 
-
 @_attrs_define
 class ChatToolCallFunctionEnvelope:
-    """ 
-        Attributes:
-            arguments (str | Unset):
-            name (str | Unset):
-     """
+    """
+    Attributes:
+        arguments (str | Unset):
+        name (str | Unset):
+    """
 
     arguments: str | Unset = UNSET
     name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         arguments = self.arguments
 
         name = self.name
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if arguments is not UNSET:
             field_dict["arguments"] = arguments
         if name is not UNSET:
             field_dict["name"] = name
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class ChatToolCallFunctionEnvelope:
             arguments=arguments,
             name=name,
         )
-
 
         chat_tool_call_function_envelope.additional_properties = d
         return chat_tool_call_function_envelope

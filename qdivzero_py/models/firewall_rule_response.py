@@ -11,22 +11,21 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="FirewallRuleResponse")
 
 
-
 @_attrs_define
 class FirewallRuleResponse:
-    """ 
-        Attributes:
-            category (str | Unset):
-            created_at (str | Unset):
-            default_severity (str | Unset):
-            description (str | Unset):
-            name (str | Unset):
-            prompt (str | Unset):
-            recommended (bool | Unset):
-            slug (str | Unset):
-            source (str | Unset):
-            updated_at (str | Unset):
-     """
+    """
+    Attributes:
+        category (str | Unset):
+        created_at (str | Unset):
+        default_severity (str | Unset):
+        description (str | Unset):
+        name (str | Unset):
+        prompt (str | Unset):
+        recommended (bool | Unset):
+        slug (str | Unset):
+        source (str | Unset):
+        updated_at (str | Unset):
+    """
 
     category: str | Unset = UNSET
     created_at: str | Unset = UNSET
@@ -39,10 +38,6 @@ class FirewallRuleResponse:
     source: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         category = self.category
@@ -65,11 +60,9 @@ class FirewallRuleResponse:
 
         updated_at = self.updated_at
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if category is not UNSET:
             field_dict["category"] = category
         if created_at is not UNSET:
@@ -92,8 +85,6 @@ class FirewallRuleResponse:
             field_dict["updated_at"] = updated_at
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -130,7 +121,6 @@ class FirewallRuleResponse:
             source=source,
             updated_at=updated_at,
         )
-
 
         firewall_rule_response.additional_properties = d
         return firewall_rule_response

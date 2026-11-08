@@ -11,41 +11,32 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="BeginTotpEnrollmentResponse")
 
 
-
 @_attrs_define
 class BeginTotpEnrollmentResponse:
-    """ 
-        Attributes:
-            otpauth_uri (str | Unset):
-            secret (str | Unset):
-     """
+    """
+    Attributes:
+        otpauth_uri (str | Unset):
+        secret (str | Unset):
+    """
 
     otpauth_uri: str | Unset = UNSET
     secret: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         otpauth_uri = self.otpauth_uri
 
         secret = self.secret
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if otpauth_uri is not UNSET:
             field_dict["otpauth_uri"] = otpauth_uri
         if secret is not UNSET:
             field_dict["secret"] = secret
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,7 +49,6 @@ class BeginTotpEnrollmentResponse:
             otpauth_uri=otpauth_uri,
             secret=secret,
         )
-
 
         begin_totp_enrollment_response.additional_properties = d
         return begin_totp_enrollment_response

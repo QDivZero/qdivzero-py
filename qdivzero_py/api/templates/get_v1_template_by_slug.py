@@ -15,50 +15,40 @@ def _get_kwargs(
     slug: str,
     *,
     locale: str | Unset = UNSET,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
     params["locale"] = locale
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/v1/templates/by-slug/{slug}".format(slug=quote(str(slug), safe=""),),
+        "url": "/v1/templates/by-slug/{slug}".format(
+            slug=quote(str(slug), safe=""),
+        ),
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ErrorResponse | GetTemplateBySlugResponse | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ErrorResponse | GetTemplateBySlugResponse | None:
     if response.status_code == 200:
         response_200 = GetTemplateBySlugResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 404:
         response_404 = ErrorResponse.from_dict(response.json())
 
-
-
         return response_404
 
     if response.status_code == 503:
         response_503 = ErrorResponse.from_dict(response.json())
-
-
 
         return response_503
 
@@ -68,7 +58,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ErrorResponse | GetTemplateBySlugResponse]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ErrorResponse | GetTemplateBySlugResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -82,9 +74,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     locale: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | GetTemplateBySlugResponse]:
-    """ Get a template by slug
+    """Get a template by slug
 
      Returns a template variant by its URL slug for the authenticated user.
 
@@ -98,13 +89,11 @@ def sync_detailed(
 
     Returns:
         Response[ErrorResponse | GetTemplateBySlugResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         slug=slug,
-locale=locale,
-
+        locale=locale,
     )
 
     response = client.get_httpx_client().request(
@@ -113,14 +102,14 @@ locale=locale,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     slug: str,
     *,
     client: AuthenticatedClient,
     locale: str | Unset = UNSET,
-
 ) -> ErrorResponse | GetTemplateBySlugResponse | None:
-    """ Get a template by slug
+    """Get a template by slug
 
      Returns a template variant by its URL slug for the authenticated user.
 
@@ -134,24 +123,22 @@ def sync(
 
     Returns:
         ErrorResponse | GetTemplateBySlugResponse
-     """
-
+    """
 
     return sync_detailed(
         slug=slug,
-client=client,
-locale=locale,
-
+        client=client,
+        locale=locale,
     ).parsed
+
 
 async def asyncio_detailed(
     slug: str,
     *,
     client: AuthenticatedClient,
     locale: str | Unset = UNSET,
-
 ) -> Response[ErrorResponse | GetTemplateBySlugResponse]:
-    """ Get a template by slug
+    """Get a template by slug
 
      Returns a template variant by its URL slug for the authenticated user.
 
@@ -165,29 +152,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[ErrorResponse | GetTemplateBySlugResponse]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         slug=slug,
-locale=locale,
-
+        locale=locale,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     slug: str,
     *,
     client: AuthenticatedClient,
     locale: str | Unset = UNSET,
-
 ) -> ErrorResponse | GetTemplateBySlugResponse | None:
-    """ Get a template by slug
+    """Get a template by slug
 
      Returns a template variant by its URL slug for the authenticated user.
 
@@ -201,12 +184,12 @@ async def asyncio(
 
     Returns:
         ErrorResponse | GetTemplateBySlugResponse
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        slug=slug,
-client=client,
-locale=locale,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            slug=slug,
+            client=client,
+            locale=locale,
+        )
+    ).parsed
